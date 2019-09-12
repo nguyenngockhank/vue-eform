@@ -32,6 +32,16 @@ module.exports = {
                 test: /\.(sa|sc|c)ss$/,
                 use: styleLoaders
             },
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?[a-z0-9]+)?$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'fonts/'
+                    }
+                }]
+            },
         ]
     },
     resolve: {
@@ -50,8 +60,10 @@ module.exports = {
     optimization: {}
 }
 
+
+module.exports.devtool = '#source-map'
+
 if (mode === 'production') {
-    module.exports.devtool = '#source-map'
 
     module.exports.optimization.minimizer = (module.exports.optimization.minimizer || []).concat([
         new UglifyJsPlugin({

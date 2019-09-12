@@ -48,7 +48,7 @@ Structure will be looked like this:
                                 /// style
                                 bold: false,
                                 italic: false,
-                                underline:: false,
+                                underline: false,
                             }, 
 
                             options: {
@@ -67,24 +67,13 @@ Structure will be looked like this:
 
 ```
 
-  /// attrs: this attribute used for applying style for component 
-            ///     style:  {
-            ///         width: {
-
-            }
-            ///     }
-            /// 
-            
-            /// $options: this attribute used for providing info of component
-
-Template will build this structure data 
-
-
 
 ## Component Usage 
 
 Underscore 
 
-JQuery + JQuery UI for: `Drag & Drop`,  `Sortable`, `Resizable`
+
+
+[Drag & Drop](https://github.com/SortableJS/Vue.Draggable)
 
 Built on top this library [element](https://element.eleme.io/#/en-US/component/)

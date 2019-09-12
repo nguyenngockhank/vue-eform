@@ -1,15 +1,29 @@
-require('webpack-jquery-ui/draggable');
+import { 
+    Collapse,
+    CollapseItem, 
+    Button, 
+} from 'element-ui';
 
-import draggableDirective from  '../../core/directives/draggableDirective';
+// import 'element-ui/lib/theme-chalk/index.css';
 
-import { PREFIX_DIRECTIVE } from '../../constants';
+import StructureHandler from './core/StructureHandler';
 
+// import draggableComponent from 'vuedraggable';
+import Main from './components/Main.vue';
 
 const instance =  {
     install: function (Vue, options) {
-        // TODO: wiil grab prefix in options
-        Vue.directive(`${PREFIX_DIRECTIVE}draggable`, draggableDirective)
 
+        // register 3rd parties
+        Vue.use(Collapse);
+        Vue.use(CollapseItem);
+        Vue.use(Button);
+        // Vue.component("draggable", draggableComponent);
+        
+        // Vue.directive(`${PREFIX_DIRECTIVE}draggable`, draggableDirective)
+        Vue.component('eform-builder', Main);
+
+        StructureHandler.init();
 
     }
 };

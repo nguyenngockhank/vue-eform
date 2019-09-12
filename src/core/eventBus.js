@@ -1,4 +1,4 @@
-export default class EventBus {
+class EventBus {
     static getInstance() {
         if (typeof EventBus.instance === 'object') {
             return EventBus.instance;
@@ -55,3 +55,5 @@ export default class EventBus {
         }
     }
 }
+
+export default EventBus.getInstance();

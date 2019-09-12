@@ -19,14 +19,15 @@
         "build-bundle": "rimraf ./dist && webpack --config ./webpack.config.js"
     },
     "dependencies": {
-        "webpack-jquery-ui": "^2.0.1"
+        "element-ui": "^2.12.0",
+        "vuedraggable": "^2.23.0"
     },
     "devDependencies": {
-        "vue": "^2.6",
         "@babel/core": "^7.1.6",
-        "@babel/plugin-syntax-dynamic-import": "^7.0.0",
         "@babel/preset-env": "^7.1.6",
         "babel-loader": "^8.0.4",
+        "file-loader": "^4.2.0",
+        "babel-plugin-component": "^1.1.1",
         "babel-polyfill": "^6.26.0",
         "cross-env": "^5.2.0",
         "css-loader": "^1.0.1",
@@ -34,6 +35,7 @@
         "node-sass": "^4.11.0",
         "sass-loader": "^7.1.0",
         "uglifyjs-webpack-plugin": "^2.0.1",
+        "vue": "^2.6",
         "vue-loader": "^15.4.2",
         "vue-style-loader": "^4.1.2",
         "vue-template-compiler": "^2.5.17",
