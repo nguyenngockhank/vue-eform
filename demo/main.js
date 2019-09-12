@@ -1,5 +1,5 @@
-Vue.use(window.VuePaper);
-console.log('>>> use VuePaper', window.VuePaper)
+Vue.use(window.VueEform);
+console.log('>>> use VuePaper', window.VueEform)
 
 var vm = new Vue({
     el: "#app",

@@ -22,7 +22,10 @@
             width: 200px;
             height: 30px;
             margin-bottom: 10px;
-            background-color: aqua;
+            background-color:burlywood;
+
+            text-align: center;
+            line-height: 30px;
         }
     </style>
 </head>
@@ -31,19 +34,20 @@
     <div id="app">
         {{ message }}
 
-        <div class="box-draggable" v-draggable></div>
+        <div class="box-draggable" v-ef-draggable.revert></div>
 
-
-        <div class="box-draggable-container" v-draggable.clone="'.item-draggable'">
-            <div class="item-draggable"></div>
-            <div class="item-draggable"></div>
-            <div class="item-draggable"></div>
-            <div class="item-draggable"></div>
-            <div class="item-draggable"></div>
-            <div class="item-draggable"></div>
-            <div class="item-draggable"></div>
-            <div class="item-draggable"></div>
+        <div class="box-draggable-container" v-ef-draggable.clone.revert="'.item-draggable'">
+            <div class="item-draggable">1</div>
+            <div class="item-draggable">2</div>
+            <div class="item-draggable">3</div>
+            <div class="item-draggable">4</div>
+            <div class="item-draggable">5</div>
+            <div class="item-draggable">6</div>
+            <div class="item-draggable">7</div>
+            <div class="item-draggable">8</div>
         </div>
+
+
     </div>
 
 

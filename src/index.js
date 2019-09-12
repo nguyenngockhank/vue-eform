@@ -1,24 +1,17 @@
-require('webpack-jquery-ui/draggable');
+import template from './modules/template/index';
 
-import draggableDirective from  './core/directives/draggableDirective';
-
-const PREFIX = '';
+import { VAR_GLOBAL_NAME } from './constants';
 
 const instance =  {
-    install: function (Vue, options) {
-        // TODO: wiil grab prefix in options
-        Vue.directive(`${PREFIX}draggable`, draggableDirective)
-
-
+    install: function (...params) {
+        template.install(...params);
     }
 };
 
 
+// register global 
 if (typeof window !== undefined) {
-    // register global 
-
-    window.VuePaper = instance;
-
+    window[VAR_GLOBAL_NAME] = instance;
 }
 
 export default instance;
