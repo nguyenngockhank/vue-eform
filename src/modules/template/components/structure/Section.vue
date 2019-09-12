@@ -21,6 +21,7 @@ import eventBus from 'core/eventBus';
 import { ROW_ADDING } from '../../constants/events';
 
 
+
 export default {
     props: [ 'title', 'children', 'id'],
     methods: {

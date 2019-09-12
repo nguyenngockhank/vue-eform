@@ -24,38 +24,44 @@
 </template>
 
 <script>
+import eventBus from 'core/eventBus';
 import draggable from 'vuedraggable';
-
 import Section from './structure/Section';
+import { SECTION_ADDING, SECTION_ADDED } from '../constants/events';
 
-import factory from '../utils/factory';
+
+import StructureHandler from '../core/StructureHandler';
 
 export default {
     components: {
         draggable, Section
     },
     data() {
-        var structure = {
-            children: [ 
-                factory.createSection({ title: 'First Section' }),
-                factory.createSection({ title: 'Second Section' }),
-            ],
-        }
 
         return {
-            structure, 
+            structure: StructureHandler.getState(), 
             // open collapse 
-            activeSections:  structure.children.map( (sec) => sec.id ),
+            activeSections: [],
         } 
     },
+    created() {
+
+        eventBus.addListener(SECTION_ADDED, ({ sectionId }) => {
+            console.log(sectionId, 'added section')
+            this.activeSections.push(sectionId);
+        });
+
+
+
+        this.addSection('First section');
+        this.addSection('Second section');
+    },
      methods: {
-        addSection(val) {
-
-            // console.log('add di ne')
-            var data = factory.createSection({ title: 'Random title' });
-
-            this.structure.children.push( data );
-            this.activeSections.push( data.id);
+        addSection(title = 'Random title') {
+            if ( typeof title != 'string') {
+                title = 'Random title';
+            }
+            eventBus.fireEvent(SECTION_ADDING, { title });
         }
     }
 }

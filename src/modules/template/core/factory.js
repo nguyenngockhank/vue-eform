@@ -1,4 +1,4 @@
-import generator from './idGenerator';
+import generator from '../utils/idGenerator';
 
 /// 
 let rowIdGenerator = generator('R');
