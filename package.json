@@ -1,0 +1,43 @@
+{
+    "name": "v-paper",
+    "description": "A page builder by using VueJS",
+    "version": "1.0.0",
+    "author": "Nguyen Khank <nguyenngockhank@gmail.com>",
+    "keywords": [
+        "vue",
+        "vuejs",
+        "page builder"
+    ],
+    "license": "MIT",
+    "private": false,
+    "main": "dist/vue-form-builder.min.js",
+    "scripts": {
+        "test": "webpack --json > stats.json",
+        "dev": "webpack -d --watch",
+        "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+        "build-dev": "cross-env NODE_ENV=development webpack --progress --hide-modules",
+        "build-bundle": "rimraf ./dist && webpack --config ./webpack.config.js"
+    },
+    "dependencies": {
+        "webpack-jquery-ui": "^2.0.1"
+    },
+    "devDependencies": {
+        "vue": "^2.6",
+        "@babel/core": "^7.1.6",
+        "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+        "@babel/preset-env": "^7.1.6",
+        "babel-loader": "^8.0.4",
+        "babel-polyfill": "^6.26.0",
+        "cross-env": "^5.2.0",
+        "css-loader": "^1.0.1",
+        "mini-css-extract-plugin": "^0.5.0",
+        "node-sass": "^4.11.0",
+        "sass-loader": "^7.1.0",
+        "uglifyjs-webpack-plugin": "^2.0.1",
+        "vue-loader": "^15.4.2",
+        "vue-style-loader": "^4.1.2",
+        "vue-template-compiler": "^2.5.17",
+        "webpack": "^4.26.1",
+        "webpack-cli": "^3.1.2"
+    }
+}

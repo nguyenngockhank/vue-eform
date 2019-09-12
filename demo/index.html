@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Example</title>
+
+    <style>
+        #app {
+            width: 960px;
+            margin: auto;
+        }
+
+        .box-draggable{
+            height: 30px;
+            width: 30px;
+            background-color: blueviolet;
+        }
+
+        .item-draggable {
+            width: 200px;
+            height: 30px;
+            margin-bottom: 10px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="app">
+        {{ message }}
+
+        <div class="box-draggable" v-draggable></div>
+
+
+        <div class="box-draggable-container" v-draggable.clone="'.item-draggable'">
+            <div class="item-draggable"></div>
+            <div class="item-draggable"></div>
+            <div class="item-draggable"></div>
+            <div class="item-draggable"></div>
+            <div class="item-draggable"></div>
+            <div class="item-draggable"></div>
+            <div class="item-draggable"></div>
+            <div class="item-draggable"></div>
+        </div>
+    </div>
+
+
+    <script src="../node_modules/vue/dist/vue.min.js"></script>
+
+    <!-- add built file -->
+    <script src="../dist/index.js"></script>
+
+    <script src="./main.js"></script>
+</body>
+</html>
+
+
