@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Example</title>
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
 
     <style>
         * { margin: 0; padding: 0}
@@ -30,7 +30,7 @@
 
     <script src="../node_modules/vue/dist/vue.min.js"></script>
     <!-- add built file -->
-    <script src="index.js"></script>
+    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 
     <script>
         window.__webpack_public_path__ = 'http://localhost/vue-eform/dist/';

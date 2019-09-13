@@ -1,19 +1,20 @@
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const path = require('path')
+const APP_DIR = path.resolve(__dirname, 'src');
+const BUILD_DIR = path.resolve(__dirname, 'dist');
 
-var path = require('path')
-var APP_DIR = path.resolve(__dirname, 'src');
-var BUILD_DIR = path.resolve(__dirname, 'dist');
-
-var mode = process.env.NODE_ENV; // production or development
+const mode = process.env.NODE_ENV; // production or development
 
 var styleLoaders = mode !== 'production' ? [ 'vue-style-loader', 'css-loader', 'sass-loader' ] : [ MiniCssExtractPlugin.loader,  'css-loader', 'sass-loader'] ;
 
 module.exports = {
     mode: mode,
-    entry: ['babel-polyfill', './src/index.js'],
+    entry: ['babel-polyfill', path.join(__dirname, 'src', 'index.js')],
     output: {
         path: BUILD_DIR,
         filename: 'index.js'
@@ -38,7 +39,7 @@ module.exports = {
                     loader: 'file-loader',
                     options: {
                         name: '[name].[ext]',
-                        outputPath: 'fonts/'
+                        outputPath: 'assets/fonts/'
                     }
                 }]
             },
@@ -55,9 +56,13 @@ module.exports = {
         ]
     },
     plugins: [
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'public', 'index.html'),
+            inject: false
+        }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'style.css'
+            filename: "assets/css/style.css"
         })
     ],
     optimization: {}
@@ -84,6 +89,7 @@ if (mode === 'production') {
 
     // http://vue-loader.vuejs.org/en/workflow/production.html
     module.exports.plugins = (module.exports.plugins || []).concat([
+        new CleanWebpackPlugin(BUILD_DIR),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"'
