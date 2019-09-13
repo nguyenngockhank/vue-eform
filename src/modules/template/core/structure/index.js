@@ -40,7 +40,7 @@ function initFactory() {
 function initEvent() {
 
     // TODO: split handler to service 
-    eventBus.addListener(EV.SECTION_ADDING, function(payload = { title }) {
+    eventBus.addListener(EV.SECTION_ADD_REQUEST, function(payload = { title }) {
 
         // create main entity
         var sectionData = factories.section.create(payload); 
@@ -58,9 +58,9 @@ function initEvent() {
         // fire event
         eventBus.fireEvent(EV.SECTION_ADDED, { sectionId: sectionData.id });
     });
-
     
-    eventBus.addListener(EV.ROW_ADDING, function({ sectionId }) {
+
+    eventBus.addListener(EV.ROW_ADD_REQUEST, function({ sectionId }) {
         console.log(' row adding ...', sectionId)
 
         /// look up section data 
@@ -76,6 +76,23 @@ function initEvent() {
 
         // fire event
         eventBus.fireEvent(EV.ROW_ADDED, { rowId: rowData.id });
+    });
+
+    eventBus.addListener(EV.ROW_REORDER_REQUEST, function({ sectionId, newIndex, oldIndex } = { sectionId, newIndex, oldIndex }) {
+        /// look up section data 
+        if (!repositories.section.has(sectionId)) {
+            // throw error
+            return false;
+        }
+
+        var secData = repositories.section.get(sectionId);
+
+        // swap 
+        var temp = secData.children[newIndex];
+        secData.children[newIndex] = secData.children[oldIndex];
+        secData.children[oldIndex] = temp;
+
+        // fire event done 
     });
 }
 
