@@ -4,22 +4,26 @@
 
     <p>This is a line to prove this component working!</p>
 
-    <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
+    <div class="build-wrapper">
+        <div class="col-xs-6">
+            <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
 
-    <el-collapse v-model="activeSections" >
-        <draggable v-model="structure.children" class="structure-wrapper">
+            <el-collapse v-model="activeSections" >
+                <draggable v-model="structure.children" class="structure-wrapper">
 
-            <Section  v-for="section in structure.children"   
-                 class="section-wrapper"   v-bind="section"  :key="section.id"  ></Section>
-        
-        </draggable>
-    </el-collapse>
+                    <Section  v-for="section in structure.children"   
+                        class="section-wrapper"  v-bind="section" :key="section.id" v-model="section.children" ></Section>
+                
+                </draggable>
+            </el-collapse>
+            <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
+        </div>
 
-    <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
-
-
-    <h3>Data template</h3>
-    <pre>{{ $data }}</pre>
+        <div class="col-xs-6">
+            <h3>Data template</h3>
+            <pre>{{ $data }}</pre>
+        </div>
+    </div>    
 </div>
 </template>
 
@@ -29,8 +33,7 @@ import draggable from 'vuedraggable';
 import Section from './structure/Section';
 import { SECTION_ADD_REQUEST, SECTION_ADDED } from '../constants/events';
 
-
-import StructureHandler from 'template/core/structure';
+import Structure from 'template/core/structure';
 
 export default {
     components: {
@@ -39,7 +42,7 @@ export default {
     data() {
 
         return {
-            structure: StructureHandler.getState(), 
+            structure: Structure.getState(), 
             // open collapse 
             activeSections: [],
         } 
@@ -67,7 +70,13 @@ export default {
 </script>
 
 <style scoped>
-
+.build-wrapper {
+    display: flex;
+}
+.col-xs-6 {
+    /* flex-grow: 1; */
+    width: 50%;
+}
 </style>
 
 <style >

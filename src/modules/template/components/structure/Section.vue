@@ -7,39 +7,41 @@
     </template>
 
     <div class="rows-wrapper" v-if="children">
-        <draggable v-model="rowOrder" :component-data="getComponentData()">
+        <draggable v-model="children" :component-data="getComponentData()">
             <div class="row-wrapper" v-for="row in children" :key="row.id">
                 {{ row }}
             </div>
        </draggable>
     </div>
-    {{ rowOrder }}
+    {{ $data }}
 </el-collapse-item>
 </template>
 
 <script>
 import eventBus from 'core/eventBus';
 import draggable from 'vuedraggable';
-import { ROW_ADD_REQUEST, ROW_REORDER_REQUEST } from '../../constants/events';
-
+import { ROW_ADD_REQUEST, ROW_REORDER_REQUEST } from 'template/constants/events';
+import Structure from 'template/core/structure';
 
 export default {
     components: {
         draggable, 
     },
-    props: [ 'title', 'children', 'id'],
-    data() {
-        return {
-            rowOrder: [],
-        }
+    model: {
+        prop: 'children',
+        event: 'reorder',
     },
-    created() {
-        this.rowOrder = this.children.map(el => el.id );
+    props: [ 'title', 'id'],
+    data() {
+        const sectionState = Structure.getSectionState(this.$props.id)
+        console.log(">>> sectionState of ", this.$props.id, sectionState)
+
+        return sectionState;
     },
     watch: {
-        children(newVal , oldVal) {
-            // console.log('>>> new val', newVal, '>>> old val', oldVal)
-            this.rowOrder = newVal.map(el => el.id );
+        children(newValue) {
+            /// update index 
+            newValue.forEach((e, index) => e.index = index );
         }
     },
     methods: {
@@ -48,17 +50,19 @@ export default {
         }, 
         handleChange(event, ...params) {
             var { newIndex, oldIndex } = event; 
-            // console.log(params)
+            console.log(newIndex, oldIndex, event)
 
             if ( newIndex != oldIndex ) {
-                eventBus.fireEvent(ROW_REORDER_REQUEST, { sectionId: this.id, newIndex, oldIndex });
+                console.log(this.pChildren)
+                this.$emit('reorder', this.pChildren);
+                // eventBus.fireEvent(ROW_REORDER_REQUEST, { sectionId: this.id, newIndex, oldIndex });
             }
         },
         getComponentData() {
             return {
-                on: {
-                    change: this.handleChange,
-                },
+                // on: {
+                //     update: this.handleChange,
+                // },
                 attrs:{
                     wrap: true
                 },

@@ -9,4 +9,4 @@ class ControlFactory extends EntityFactory {
 
 }
 
-export default ControlFactory;
+export default new ControlFactory;
