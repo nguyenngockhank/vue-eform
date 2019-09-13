@@ -31,7 +31,7 @@
 import eventBus from 'core/eventBus';
 import draggable from 'vuedraggable';
 import Section from './structure/Section';
-import { SECTION_ADD_REQUEST, SECTION_ADDED } from '../constants/events';
+import { SECTION_ADD_REQUEST,  SECTION_ADDED } from '../constants/events';
 
 import Structure from 'template/core/structure';
 
@@ -80,6 +80,12 @@ export default {
 </style>
 
 <style >
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.pull-right {
+    float: right;
+}
 .structure-wrapper {
     /* border: 1px solid #ddd; */
     margin: 20px 0;
@@ -95,7 +101,10 @@ export default {
     border-top: none;
     border-bottom: none;
 }
-.el-collapse-item__content {
+.el-collapse-item__header {
     background-color: #f1f1f1;
+}
+.el-collapse-item__content {
+  
 }
 </style>

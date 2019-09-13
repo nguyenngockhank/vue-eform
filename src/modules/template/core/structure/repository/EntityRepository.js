@@ -18,7 +18,7 @@ class EntityRepository {
     }
 
     remove(entityId) {
-        return this.map.remove(entityId);
+        return this.map.delete(entityId);
     }
 
 }

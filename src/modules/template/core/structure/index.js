@@ -28,6 +28,13 @@ function initEvent() {
         eventBus.fireEvent(EV.SECTION_ADDED, { sectionId: sectionData.id });
     });
 
+
+    eventBus.addListener(EV.SECTION_REMOVE_REQUEST, function({ sectionId }) {
+        sectionRepository.remove(sectionId);
+        _dataStructure.children = _dataStructure.children.filter((e) => e.id != sectionId)
+    });
+
+    
     
     eventBus.addListener(EV.ROW_ADD_REQUEST, function({ sectionId }) {
 
@@ -38,26 +45,7 @@ function initEvent() {
         eventBus.fireEvent(EV.ROW_ADDED, { rowId: rowData.id });
     });
 
-    /*
-    eventBus.addListener(EV.ROW_REORDER_REQUEST, function({ sectionId, newIndex, oldIndex } = { sectionId, newIndex, oldIndex }) {
-        /// look up section data 
-        if (!repositories.section.has(sectionId)) {
-            // throw error
-            return false;
-        }
 
-        var secData = repositories.section.get(sectionId);
-
-        // swap 
-        var temp = secData.children[newIndex];
-        secData.children[newIndex] = secData.children[oldIndex];
-        secData.children[oldIndex] = temp;
-
-        console.log('swap', secData)
-
-        // fire event done 
-    });
-    */
 }
 
 
