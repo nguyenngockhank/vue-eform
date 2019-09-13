@@ -27,10 +27,10 @@
 import eventBus from 'core/eventBus';
 import draggable from 'vuedraggable';
 import Section from './structure/Section';
-import { SECTION_ADDING, SECTION_ADDED } from '../constants/events';
+import { SECTION_ADD_REQUEST, SECTION_ADDED } from '../constants/events';
 
 
-import StructureHandler from '../core/structure/index';
+import StructureHandler from 'template/core/structure';
 
 export default {
     components: {
@@ -52,16 +52,15 @@ export default {
         });
 
 
-
         this.addSection('First section');
         this.addSection('Second section');
     },
-     methods: {
+    methods: {
         addSection(title = 'Random title') {
             if ( typeof title != 'string') {
                 title = 'Random title';
             }
-            eventBus.fireEvent(SECTION_ADDING, { title });
+            eventBus.fireEvent(SECTION_ADD_REQUEST, { title });
         }
     }
 }

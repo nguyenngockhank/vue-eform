@@ -19,7 +19,7 @@ class EntityFactory {
             children: [],
         };
 
-        console.log('>> >create witth options ', this.type,  options)
+        // console.log('>>> create with options ', this.type,  options);
         newIns = Object.assign(newIns, options); // extends attrs 
         newIns.id = this.generator(); // assign id for entity 
 
