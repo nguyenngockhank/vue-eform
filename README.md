@@ -76,4 +76,4 @@ Underscore
 
 [Drag & Drop](https://github.com/SortableJS/Vue.Draggable)
 
-Built on top this library [element](https://element.eleme.io/#/en-US/component/)
+[UI Elements](https://element.eleme.io/#/en-US/component/)

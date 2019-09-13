@@ -30,7 +30,7 @@ import Section from './structure/Section';
 import { SECTION_ADDING, SECTION_ADDED } from '../constants/events';
 
 
-import StructureHandler from '../core/StructureHandler';
+import StructureHandler from '../core/structure/index';
 
 export default {
     components: {

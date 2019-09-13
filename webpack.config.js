@@ -45,10 +45,13 @@ module.exports = {
         ]
     },
     resolve: {
-        alias: { vue: 'vue/dist/vue.js' },
+        alias: { 
+            vue: 'vue/dist/vue.js',
+            template: APP_DIR + '/modules/template/',
+        },
         extensions: ['*', '.js', '.vue', '.json'],
         modules: [
-            "node_modules",  APP_DIR
+            "node_modules",  APP_DIR, 
         ]
     },
     plugins: [

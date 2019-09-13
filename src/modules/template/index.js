@@ -6,7 +6,7 @@ import {
 
 // import 'element-ui/lib/theme-chalk/index.css';
 
-import StructureHandler from './core/StructureHandler';
+import StructureHandler from './core/structure';
 
 // import draggableComponent from 'vuedraggable';
 import Main from './components/Main.vue';
