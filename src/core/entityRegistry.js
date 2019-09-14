@@ -1,6 +1,6 @@
 class EntityRegistry {
 
-    construct(){
+    constructor(){
         this.allowedKeys = new Map;
     }
 

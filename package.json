@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "element-ui": "^2.12.0",
+        "lodash": "^4.17.15",
         "vuedraggable": "^2.23.0"
     },
     "devDependencies": {

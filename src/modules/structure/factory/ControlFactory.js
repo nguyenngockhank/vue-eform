@@ -7,6 +7,8 @@ class ControlFactory extends EntityFactory {
         super( PREFIX_CONTROL_ID, TYPE_CONTROL);
     }
 
+    /// build control data from registry
+
 }
 
 export default new ControlFactory;
