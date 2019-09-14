@@ -4,7 +4,7 @@ import { TYPE_CONTROL, PREFIX_CONTROL_ID } from 'constants/entities';
 class ControlFactory extends EntityFactory {
     
     constructor() {
-        super(TYPE_CONTROL, PREFIX_CONTROL_ID);
+        super( PREFIX_CONTROL_ID, TYPE_CONTROL);
     }
 
 }

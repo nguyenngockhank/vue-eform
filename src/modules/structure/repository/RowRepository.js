@@ -2,15 +2,22 @@ import EntityRepository from './EntityRepository';
 
 import rowFactory from '../factory/RowFactory';
 
+import controlRepo from './ControlRepository';
+
 class RowRepository extends EntityRepository {
 
-    constructor() {
-        super(); 
-        this.sectionMap = new Map();
-    }
+    addControl( rowId ) {
+        let rowData = this.find(rowId);
+        if (!rowData) {
+            return false;
+        }
 
-    listOfSection(sectionId) {
+        const index = rowData.children.length; // last index 
+        // more sub_type
+        const controlData = controlRepo.add({ rowId: rowData.id, index });
 
+        rowData.children.push(controlData);
+        return controlData;
     }
 
 

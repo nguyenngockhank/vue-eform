@@ -31,7 +31,7 @@
 import eventBus from 'core/eventBus';
 import draggable from 'vuedraggable';
 import Section from './structure/Section';
-import { SECTION_ADD_REQUEST,  SECTION_ADDED } from '$template/constants/events';
+import { SECTION_ADD_REQUEST,  SECTION_ADDED, ROW_ADD_REQUEST } from '$template/constants/events';
 
 import CoreHandler from '$template/core';
 
@@ -52,6 +52,10 @@ export default {
         eventBus.addListener(SECTION_ADDED, ({ sectionId }) => {
             console.log(sectionId, 'added section')
             this.activeSections.push(sectionId);
+
+            // fire event to add a new row 
+            eventBus.fireEvent(ROW_ADD_REQUEST, { sectionId });
+            eventBus.fireEvent(ROW_ADD_REQUEST, { sectionId });
         });
 
 
@@ -105,6 +109,6 @@ export default {
     background-color: #f1f1f1;
 }
 .el-collapse-item__content {
-  
+    padding-bottom: 0px;
 }
 </style>

@@ -12,7 +12,7 @@
         
     </template>
 
-    <div class="rows-wrapper" v-if="children">
+    <div class="section-body" v-if="children">
         <draggable v-model="children" >
             <Row v-for="row in children" :key="row.id" v-bind="row"  />
        </draggable>
@@ -26,7 +26,7 @@ import eventBus from 'core/eventBus';
 import draggable from 'vuedraggable';
 
 import { ROW_ADD_REQUEST, SECTION_REMOVE_REQUEST } from '$template/constants/events';
-import Structure from '$template/core';
+import CoreHandler from '$template/core';
 
 export default {
     components: {
@@ -38,9 +38,8 @@ export default {
     },
     props: [ 'title', 'id'],
     data() {
-        const sectionState = Structure.getSectionState(this.$props.id)
-        console.log(">>> sectionState of ", this.$props.id, sectionState)
-
+        const sectionState = CoreHandler.getSectionState(this.$props.id)
+        // console.log(">>> sectionState of ", this.$props.id, sectionState)
         return sectionState;
     },
     watch: {
@@ -57,33 +56,13 @@ export default {
             /// TODO: confirm ?
             eventBus.fireEvent(SECTION_REMOVE_REQUEST, { sectionId: this.id });
         }
-        // handleChange(event, ...params) {
-        //     var { newIndex, oldIndex } = event; 
-        //     console.log(newIndex, oldIndex, event)
-
-        //     if ( newIndex != oldIndex ) {
-        //         console.log(this.pChildren)
-        //         this.$emit('reorder', this.pChildren);
-        //         // eventBus.fireEvent(ROW_REORDER_REQUEST, { sectionId: this.id, newIndex, oldIndex });
-        //     }
-        // },
-        // getComponentData() {
-        //     return {
-        //         // on: {
-        //         //     update: this.handleChange,
-        //         // },
-        //         attrs:{
-        //             wrap: true
-        //         },
-        //     };
-        // }
     }
 }
 </script>
 
 <style scoped>
-.rows-wrapper {
-    padding: 7px 14px;
+.section-body {
+    padding: 7px ;
 }
 .section-toolbar {
     display: flex;

@@ -30,8 +30,17 @@ class Page {
     }
  
     removeRow(rowId) {
-        return  sectionRepo.removeRow ( rowId);
+        return  sectionRepo.removeRow(rowId);
     }
+
+    // manipulate of control
+    addControl(rowId) {
+        const controlData = rowRepo.addControl(rowId);
+        return controlData;
+        // const rowData = sectionRepo.addRow( sectionId );
+        // return rowData;
+    }
+ 
 
     /// getter for state
     getPageState() {
@@ -40,6 +49,10 @@ class Page {
 
     getSectionState(sectionId) {
         return sectionRepo.find(sectionId);
+    }
+
+    getRowState(rowId) {
+        return rowRepo.find(rowId);
     }
 
 }

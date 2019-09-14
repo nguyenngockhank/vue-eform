@@ -13,24 +13,40 @@
     </div>
 
     <div class="row-body">
-        CONTROL O DAY
+       <draggable v-model="children" >
+            <div class="ef-control" v-for="control in children" :key="control.id" v-bind="control" >
+                {{ control }}
+            </div>
+       </draggable>
     </div>
 
-   
+
 </div>
 </template>
 
 <script>
 import eventBus from 'core/eventBus';
 import draggable from 'vuedraggable';
-import {  ROW_REMOVE_REQUEST } from '$template/constants/events';
+import {  ROW_REMOVE_REQUEST, CONTROL_ADD_REQUEST } from '$template/constants/events';
+import CoreHandler from '$template/core';
+
 
 export default {
     props: [ 'id', 'index'],
-
+    data() {
+        const rowState = CoreHandler.getRowState(this.$props.id)
+        return rowState;
+    },
+    watch: {
+        children(newValue) {
+            /// update index 
+            newValue.forEach((e, index) => e.index = index );
+        }
+    },
     methods: {
         addControl() {
-            console.log('add control')
+            // sub_type: text, number, ... 
+            eventBus.fireEvent(CONTROL_ADD_REQUEST, { rowId: this.id });
         }, 
         removeRow() {
             eventBus.fireEvent(ROW_REMOVE_REQUEST, { rowId: this.id });
@@ -61,5 +77,10 @@ export default {
 
 .clearfix {
     clear: box;
+}
+
+ef-control {
+    display: inline-block;
+    width: 30%;
 }
 </style>
