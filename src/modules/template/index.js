@@ -6,7 +6,7 @@ import {
 
 // import 'element-ui/lib/theme-chalk/index.css';
 
-import StructureHandler from './core/structure';
+import CoreHandler from './core';
 
 // import draggableComponent from 'vuedraggable';
 import Main from './components/Main.vue';
@@ -23,7 +23,7 @@ const instance =  {
         // Vue.directive(`${PREFIX_DIRECTIVE}draggable`, draggableDirective)
         Vue.component('eform-builder', Main);
 
-        StructureHandler.init();
+        CoreHandler.init();
 
     }
 };

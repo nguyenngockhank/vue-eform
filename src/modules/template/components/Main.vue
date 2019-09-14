@@ -31,9 +31,9 @@
 import eventBus from 'core/eventBus';
 import draggable from 'vuedraggable';
 import Section from './structure/Section';
-import { SECTION_ADD_REQUEST,  SECTION_ADDED } from '../constants/events';
+import { SECTION_ADD_REQUEST,  SECTION_ADDED } from '$template/constants/events';
 
-import Structure from 'template/core/structure';
+import CoreHandler from '$template/core';
 
 export default {
     components: {
@@ -42,7 +42,7 @@ export default {
     data() {
 
         return {
-            structure: Structure.getState(), 
+            structure: CoreHandler.getPageState(), 
             // open collapse 
             activeSections: [],
         } 

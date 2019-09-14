@@ -2,7 +2,7 @@ import EntityRepository from './EntityRepository';
 
 import sectionFactory from '../factory/SectionFactory';
 
-import rowRepository from './RowRepository';
+import rowRepo from './RowRepository';
 
 class SectionRepository extends EntityRepository {
 
@@ -14,12 +14,28 @@ class SectionRepository extends EntityRepository {
         }
 
         const index = sectionData.children.length; // last index 
-        const rowData = rowRepository.add({ sectionId: sectionData.id, index });
+        const rowData = rowRepo.add({ sectionId: sectionData.id, index });
 
         sectionData.children.push(rowData);
-
         return rowData;
     }
+
+    removeRow(rowId) {
+        const rowData = rowRepo.find(rowId); 
+        const { sectionId } = rowData;
+
+        if (!rowData) {
+            return; 
+        }
+
+        // remove from repo 
+        rowRepo.remove(rowId);
+
+        // remove from data structure 
+        const sectionData = this.find(sectionId);
+        sectionData.children = sectionData.children.filter((e) => e.id != rowId)
+    }
+
 
 
     add(payload) {

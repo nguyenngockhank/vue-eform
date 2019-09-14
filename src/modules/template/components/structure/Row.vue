@@ -23,7 +23,7 @@
 <script>
 import eventBus from 'core/eventBus';
 import draggable from 'vuedraggable';
-
+import {  ROW_REMOVE_REQUEST } from '$template/constants/events';
 
 export default {
     props: [ 'id', 'index'],
@@ -31,11 +31,9 @@ export default {
     methods: {
         addControl() {
             console.log('add control')
-
-
         }, 
         removeRow() {
-
+            eventBus.fireEvent(ROW_REMOVE_REQUEST, { rowId: this.id });
         }
     }
 }

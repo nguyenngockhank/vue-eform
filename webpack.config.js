@@ -49,7 +49,8 @@ module.exports = {
     resolve: {
         alias: { 
             vue: 'vue/dist/vue.js',
-            template: APP_DIR + '/modules/template/',
+            $template: APP_DIR + '/modules/template/',
+            $structure: APP_DIR + '/modules/structure/',
         },
         extensions: ['*', '.js', '.vue', '.json'],
         modules: [

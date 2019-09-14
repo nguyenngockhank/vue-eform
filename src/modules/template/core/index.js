@@ -1,25 +1,13 @@
-import * as EV from 'template/constants/events';
+import * as EV from '$template/constants/events';
 import eventBus from 'core/eventBus';
 
-import sectionRepository from './repository/SectionRepository';
-// import rowRepository from './repository/RowRepository';
-
-
-const instance = { };
-
-const _dataStructure = {
-    children: [],
-}; 
-
+import { PageStructure } from '$structure/index';
 
 function initEvent() {
-
     // TODO: split handler to service 
     eventBus.addListener(EV.SECTION_ADD_REQUEST, function(payload = { title }) {
-        let sectionData = sectionRepository.add(payload);
-  
         // add to _dataStructure  
-        _dataStructure.children.push(sectionData);
+        const sectionData = PageStructure.addSection(payload);
 
         // fire event to add a new row 
         eventBus.fireEvent(EV.ROW_ADD_REQUEST, { sectionId: sectionData.id });
@@ -30,39 +18,41 @@ function initEvent() {
 
 
     eventBus.addListener(EV.SECTION_REMOVE_REQUEST, function({ sectionId }) {
-        sectionRepository.remove(sectionId);
-        _dataStructure.children = _dataStructure.children.filter((e) => e.id != sectionId)
+        PageStructure.removeSection(sectionId);
+        // fire event
     });
 
     
-    
     eventBus.addListener(EV.ROW_ADD_REQUEST, function({ sectionId }) {
-
-        const rowData = sectionRepository.addRow( sectionId )
-        // rowRepository.add({ sectionId: sectionData.id })
+        const rowData = PageStructure.addRow(sectionId);
 
         // fire event
         eventBus.fireEvent(EV.ROW_ADDED, { rowId: rowData.id });
     });
 
+    eventBus.addListener(EV.ROW_REMOVE_REQUEST, function( { rowId }) {
+        PageStructure.removeRow(rowId);
+    });
+
 
 }
 
+
+/// import structure 
+
+const instance = {};
 
 instance.init = function() {
     initEvent();
 }
 
-instance.buildStructure = function() {
-
+instance.getPageState = function() {
+    return PageStructure.getPageState();
 }
-
-instance.getState = function() {
-    return _dataStructure;
-} 
 
 instance.getSectionState = function(sectionId) {
-    return sectionRepository.find(sectionId);
+    return PageStructure.getSectionState(sectionId);
 }
+
 
 export default instance;
