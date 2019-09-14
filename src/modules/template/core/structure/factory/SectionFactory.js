@@ -1,10 +1,9 @@
 import EntityFactory from './EntityFactory';
-
-
+import { TYPE_SECTION, PREFIX_SECTION_ID } from 'constants/entities';
 class SectionFactory extends EntityFactory {
     
     constructor() {
-        super('S', 'section');
+        super(PREFIX_SECTION_ID, TYPE_SECTION);
     }
 
 }
