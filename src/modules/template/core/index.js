@@ -7,6 +7,8 @@ import { PageStructure } from '$structure/index';
 
 import eventHandler from './handlers/eventHandler';
 
+import cloneDeep from 'lodash/cloneDeep';
+
 /// import structure 
 const instance = {};
 
@@ -41,7 +43,8 @@ instance.registerControl = function( sub_type,  { structure, sidebar, attrs }) {
 }
 
 instance.getControlAttr = function (sub_type) {
-    return controlAttrRegistry.get(sub_type);
+    // avoid to conflict 
+    return cloneDeep(controlAttrRegistry.get(sub_type));
 }
 
 export default instance;

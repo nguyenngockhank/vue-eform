@@ -45,8 +45,9 @@ export default {
     },
     methods: {
         addControl() {
+            const controlAtrr = CoreHandler.getControlAttr('text');
             // sub_type: text, number, ... 
-            eventBus.fireEvent(CONTROL_ADD_REQUEST, { rowId: this.id });
+            eventBus.fireEvent(CONTROL_ADD_REQUEST, {  ...controlAtrr, rowId: this.id });
         }, 
         removeRow() {
             eventBus.fireEvent(ROW_REMOVE_REQUEST, { rowId: this.id });

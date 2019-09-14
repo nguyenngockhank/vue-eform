@@ -34,8 +34,8 @@ instance.init = function() {
     });
 
 
-    eventBus.addListener(EV.CONTROL_ADD_REQUEST, function({ rowId }) {
-        const controlData = PageStructure.addControl(rowId);
+    eventBus.addListener(EV.CONTROL_ADD_REQUEST, function({ rowId, ...attrs }) {
+        const controlData = PageStructure.addControl(rowId, attrs);
         // fire event
         eventBus.fireEvent(EV.CONTROL_ADDED, { controlId: controlData.id });
     });
