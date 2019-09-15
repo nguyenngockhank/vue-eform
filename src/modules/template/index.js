@@ -3,18 +3,23 @@ import {
     CollapseItem, 
     Button, 
 
-    Container,
+    // Container,
     Row,
     Col,
+
+    // dropdown
+    Dropdown,
+    DropdownMenu,
+    DropdownItem,
 } from 'element-ui';
 
-// import 'element-ui/lib/theme-chalk/index.css';
+import draggableComponent from 'vuedraggable';
 
-import { TEXT_CONTROL_ATTR } from './constants/control_attrs';
+import { TEXT_CONTROL_ATTR, NUMBER_CONTROL_ATTR } from './constants/control_attrs';
 
 import CoreHandler from './core';
 
-// import draggableComponent from 'vuedraggable';
+
 import Main from './components/Main.vue';
 
 const instance =  {
@@ -26,22 +31,39 @@ const instance =  {
         Vue.use(Button);
 
         // grid 
-        Vue.use(Container);
+        // Vue.use(Container);
         Vue.use(Row);
         Vue.use(Col);
-      
 
-        // Vue.component("draggable", draggableComponent);
+        // dropdown
+        Vue.use(Dropdown);
+        Vue.use(DropdownMenu);
+        Vue.use(DropdownItem);
+
+        Vue.component("draggable", draggableComponent);
         // Vue.directive(`${PREFIX_DIRECTIVE}draggable`, draggableDirective)
 
         
         CoreHandler.registerControl( 'text', {
             structure: {
-                pre_icon: 'pencil',
+                label: 'Text Control',
+                icon: 'el-icon-edit', 
             },
             attrs: TEXT_CONTROL_ATTR,
-            sidebar: '',
+            // sidebar: '',
         })
+
+        CoreHandler.registerControl( 'number', {
+            structure: {
+                label: 'Number Control',
+                icon: 'el-icon-lollipop',
+            },
+            attrs: NUMBER_CONTROL_ATTR,
+            // sidebar: '',
+        })
+
+
+
 
         /// register global component 
         Vue.component('eform-builder', Main);

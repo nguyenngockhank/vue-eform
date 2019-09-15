@@ -3,8 +3,19 @@
 
     <div class="row-toolbar">
         <span>
-            <el-button @click.native.stop="addControl" type="primary" icon="el-icon-plus" size="mini">Add Control</el-button>
+            <el-dropdown trigger="click"  @command="addControl">
+                <el-button type="primary" size="mini">
+                   <i class="el-icon-plus" /> Add Control <i class="el-icon-arrow-down" /> 
+                </el-button>
 
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item v-for="item in dropdownControlItems" :command="item.key" :key="item.key" :icon="item.icon">
+                        {{ item.label }}
+                    </el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>    
+
+            <el-button @click.native.stop="addControl" type="primary" icon="el-icon-plus" size="mini">Add Control</el-button>
             ({{ id }})
         </span>
         <span>
@@ -25,7 +36,6 @@
 
 <script>
 import eventBus from 'core/eventBus';
-import draggable from 'vuedraggable';
 import {  ROW_REMOVE_REQUEST, CONTROL_ADD_REQUEST } from '$template/constants/events';
 import Control from './Control';
 import CoreHandler from '$template/core';
@@ -38,8 +48,12 @@ export default {
         const rowState = CoreHandler.getRowState(this.$props.id)
         return rowState;
     },
-    created() {
-        console.log('created row hook: ', this)
+    computed: {
+        // it means controls must be registered before CoreHandler init =)) 
+        // because this value of this method never change. Why? It's not a obserable vars.
+        dropdownControlItems() {
+            return CoreHandler.datasourceControlList();
+        }
     },
     watch: {
         children(newValue) {
@@ -48,8 +62,8 @@ export default {
         }
     },
     methods: {
-        addControl() {
-            const subType = 'text';
+        addControl(val) {
+            const subType = val;
             const controlAtrr = CoreHandler.getControlAttr(subType);
             // sub_type: text, number, ... 
             eventBus.fireEvent(CONTROL_ADD_REQUEST, {  ...controlAtrr, sub_type: subType, rowId: this.id });

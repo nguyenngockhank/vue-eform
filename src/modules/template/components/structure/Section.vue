@@ -24,14 +24,13 @@
 <script>
 import Row from './Row';
 import eventBus from 'core/eventBus';
-import draggable from 'vuedraggable';
 
 import { ROW_ADD_REQUEST, SECTION_REMOVE_REQUEST } from '$template/constants/events';
 import CoreHandler from '$template/core';
 
 export default {
     components: {
-        draggable, Row
+         Row
     },
     model: {
         prop: 'children',

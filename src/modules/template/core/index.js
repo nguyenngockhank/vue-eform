@@ -31,22 +31,27 @@ instance.getControlState = function(controlId) {
 }
 
 instance.registerControl = function( sub_type,  { structure, sidebar, attrs }) {
-    if (attrs) {
-        controlAttrRegistry.register(sub_type, attrs);
+    if (!attrs || !structure) {
+        console.warn(`[EForm Warning]: Register control failed! Options invalid!`)
+        return false; 
     }
 
-    if (structure) {
-        controlStructureRegistry.register(sub_type, structure);
-    }
+    controlAttrRegistry.register(sub_type, attrs);
+    controlStructureRegistry.register(sub_type, structure);
 
     if (sidebar) {
         // sidebar ... 
     }
 }
 
+///  helper to GUI 
 instance.getControlAttr = function (sub_type) {
     // avoid to conflict 
     return cloneDeep(controlAttrRegistry.get(sub_type));
+}
+
+instance.datasourceControlList = function() {
+    return controlStructureRegistry.menuItemControlList();
 }
 
 export default instance;

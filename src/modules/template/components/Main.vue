@@ -30,7 +30,6 @@
 
 <script>
 import eventBus from 'core/eventBus';
-import draggable from 'vuedraggable';
 import Section from './structure/Section';
 import { SECTION_ADD_REQUEST,  SECTION_ADDED, ROW_ADD_REQUEST } from '$template/constants/events';
 
@@ -38,7 +37,7 @@ import CoreHandler from '$template/core';
 
 export default {
     components: {
-        draggable, Section
+        Section
     },
     data() {
 
