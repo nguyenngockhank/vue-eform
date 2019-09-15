@@ -1,5 +1,3 @@
-
-
 import controlAttrRegistry from './registry/ControlAttrRegistry';
 import controlStructureRegistry from './registry/ControlStructureRegistry';
 
@@ -26,6 +24,10 @@ instance.getSectionState = function(sectionId) {
 
 instance.getRowState = function(rowId) {
     return PageStructure.getRowState(rowId);
+}
+
+instance.getControlState = function(controlId) {
+    return PageStructure.getControlState(controlId);
 }
 
 instance.registerControl = function( sub_type,  { structure, sidebar, attrs }) {

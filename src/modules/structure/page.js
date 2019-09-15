@@ -1,5 +1,6 @@
 import sectionRepo from './repository/SectionRepository';
 import rowRepo from './repository/RowRepository';
+import controlRepo from './repository/ControlRepository';
 
 class Page {
 
@@ -53,6 +54,10 @@ class Page {
 
     getRowState(rowId) {
         return rowRepo.find(rowId);
+    }
+
+    getControlState(controlId) {
+        return controlRepo.find(controlId);
     }
 
 }

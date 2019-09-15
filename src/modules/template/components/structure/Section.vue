@@ -16,6 +16,7 @@
         <draggable v-model="children" >
             <Row v-for="row in children" :key="row.id" v-bind="row"  />
        </draggable>
+        <div v-if="children.length == 0">[ EMPTY SECTION ]</div>
     </div>
 </el-collapse-item>
 </template>

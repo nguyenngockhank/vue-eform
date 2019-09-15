@@ -12,14 +12,13 @@
         </span>
     </div>
 
-    <div class="row-body">
-       <draggable v-model="children" >
-            <div class="ef-control" v-for="control in children" :key="control.id" v-bind="control" >
-                {{ control }}
-            </div>
-       </draggable>
-    </div>
 
+    <el-row class="row-body">
+        <draggable v-model="children" >
+            <Control v-for="control in children" :key="control.id" v-bind="control" />
+        </draggable>
+        <div v-if="children.length == 0">[ EMPTY ROW ]</div>
+    </el-row>
 
 </div>
 </template>
@@ -28,14 +27,19 @@
 import eventBus from 'core/eventBus';
 import draggable from 'vuedraggable';
 import {  ROW_REMOVE_REQUEST, CONTROL_ADD_REQUEST } from '$template/constants/events';
+import Control from './Control';
 import CoreHandler from '$template/core';
 
 
 export default {
     props: [ 'id', 'index'],
+    components: { Control },
     data() {
         const rowState = CoreHandler.getRowState(this.$props.id)
         return rowState;
+    },
+    created() {
+        console.log('created row hook: ', this)
     },
     watch: {
         children(newValue) {
@@ -45,9 +49,10 @@ export default {
     },
     methods: {
         addControl() {
-            const controlAtrr = CoreHandler.getControlAttr('text');
+            const subType = 'text';
+            const controlAtrr = CoreHandler.getControlAttr(subType);
             // sub_type: text, number, ... 
-            eventBus.fireEvent(CONTROL_ADD_REQUEST, {  ...controlAtrr, rowId: this.id });
+            eventBus.fireEvent(CONTROL_ADD_REQUEST, {  ...controlAtrr, sub_type: subType, rowId: this.id });
         }, 
         removeRow() {
             eventBus.fireEvent(ROW_REMOVE_REQUEST, { rowId: this.id });
@@ -73,15 +78,12 @@ export default {
 }
 
 .row-body {
-    border: 1px solid #ccc;
+    border: 1px solid #000;
+    padding: 7px 5px;
+    background-color: #eee;
 }
 
 .clearfix {
     clear: box;
-}
-
-ef-control {
-    display: inline-block;
-    width: 30%;
 }
 </style>

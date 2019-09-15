@@ -2,6 +2,10 @@ import {
     Collapse,
     CollapseItem, 
     Button, 
+
+    Container,
+    Row,
+    Col,
 } from 'element-ui';
 
 // import 'element-ui/lib/theme-chalk/index.css';
@@ -20,6 +24,13 @@ const instance =  {
         Vue.use(Collapse);
         Vue.use(CollapseItem);
         Vue.use(Button);
+
+        // grid 
+        Vue.use(Container);
+        Vue.use(Row);
+        Vue.use(Col);
+      
+
         // Vue.component("draggable", draggableComponent);
         // Vue.directive(`${PREFIX_DIRECTIVE}draggable`, draggableDirective)
 

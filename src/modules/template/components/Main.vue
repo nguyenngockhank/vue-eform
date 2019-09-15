@@ -5,24 +5,25 @@
     <p>This is a line to prove this component working!</p>
 
     <div class="build-wrapper">
-        <div class="col-xs-6">
-            <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
+        <el-row>
+            <el-col :span="16">
+                <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
 
-            <el-collapse v-model="activeSections" >
-                <draggable v-model="structure.children" class="structure-wrapper">
+                <el-collapse v-model="activeSections" >
+                    <draggable v-model="structure.children" class="structure-wrapper">
+                        <Section  v-for="section in structure.children"   
+                            class="section-wrapper"  v-bind="section" :key="section.id" v-model="section.children" ></Section>
+                    </draggable>
+                </el-collapse>
+                <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
+            </el-col>
 
-                    <Section  v-for="section in structure.children"   
-                        class="section-wrapper"  v-bind="section" :key="section.id" v-model="section.children" ></Section>
-                
-                </draggable>
-            </el-collapse>
-            <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
-        </div>
+            <el-col :span="8">
+                <h3>Data template</h3>
+                <pre>{{ $data }}</pre>
+            </el-col> 
 
-        <div class="col-xs-6">
-            <h3>Data template</h3>
-            <pre>{{ $data }}</pre>
-        </div>
+        </el-row>
     </div>    
 </div>
 </template>
@@ -50,7 +51,6 @@ export default {
     created() {
 
         eventBus.addListener(SECTION_ADDED, ({ sectionId }) => {
-            console.log(sectionId, 'added section')
             this.activeSections.push(sectionId);
 
             // fire event to add a new row 
@@ -75,11 +75,7 @@ export default {
 
 <style scoped>
 .build-wrapper {
-    display: flex;
-}
-.col-xs-6 {
-    /* flex-grow: 1; */
-    width: 50%;
+    display: block;
 }
 </style>
 
