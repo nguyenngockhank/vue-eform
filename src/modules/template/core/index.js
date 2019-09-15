@@ -1,9 +1,10 @@
-import controlAttrRegistry from './registry/ControlAttrRegistry';
-import controlStructureRegistry from './registry/ControlStructureRegistry';
+import controlAttrRegistry from './registry/controlAttrRegistry';
+import controlStructureRegistry from './registry/controlStructureRegistry';
 
 import { PageStructure } from '$structure/index';
 
 import eventHandler from './handlers/eventHandler';
+import controlRegisterHandler from './handlers/controlRegisterHandler';
 
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -12,6 +13,7 @@ const instance = {};
 
 instance.init = function() {
     eventHandler.init();
+    controlRegisterHandler.init();
 }
 
 instance.getPageState = function() {
@@ -30,18 +32,8 @@ instance.getControlState = function(controlId) {
     return PageStructure.getControlState(controlId);
 }
 
-instance.registerControl = function( sub_type,  { structure, sidebar, attrs }) {
-    if (!attrs || !structure) {
-        console.warn(`[EForm Warning]: Register control failed! Options invalid!`)
-        return false; 
-    }
-
-    controlAttrRegistry.register(sub_type, attrs);
-    controlStructureRegistry.register(sub_type, structure);
-
-    if (sidebar) {
-        // sidebar ... 
-    }
+instance.registerControl = function( ...params) {
+    /// will use this later
 }
 
 ///  helper to GUI 

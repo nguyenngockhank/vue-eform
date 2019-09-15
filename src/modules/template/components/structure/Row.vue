@@ -15,7 +15,6 @@
                 </el-dropdown-menu>
             </el-dropdown>    
 
-            <el-button @click.native.stop="addControl" type="primary" icon="el-icon-plus" size="mini">Add Control</el-button>
             ({{ id }})
         </span>
         <span>

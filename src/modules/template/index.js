@@ -15,8 +15,6 @@ import {
 
 import draggableComponent from 'vuedraggable';
 
-import { TEXT_CONTROL_ATTR, NUMBER_CONTROL_ATTR } from './constants/control_attrs';
-
 import CoreHandler from './core';
 
 
@@ -43,33 +41,14 @@ const instance =  {
         Vue.component("draggable", draggableComponent);
         // Vue.directive(`${PREFIX_DIRECTIVE}draggable`, draggableDirective)
 
-        
-        CoreHandler.registerControl( 'text', {
-            structure: {
-                label: 'Text Control',
-                icon: 'el-icon-edit', 
-            },
-            attrs: TEXT_CONTROL_ATTR,
-            // sidebar: '',
-        })
 
-        CoreHandler.registerControl( 'number', {
-            structure: {
-                label: 'Number Control',
-                icon: 'el-icon-lollipop',
-            },
-            attrs: NUMBER_CONTROL_ATTR,
-            // sidebar: '',
-        })
-
-
-
+        /// run  
+        CoreHandler.init();
 
         /// register global component 
         Vue.component('eform-builder', Main);
 
-        /// run  
-        CoreHandler.init();
+        
     }
 };
 
