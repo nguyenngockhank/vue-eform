@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "allowSyntheticDefaultImports": false,
+      "baseUrl": "./",
+      "paths": {
+        "$template/*": ["src/modules/template/*"],
+        "$gui/*": ["src/modules/gui/*"],
+        "$structure/*": ["src/modules/structure/*"]
+      }
+    },
+    "exclude": ["node_modules", "dist"]
+  }

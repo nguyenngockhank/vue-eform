@@ -51,6 +51,7 @@ module.exports = {
             vue: 'vue/dist/vue.js',
             $template: APP_DIR + '/modules/template/',
             $structure: APP_DIR + '/modules/structure/',
+            $gui: APP_DIR + '/modules/gui/',
         },
         extensions: ['*', '.js', '.vue', '.json'],
         modules: [
