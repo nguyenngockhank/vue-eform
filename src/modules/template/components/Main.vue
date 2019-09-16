@@ -25,19 +25,38 @@
 
         </el-row>
     </div>    
+
+
+    <el-dialog title="Editting Control" :visible.sync="dialogEditControlVisible">
+
+        <EditControlDialogBody  />
+
+        <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogEditControlVisible = false">Cancel</el-button>
+            <el-button type="primary" @click="dialogFormVisible = false">Save</el-button>
+        </span>
+    </el-dialog>
+    
 </div>
 </template>
 
 <script>
 import eventBus from 'core/eventBus';
 import Section from './structure/Section';
-import { SECTION_ADD_REQUEST,  SECTION_ADDED, ROW_ADD_REQUEST } from '$template/constants/events';
+import { 
+    SECTION_ADD_REQUEST,  
+    SECTION_ADDED, 
+    ROW_ADD_REQUEST, 
+    UI_OPEN_EDIT_CONTROL_DIALOG
+} from '$template/constants/events';
+
+import EditControlDialogBody from './EditControlDialogBody';
 
 import CoreHandler from '$template/core';
 
 export default {
     components: {
-        Section
+        Section, EditControlDialogBody
     },
     data() {
 
@@ -45,9 +64,10 @@ export default {
             structure: CoreHandler.getPageState(), 
             // open collapse 
             activeSections: [],
+            dialogEditControlVisible: false,
         } 
     },
-    created() {
+    mounted() {
 
         eventBus.addListener(SECTION_ADDED, ({ sectionId }) => {
             this.activeSections.push(sectionId);
@@ -60,6 +80,10 @@ export default {
 
         this.addSection('First section');
         this.addSection('Second section');
+
+        eventBus.addListener(UI_OPEN_EDIT_CONTROL_DIALOG, ({ data }) => {
+            this.dialogEditControlVisible = true;
+        });
     },
     methods: {
         addSection(title = 'Random title') {
@@ -67,7 +91,7 @@ export default {
                 title = 'Random title';
             }
             eventBus.fireEvent(SECTION_ADD_REQUEST, { title });
-        }
+        },
     }
 }
 </script>

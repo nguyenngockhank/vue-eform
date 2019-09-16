@@ -11,6 +11,9 @@ import {
     Dropdown,
     DropdownMenu,
     DropdownItem,
+
+    // Dialog
+    Dialog,
 } from 'element-ui';
 
 import draggableComponent from 'vuedraggable';
@@ -37,6 +40,10 @@ const instance =  {
         Vue.use(Dropdown);
         Vue.use(DropdownMenu);
         Vue.use(DropdownItem);
+        
+        // dialog
+        Vue.use(Dialog);
+        
 
         Vue.component("draggable", draggableComponent);
         // Vue.directive(`${PREFIX_DIRECTIVE}draggable`, draggableDirective)

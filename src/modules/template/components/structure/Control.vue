@@ -10,7 +10,7 @@
 <script>
 import eventBus from 'core/eventBus';
 import CoreHandler from '$template/core';
-import {  CONTROL_REMOVE_REQUEST } from '$template/constants/events';
+import {  CONTROL_REMOVE_REQUEST, UI_OPEN_EDIT_CONTROL_DIALOG } from '$template/constants/events';
 
 
 export default {
@@ -24,11 +24,12 @@ export default {
             eventBus.fireEvent(CONTROL_REMOVE_REQUEST, { controlId: this.id });
         },
         testUpdateState() {
-            this.label.text = 'UPDATED TEXT LABEL';
-            this.styles.span.lg = 8;
+            eventBus.fireEvent(UI_OPEN_EDIT_CONTROL_DIALOG, { data: this.$data});
 
-            // console.log(this.$data)
-            this.is_multiline = !this.is_multiline;
+            // this.label.text = 'UPDATED TEXT LABEL';
+            // this.styles.span.lg = 8;
+            // // console.log(this.$data)
+            // this.is_multiline = !this.is_multiline;
         }
     }
 }
