@@ -20,6 +20,22 @@ class RowRepository extends EntityRepository {
         return controlData;
     }
 
+    removeControl(controlId) {
+        const controlData = controlRepo.find(controlId); 
+        const { rowId } = controlData;
+
+        if (!controlData) {
+            return; 
+        }
+
+        // remove from repo 
+        controlRepo.remove(controlId);
+
+        // remove from data structure 
+        const rowData = this.find(rowId);
+        rowData.children = rowData.children.filter((e) => e.id != controlId)
+    }
+
 
     add(payload = { sectionId }) {
         var rowData = rowFactory.create(payload); 

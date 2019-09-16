@@ -31,17 +31,18 @@ class Page {
     }
  
     removeRow(rowId) {
-        return  sectionRepo.removeRow(rowId);
+        return sectionRepo.removeRow(rowId);
     }
 
     // manipulate of control
     addControl(rowId, attrs) {
         const controlData = rowRepo.addControl(rowId, attrs);
         return controlData;
-        // const rowData = sectionRepo.addRow( sectionId );
-        // return rowData;
     }
- 
+    
+    removeControl(controlId) {
+        return rowRepo.removeControl(controlId);
+    }
 
     /// getter for state
     getPageState() {

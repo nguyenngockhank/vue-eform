@@ -40,6 +40,13 @@ instance.init = function() {
         eventBus.fireEvent(EV.CONTROL_ADDED, { controlId: controlData.id });
     });
 
+    eventBus.addListener(EV.CONTROL_REMOVE_REQUEST, function( { controlId }) {
+        PageStructure.removeControl(controlId);
+        // fire event
+        eventBus.fireEvent(EV.CONTROL_REMOVED, { controlId });
+    });
+
+
 
 }
 
