@@ -2,6 +2,9 @@ import sectionRepo from './repository/SectionRepository';
 import rowRepo from './repository/RowRepository';
 import controlRepo from './repository/ControlRepository';
 
+import sectionFactory from './factory/SectionFactory';
+import rowFactory from './factory/RowFactory';
+import controlFactory from './factory/ControlFactory';
 class Page {
 
     constructor() {
@@ -42,6 +45,60 @@ class Page {
     
     removeControl(controlId) {
         return rowRepo.removeControl(controlId);
+    }
+
+    loadState (state) {
+        if ('string' === typeof state) {
+            try {
+                state = JSON.parse(state);
+            } catch (ex) {
+                console.warn('[EFORM WARNING]: Invalid Data to Load!');
+                return false;
+            }
+        }
+        /// load state 
+
+        // load to repos
+        // traverse sections
+        let secIndex =0, rowIndex = 0, controlIndex = 0; 
+
+        state.children.forEach( (sectionData) => {
+            sectionRepo.set(sectionData.id, sectionData);
+
+            const sIndex = sectionFactory.extractIndexFromId(sectionData.id);
+            if (sIndex > secIndex) {
+                secIndex = sIndex;
+            }
+
+            // traverse rows of section
+            sectionData.children.forEach( (rowData) => {
+                rowRepo.set(rowData.id, rowData);
+                const rIndex = rowFactory.extractIndexFromId(rowData.id);
+                if (rIndex > rowIndex) {
+                    rowIndex = rIndex;
+                }
+
+                // traverse controls of row
+                rowData.children.forEach( (controlData) => {
+                    controlRepo.set(controlData.id, controlData);
+                    const cIndex = controlFactory.extractIndexFromId(controlData.id);
+                    if (cIndex > controlIndex) {
+                        controlIndex = cIndex;
+                    }
+                });
+            })
+        });
+
+        /// reset factory - gererator id index
+        sectionFactory.setGeneratorIndex(secIndex);
+        rowFactory.setGeneratorIndex(rowIndex);
+        controlFactory.setGeneratorIndex(controlIndex);
+
+
+        /// set to local var 
+        this._dataStructure = state;
+
+        return state;
     }
 
     /// getter for state

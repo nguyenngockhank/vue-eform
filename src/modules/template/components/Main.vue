@@ -8,6 +8,7 @@
         <el-row>
             <el-col :span="16">
                 <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
+                <el-button @click.native="saveTemplate" type="success" icon="el-icon-s-promotion" > Save Template</el-button>
 
                 <el-collapse v-model="activeSections" >
                     <draggable v-model="structure.children" class="structure-wrapper">
@@ -69,17 +70,24 @@ export default {
     },
     mounted() {
 
-        eventBus.addListener(SECTION_ADDED, ({ sectionId }) => {
-            this.activeSections.push(sectionId);
+        const lastState = CoreHandler.loadLastestTemplate();
 
-            // fire event to add a new row 
-            eventBus.fireEvent(ROW_ADD_REQUEST, { sectionId });
-            eventBus.fireEvent(ROW_ADD_REQUEST, { sectionId });
-        });
+        this.structure = lastState;
 
+        console.log('>>> loaded', lastState);
 
-        this.addSection('First section');
-        this.addSection('Second section');
+        eventBus.fireEvent('TEMPLATE_HAS_NEW_DATA');
+
+        // eventBus.addListener(SECTION_ADDED, ({ sectionId }) => {
+        //     this.activeSections.push(sectionId);
+
+        //     // fire event to add a new row 
+        //     eventBus.fireEvent(ROW_ADD_REQUEST, { sectionId });
+        //     eventBus.fireEvent(ROW_ADD_REQUEST, { sectionId });
+        // });
+
+        // this.addSection('First section');
+        // this.addSection('Second section');
 
         eventBus.addListener(UI_OPEN_EDIT_CONTROL_DIALOG, ({ data }) => {
             this.dialogEditControlVisible = true;
@@ -92,6 +100,10 @@ export default {
             }
             eventBus.fireEvent(SECTION_ADD_REQUEST, { title });
         },
+        saveTemplate() {
+            // save to local 
+            CoreHandler.saveTemplate();
+        }
     }
 }
 </script>

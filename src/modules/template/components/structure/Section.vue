@@ -37,8 +37,15 @@ export default {
         event: 'reorder',
     },
     props: [ 'title', 'id'],
+    created() {
+        eventBus.addListener('TEMPLATE_HAS_NEW_DATA', function() {
+            console.log('>>> refresh section thoi');
+        });
+    },
     data() {
-        const sectionState = CoreHandler.getSectionState(this.$props.id)
+        const sectionState = CoreHandler.getSectionState(this.$props.id);
+
+        console.log('state of section', sectionState)
         // console.log(">>> sectionState of ", this.$props.id, sectionState)
         return sectionState;
     },

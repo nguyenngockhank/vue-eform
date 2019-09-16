@@ -26,6 +26,16 @@ class EntityFactory {
         return newIns;
     }
 
+
+    extractIndexFromId(id) {
+        id += ''; // force to string
+
+        const expr = `${this.prefix}(\\d+)`;
+        const result = id.match(new RegExp(expr));
+
+        let [ prefix, index ] = result;
+        return parseInt(index);
+    }
 }
 
 export default EntityFactory;

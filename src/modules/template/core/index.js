@@ -1,7 +1,7 @@
 import controlAttrRegistry from './registry/controlAttrRegistry';
 import controlStructureRegistry from './registry/controlStructureRegistry';
 
-import { PageStructure } from '$structure/index';
+import { PageStructure, TemplateStorage } from '$structure/index';
 
 import eventHandler from './handlers/eventHandler';
 import controlRegisterHandler from './handlers/controlRegisterHandler';
@@ -44,6 +44,21 @@ instance.getControlAttr = function (sub_type) {
 
 instance.datasourceControlList = function() {
     return controlStructureRegistry.menuItemControlList();
+}
+
+
+/// save template & update template & delete ... 
+instance.saveTemplate = function() {
+    return TemplateStorage.saveToLocalStorage();
+}
+
+instance.loadLastestTemplate = function() {
+    const stateStr = TemplateStorage.getLastestItem();
+    if (stateStr == null) {
+        return; 
+    }
+
+    return PageStructure.loadState(stateStr);
 }
 
 export default instance;
