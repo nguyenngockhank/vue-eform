@@ -52,13 +52,17 @@ instance.saveTemplate = function() {
     return TemplateStorage.saveToLocalStorage();
 }
 
+instance.loadTemplate = function(templateData) {
+    return PageStructure.loadState(templateData);
+}
+
 instance.loadLastestTemplate = function() {
     const stateStr = TemplateStorage.getLastestItem();
     if (stateStr == null) {
         return; 
     }
 
-    return PageStructure.loadState(stateStr);
+    return instance.loadTemplate(stateStr);
 }
 
 export default instance;

@@ -7,8 +7,10 @@
     <div class="build-wrapper">
         <el-row>
             <el-col :span="16">
-                <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
-                <el-button @click.native="saveTemplate" type="success" icon="el-icon-s-promotion" > Save Template</el-button>
+                <div class="toolbar">
+                    <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
+                    <slot name="toolbar"></slot>
+                </div>
 
                 <el-collapse v-model="activeSections" >
                     <draggable v-model="structure.children" class="structure-wrapper">
@@ -69,19 +71,10 @@ export default {
         } 
     },
     mounted() {
-
-        const lastState = CoreHandler.loadLastestTemplate();
-
-        this.structure = lastState;
-
-        console.log('>>> loaded', lastState);
-
-        eventBus.fireEvent('TEMPLATE_HAS_NEW_DATA');
+        
 
         // eventBus.addListener(SECTION_ADDED, ({ sectionId }) => {
         //     this.activeSections.push(sectionId);
-
-        //     // fire event to add a new row 
         //     eventBus.fireEvent(ROW_ADD_REQUEST, { sectionId });
         //     eventBus.fireEvent(ROW_ADD_REQUEST, { sectionId });
         // });
@@ -93,6 +86,14 @@ export default {
             this.dialogEditControlVisible = true;
         });
     },
+    watch: {
+        'structure.children': {
+            handler(newVal) {
+                const newIds = newVal.map(el => el.id);
+                this.activeSections = newIds;
+            }
+        }
+    },
     methods: {
         addSection(title = 'Random title') {
             if ( typeof title != 'string') {
@@ -103,7 +104,22 @@ export default {
         saveTemplate() {
             // save to local 
             CoreHandler.saveTemplate();
-        }
+        }, 
+        getTemplateData(type = 'object') {
+            let result = JSON.stringify(this.structure);
+            if (type === 'object') {
+                return JSON.parse(result);
+            } 
+            return result;
+        },
+        loadTemplateData(data) {
+            if (!data) {
+                console.warn('[VUE EFORM]: Template data is Empty :('); 
+                return;
+            }
+            const objState = CoreHandler.loadTemplate(data);
+            this.structure = objState;
+        },
     }
 }
 </script>

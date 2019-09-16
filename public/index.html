@@ -24,7 +24,18 @@
 <body>
     
     <div id="app">
-        <eform-builder></eform-builder>
+        <eform-builder ref="template">
+            <template v-slot:toolbar>
+                <el-button @click.native="saveTemplate" type="success" icon="el-icon-s-promotion" >
+                    Save Template
+                </el-button>
+
+                <el-button @click.native="loadTemplate" type="default" icon="el-icon-refresh-right" >
+                    Load Template
+                </el-button>
+
+            </template>
+        </eform-builder>
     </div>
 
 
@@ -35,14 +46,23 @@
     <script>
         window.__webpack_public_path__ = 'http://localhost/vue-eform/dist/';
 
-    Vue.use(window.VueEform);
+        Vue.use(window.VueEform);
 
-var vm = new Vue({
-    el: "#app",
-    // data: {
-    //     message: 'Hello'
-    // }
-});
+        var vm = new Vue({
+            el: "#app",
+            methods: {
+                saveTemplate() {
+                    var val = this.$refs.template.getTemplateData('string');
+                    localStorage.setItem('EFORM_TEMPLATE', val);
+                    console.log('save di ne', val)
+                },
+                loadTemplate() {
+                    var val = localStorage.getItem('EFORM_TEMPLATE');
+                    console.log(val)
+                    this.$refs.template.loadTemplateData(val);
+                }
+            }
+        });
 
 
     </script>
