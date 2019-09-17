@@ -15,7 +15,7 @@
                 <el-collapse v-model="activeSections" >
                     <draggable v-model="structure.children" class="structure-wrapper">
                         <Section  v-for="section in structure.children"   
-                            class="section-wrapper"  v-bind="section" :key="section.id" v-model="section.children" ></Section>
+                            class="section-wrapper"  v-bind="section" :key="section.id + '_' + version" v-model="section.children" ></Section>
                     </draggable>
                 </el-collapse>
                 <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
@@ -68,6 +68,7 @@ export default {
             // open collapse 
             activeSections: [],
             dialogEditControlVisible: false,
+            version: 1,
         } 
     },
     mounted() {
@@ -119,6 +120,7 @@ export default {
             }
             const objState = CoreHandler.loadTemplate(data);
             this.structure = objState;
+            this.$nextTick(() => ++this.version);
         },
     }
 }
