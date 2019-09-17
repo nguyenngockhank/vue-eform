@@ -2,6 +2,7 @@ class EntityRegistry {
 
     constructor(){
         this.allowedKeys = new Map;
+        this.noFrozen = false;
     }
 
     register(key, value) {
@@ -14,7 +15,10 @@ class EntityRegistry {
         }
 
         // freeze value
-        Object.freeze(value);
+        if (!this.noFrozen) {
+            Object.freeze(value);
+        }
+       
         this.allowedKeys.set(key, value);
         return true;
     }
@@ -30,7 +34,9 @@ class EntityRegistry {
         }
 
         // freeze value
-        Object.freeze(value);
+        if (!this.noFrozen) {
+            Object.freeze(value);
+        }
         this.allowedKeys.set(key, value);
     }
 

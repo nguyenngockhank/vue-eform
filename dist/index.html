@@ -58,10 +58,17 @@
                 },
                 loadTemplate() {
                     var val = localStorage.getItem('EFORM_TEMPLATE');
-                    console.log(val)
+                    if (!val) {
+                        return;
+                    }
                     this.$refs.template.loadTemplateData(val);
                 }
+            },
+            mounted() {
+                // auto load when lastest template available
+                this.loadTemplate();
             }
+
         });
 
 

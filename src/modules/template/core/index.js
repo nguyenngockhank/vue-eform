@@ -1,5 +1,6 @@
 import controlAttrRegistry from './registry/controlAttrRegistry';
 import controlStructureRegistry from './registry/controlStructureRegistry';
+import controlOptionsComponentRegistry from './registry/ControlOptionsComponentRegistry';
 
 import { PageStructure, TemplateStorage } from '$structure/index';
 
@@ -16,6 +17,13 @@ instance.init = function() {
     controlRegisterHandler.init();
 }
 
+instance.registerControl = function( ...params) {
+    /// will use this later
+}
+
+/**
+ * Methods to expose state for component
+ */
 instance.getPageState = function() {
     return PageStructure.getPageState();
 }
@@ -32,11 +40,10 @@ instance.getControlState = function(controlId) {
     return PageStructure.getControlState(controlId);
 }
 
-instance.registerControl = function( ...params) {
-    /// will use this later
-}
 
-///  helper to GUI 
+/**
+ * Methods to expose data for Component 
+ */
 instance.getControlAttr = function (sub_type) {
     // avoid to conflict 
     return cloneDeep(controlAttrRegistry.get(sub_type));
@@ -46,8 +53,13 @@ instance.datasourceControlList = function() {
     return controlStructureRegistry.menuItemControlList();
 }
 
+instance.getControlOptionsComponent = function(sub_type) {
+    return controlOptionsComponentRegistry.get(sub_type);
+}
 
-/// save template & update template & delete ... 
+/**
+ * Methods to expose API manipulate with template data
+ */
 instance.saveTemplate = function() {
     return TemplateStorage.saveToLocalStorage();
 }

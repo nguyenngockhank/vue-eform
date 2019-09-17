@@ -30,13 +30,17 @@
     </div>    
 
 
-    <el-dialog title="Editting Control" :visible.sync="dialogEditControlVisible">
+    <el-dialog title="Editting Control" :show-close="false" :visible.sync="dialogEditControl.visible" width="50%"  :before-close="() => false">
 
-        <EditControlDialogBody  />
+        <EditControlDialogBody>
+            <template v-slot:specific="slotProps">
+                <component ref="inputOption" :is="componentInputOptions" v-bind="slotProps" ></component> 
+            </template>
+        </EditControlDialogBody>
 
         <span slot="footer" class="dialog-footer">
-            <el-button @click="dialogEditControlVisible = false">Cancel</el-button>
-            <el-button type="primary" @click="dialogFormVisible = false">Save</el-button>
+            <el-button @click="dialogEditControl.visible = false">Cancel</el-button>
+            <el-button type="primary" @click="handleSaveControl" >Save</el-button>
         </span>
     </el-dialog>
     
@@ -54,8 +58,9 @@ import {
 } from '$template/constants/events';
 
 import EditControlDialogBody from './EditControlDialogBody';
-
 import CoreHandler from '$template/core';
+
+// import InputOptions from './control_options/index';
 
 export default {
     components: {
@@ -67,9 +72,19 @@ export default {
             structure: CoreHandler.getPageState(), 
             // open collapse 
             activeSections: [],
-            dialogEditControlVisible: false,
             version: 1,
+
+            dialogEditControl: {
+                visible: true,
+                type: 'text'
+            }
         } 
+    },
+    computed: {
+        componentInputOptions() {
+            return CoreHandler.getControlOptionsComponent(this.dialogEditControl.type);
+            // return InputOptions.options[this.dialogEditControl.type];
+        },
     },
     mounted() {
         
@@ -84,7 +99,7 @@ export default {
         // this.addSection('Second section');
 
         eventBus.addListener(UI_OPEN_EDIT_CONTROL_DIALOG, ({ data }) => {
-            this.dialogEditControlVisible = true;
+            this.dialogEditControl.visible = true;
         });
     },
     watch: {
@@ -96,6 +111,15 @@ export default {
         }
     },
     methods: {
+        handleSaveControl() {
+            const val = this.$refs.inputOption.getValue();
+            console.log('val from options', val);
+
+            // this.dialogEditControl.visible = false;
+            this.dialogEditControl.type =  this.dialogEditControl.type === 'text' ? 'number' : 'text';
+
+
+        },
         addSection(title = 'Random title') {
             if ( typeof title != 'string') {
                 title = 'Random title';
@@ -133,11 +157,12 @@ export default {
 </style>
 
 <style >
-* {
+body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.pull-right {
-    float: right;
+.dialog-input-options h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .structure-wrapper {
     /* border: 1px solid #ddd; */
@@ -149,7 +174,10 @@ export default {
     background-color: #f1f1f1;
     margin-top: 10px;
 }
-
+.el-dialog__body {
+    padding-top: 0;
+    padding-bottom: 0;
+}
 .el-collapse {
     border-top: none;
     border-bottom: none;

@@ -7,4 +7,3 @@ class ControlAttrRegistry extends EntityRegistry {
 }
 
 export default new ControlAttrRegistry;
-

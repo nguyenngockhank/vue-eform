@@ -44,8 +44,6 @@ export default {
     },
     data() {
         const sectionState = CoreHandler.getSectionState(this.$props.id);
-
-        console.log('state of section', sectionState)
         // console.log(">>> sectionState of ", this.$props.id, sectionState)
         return sectionState;
     },

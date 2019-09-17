@@ -1,6 +1,10 @@
 import { 
     Collapse,
     CollapseItem, 
+
+    Input,
+    InputNumber,
+    Checkbox,
     Button, 
 
     // Container,
@@ -29,7 +33,11 @@ const instance =  {
         // register 3rd parties
         Vue.use(Collapse);
         Vue.use(CollapseItem);
+
         Vue.use(Button);
+        Vue.use(Input);
+        Vue.use(InputNumber);
+        Vue.use(Checkbox);
 
         // grid 
         // Vue.use(Container);
