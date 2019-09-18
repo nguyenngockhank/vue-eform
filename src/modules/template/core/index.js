@@ -7,7 +7,7 @@ import { PageStructure, TemplateStorage } from '$structure/index';
 import eventHandler from './handlers/eventHandler';
 import controlRegisterHandler from './handlers/controlRegisterHandler';
 
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep }  from 'utils/objectHelpers';
 
 /// import structure 
 const instance = {};

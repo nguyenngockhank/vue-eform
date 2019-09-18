@@ -7,8 +7,11 @@ class ControlFactory extends EntityFactory {
         super( PREFIX_CONTROL_ID, TYPE_CONTROL);
     }
 
-    /// build control data from registry
-
+    create(options) {
+        let newIns = super.create(options);
+        newIns.name = newIns.id; 
+        return newIns;
+    }
 }
 
 export default new ControlFactory;

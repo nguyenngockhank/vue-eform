@@ -1,5 +1,5 @@
 // This handler to register all built-in Control 
-import { TEXT_CONTROL_ATTR, NUMBER_CONTROL_ATTR } from '$template/constants/control_attrs';
+import { TEXT_CONTROL_ATTR, NUMBER_CONTROL_ATTR } from '$template/constants/controlAttrs';
 import TextOptions from '$template/components/control_options/TextOptions';
 import NumberOptions from '$template/components/control_options/NumberOptions';
 
