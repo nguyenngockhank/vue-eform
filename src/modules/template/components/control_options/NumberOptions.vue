@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import optionMixin from '$template/utils/optionMixin';
+import optionMixin from '$template/utils/controlOptionMixin';
 
 export default {
     mixins: [ optionMixin ],

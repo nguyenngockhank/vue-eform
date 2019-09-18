@@ -24,7 +24,7 @@
 
 
     <el-row class="row-body">
-        <draggable group="control" v-model="children" >
+        <draggable group="control" @add="onAddControl" v-model="children" >
             <Control v-for="control in children" :key="control.id" v-bind="control" />
         </draggable>
         <div v-if="children.length == 0">[ EMPTY ROW ]</div>
@@ -56,8 +56,14 @@ export default {
     },
     watch: {
         children(newValue) {
-            /// update index 
-            newValue.forEach((e, index) => e.index = index );
+            /// update index & parentId
+            newValue.forEach((e, index) => {
+                e.index = index; 
+                e.rowId = this.id;
+            });
+
+            // this.$nextTick(() =>  console.log(newValue))
+           ;
         }
     },
     methods: {
@@ -69,6 +75,10 @@ export default {
         }, 
         removeRow() {
             eventBus.fireEvent(ROW_REMOVE_REQUEST, { rowId: this.id });
+        },
+
+        onAddControl(e) {
+            console.log('>>> on add conttrol to row id', this.id, ' . ', e )
         }
     }
 }

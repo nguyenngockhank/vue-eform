@@ -5,8 +5,8 @@
     <p>This is a line to prove this component working!</p>
 
     <div class="build-wrapper">
-        <el-row>
-            <el-col :span="16">
+        <!-- <el-row>
+            <el-col :span="16"> -->
                 <div class="toolbar">
                     <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
                     <slot name="toolbar"></slot>
@@ -19,14 +19,14 @@
                     </draggable>
                 </el-collapse>
                 <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
-            </el-col>
+            <!-- </el-col> -->
 
-            <el-col :span="8">
+            <!-- <el-col :span="8">
                 <h3>Data template</h3>
                 <pre>{{ $data }}</pre>
-            </el-col> 
+            </el-col>  -->
 
-        </el-row>
+        <!-- </el-row> -->
     </div>    
 
 

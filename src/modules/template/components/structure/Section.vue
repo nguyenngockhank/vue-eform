@@ -50,7 +50,10 @@ export default {
     watch: {
         children(newValue) {
             /// update index 
-            newValue.forEach((e, index) => e.index = index );
+            newValue.forEach((e, index) => {
+                e.index = index; 
+                e.sectionId = this.id;
+            });
         }
     },
     methods: {

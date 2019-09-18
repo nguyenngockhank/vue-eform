@@ -5,8 +5,10 @@
 </div>
 </template>
 <script>
+import controlStructureMixin from '$template/utils/controlStructureMixin';
+
 export default {
-    props: [ 'extra', 'name', 'label'], 
+    mixins: [ controlStructureMixin ],
     computed: {
         inputType() {
             const extra = this.extra;
@@ -16,24 +18,7 @@ export default {
 
             return 'text';
         },
-        labelStyle() {
-            const label = this.label;
-            const result = { };
-
-            if (label.underline) {
-                result['text-decoration'] = 'underline';
-            }
-
-            if (label.bold) {
-                result['font-weight'] = 700;
-            }
-
-            if (label.italic) {
-                result['font-style'] = 'italic';
-            }
-
-            return result;
-        }
+     
     }
 }
 </script>
