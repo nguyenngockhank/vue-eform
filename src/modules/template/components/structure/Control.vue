@@ -1,17 +1,29 @@
 <template>
-<el-col v-bind="styles.span" >
+<el-col v-bind="styleSpan" >
     <div class="control-wrapper"   @dblclick="testUpdateState" >
         <span class="control-remove-icon" @click="removeControl"><i class="el-icon-close" /></span>
-        {{ id }} - {{ sub_type }} - {{ label.text }}
+            
+        <!-- DISPLAY COMPONENT -->
+        <component v-if="hasComponentDisplay" :is="componentDisplay" v-bind="$data" />
+        <div v-if="!hasComponentDisplay" >
+            {{ label.text }}
+            <el-input disabled="" :placeholder="name" size="mini" ></el-input>
+        </div>
+      
+                
+
+        <!-- {{ id }} - {{ sub_type }} - {{ label.text }} -->
+        <!-- {{ styleSpan }} -->
     </div>
 </el-col>
 </template>
 
 <script>
 import eventBus from 'core/eventBus';
+import {  CONTROL_REMOVE_REQUEST, UI_OPEN_EDIT_CONTROL_DIALOG } from '$template/constants/events';
+
 import { plainObject } from 'utils/objectHelpers';
 import CoreHandler from '$template/core';
-import {  CONTROL_REMOVE_REQUEST, UI_OPEN_EDIT_CONTROL_DIALOG } from '$template/constants/events';
 
 
 export default {
@@ -19,6 +31,31 @@ export default {
     data() {
         const controlState = CoreHandler.getControlState(this.$props.id)
         return controlState;
+    },
+    computed: {
+        styleSpan(){
+            const spanStyle = this.styles.span;
+              // var spanStyle = this.styles.span;
+            if (!spanStyle.responsive) {
+                return { span: spanStyle.value } ;
+            }
+
+            return {
+                xl: spanStyle.xl,
+                lg: spanStyle.lg,
+                md: spanStyle.md,
+                sm: spanStyle.sm,
+                xs: spanStyle.xs,
+            }
+
+            return this.calculateSpan(this.styles.span);
+        },
+        componentDisplay() {
+            return CoreHandler.getControlStructureComponent(this.sub_type);
+        },
+        hasComponentDisplay() {
+            return !!this.componentDisplay;
+        }
     },
     methods: {
         removeControl() {

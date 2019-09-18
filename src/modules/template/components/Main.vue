@@ -117,7 +117,10 @@ export default {
     methods: {
         handleSaveControl() {
             const baseVal = this.$refs.controlDialog.getValue();
-            const extraVal = this.$refs.inputOption.getValue();
+            let extraVal = {};
+            if (this.$refs.inputOption) {
+                extraVal = this.$refs.inputOption.getValue();
+            }
             baseVal.extra = extraVal;
             eventBus.fireEvent(CONTROL_UPDATE_REQUEST, { controlId: baseVal.id, data: baseVal })
 

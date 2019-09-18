@@ -1,6 +1,7 @@
 import controlAttrRegistry from './registry/controlAttrRegistry';
 import controlStructureRegistry from './registry/controlStructureRegistry';
 import controlOptionsComponentRegistry from './registry/ControlOptionsComponentRegistry';
+import controlStructureComponentRegistry from './registry/ControlStructureComponentRegistry';
 
 import { PageStructure, TemplateStorage } from '$structure/index';
 
@@ -55,6 +56,10 @@ instance.datasourceControlList = function() {
 
 instance.getControlOptionsComponent = function(sub_type) {
     return controlOptionsComponentRegistry.get(sub_type);
+}
+
+instance.getControlStructureComponent = function(sub_type) {
+    return controlStructureComponentRegistry.get(sub_type);
 }
 
 /**

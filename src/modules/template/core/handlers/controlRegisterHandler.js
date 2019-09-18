@@ -1,18 +1,23 @@
 // This handler to register all built-in Control 
 import { TEXT_CONTROL_ATTR, NUMBER_CONTROL_ATTR } from '$template/constants/controlAttrs';
+
+/// control options
 import TextOptions from '$template/components/control_options/TextOptions';
 import NumberOptions from '$template/components/control_options/NumberOptions';
 
+/// structured control
+import TextStructure from '$template/components/control_structures/TextStructure';
 
-
+/// registry 
 import controlAttrRegistry from '../registry/controlAttrRegistry';
 import controlStructureRegistry from '../registry/controlStructureRegistry';
 import controlOptionsComponentRegistry from '../registry/ControlOptionsComponentRegistry';
+import controlStructureComponentRegistry from '../registry/ControlStructureComponentRegistry';
 
 const instance = {};
 
 
-instance.registerControl = function( sub_type,  { structure, attrs, optionComponent }) {
+instance.registerControl = function( sub_type,  { structure, attrs, optionComponent, structureComponent }) {
     if (!attrs || !structure) {
         console.warn(`[EForm Warning]: Register control failed! Options invalid!`)
         return false; 
@@ -22,8 +27,11 @@ instance.registerControl = function( sub_type,  { structure, attrs, optionCompon
     controlStructureRegistry.register(sub_type, structure);
 
     if (optionComponent) {
-        // sidebar ... 
         controlOptionsComponentRegistry.register(sub_type, optionComponent);
+    }
+
+    if (structureComponent) {
+        controlStructureComponentRegistry.register(sub_type, structureComponent)
     }
 }
 
@@ -39,6 +47,7 @@ instance.init = function() {
         },
         attrs: TEXT_CONTROL_ATTR,
         optionComponent: TextOptions,
+        structureComponent: TextStructure,
         // sidebar: '',
     })
 
@@ -48,7 +57,7 @@ instance.init = function() {
             icon: 'el-icon-lollipop',
         },
         attrs: NUMBER_CONTROL_ATTR,
-        optionComponent: NumberOptions,
+        // optionComponent: NumberOptions,
         // sidebar: '',
     })
 

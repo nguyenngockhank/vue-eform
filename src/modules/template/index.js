@@ -18,6 +18,8 @@ import {
 
     // Dialog
     Dialog,
+
+    FormItem,
 } from 'element-ui';
 
 import draggableComponent from 'vuedraggable';
@@ -51,6 +53,8 @@ const instance =  {
         
         // dialog
         Vue.use(Dialog);
+
+        Vue.use(FormItem);
         
 
         Vue.component("draggable", draggableComponent);

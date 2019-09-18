@@ -18,6 +18,7 @@ export const BASE_ATTR = {
         underline: false,
         italic: false,
     },
+    extra: {}
 }
 
 export const TEXT_CONTROL_ATTR = {
