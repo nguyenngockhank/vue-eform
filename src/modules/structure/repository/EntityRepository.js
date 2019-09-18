@@ -26,6 +26,9 @@ class EntityRepository {
         return this.map.delete(entityId);
     }
 
+    clear() {
+        return this.map.clear();
+    }
 }
 
 export default EntityRepository;

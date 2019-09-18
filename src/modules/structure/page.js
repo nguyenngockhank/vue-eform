@@ -47,6 +47,18 @@ class Page {
         return rowRepo.removeControl(controlId);
     }
 
+    updateControl(controlId, attrs) {
+        return controlRepo.update(controlId, attrs);
+    }
+
+
+
+    /*
+     * Load & build from stored data 
+     * - clear repo
+     * - build structure (tree) of data
+     * - set index for Id Generator of factory 
+     */
     loadState (state) {
         if ('string' === typeof state) {
             try {
@@ -58,7 +70,11 @@ class Page {
         }
         /// load state 
 
-        // load to repos
+        // reset repos
+        sectionRepo.clear();
+        rowRepo.clear();
+        controlRepo.clear();
+
         // traverse sections
         let secIndex =0, rowIndex = 0, controlIndex = 0; 
 

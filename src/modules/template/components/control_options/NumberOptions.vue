@@ -5,17 +5,9 @@
 </template>
 
 <script>
+import optionMixin from '$template/utils/optionMixin';
+
 export default {
-    created(){
-        // console.log(this.$attrs)
-    },
-    methods: {
-        getValue() {
-            return {
-                a: 123123, 
-                b: 123123, 
-            }
-        }
-    }
+    mixins: [ optionMixin ],
 }
 </script>

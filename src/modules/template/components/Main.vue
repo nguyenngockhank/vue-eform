@@ -32,11 +32,11 @@
 
     <el-dialog title="Editting Control" :show-close="false" :visible.sync="dialogEditControl.visible" width="50%"  :before-close="() => false">
 
-        <EditControlDialogBody>
-            <template v-slot:specific="slotProps">
-                <component ref="inputOption" :is="componentInputOptions" v-bind="slotProps" ></component> 
+        <ControlDialogBody ref="controlDialog" >
+            <template v-slot:extra="slotProps">
+                <component ref="inputOption" :is="componentInputOptions" v-bind="slotProps" :key="dialogEditControl.type" ></component> 
             </template>
-        </EditControlDialogBody>
+        </ControlDialogBody>
 
         <span slot="footer" class="dialog-footer">
             <el-button @click="dialogEditControl.visible = false">Cancel</el-button>
@@ -49,22 +49,22 @@
 
 <script>
 import eventBus from 'core/eventBus';
-import Section from './structure/Section';
 import { 
     SECTION_ADD_REQUEST,  
     SECTION_ADDED, 
     ROW_ADD_REQUEST, 
+    CONTROL_UPDATE_REQUEST,
     UI_OPEN_EDIT_CONTROL_DIALOG
 } from '$template/constants/events';
 
-import EditControlDialogBody from './EditControlDialogBody';
-import CoreHandler from '$template/core';
 
-// import InputOptions from './control_options/index';
+import Section from './structure/Section';
+import ControlDialogBody from './ControlDialogBody';
+import CoreHandler from '$template/core';
 
 export default {
     components: {
-        Section, EditControlDialogBody
+        Section, ControlDialogBody
     },
     data() {
 
@@ -75,7 +75,7 @@ export default {
             version: 1,
 
             dialogEditControl: {
-                visible: true,
+                visible: false,
                 type: 'text'
             }
         } 
@@ -87,8 +87,6 @@ export default {
         },
     },
     mounted() {
-        
-
         // eventBus.addListener(SECTION_ADDED, ({ sectionId }) => {
         //     this.activeSections.push(sectionId);
         //     eventBus.fireEvent(ROW_ADD_REQUEST, { sectionId });
@@ -99,12 +97,18 @@ export default {
         // this.addSection('Second section');
 
         eventBus.addListener(UI_OPEN_EDIT_CONTROL_DIALOG, ({ data }) => {
+
             this.dialogEditControl.visible = true;
+            // wait for $refs available after dialog show up
+            this.$nextTick(() => {
+                this.$refs.controlDialog.controlAttrToState( data );
+                this.dialogEditControl.type = data.sub_type;
+            })
         });
     },
     watch: {
         'structure.children': {
-            handler(newVal) {
+            handler(newVal, oldVal) {
                 const newIds = newVal.map(el => el.id);
                 this.activeSections = newIds;
             }
@@ -112,13 +116,13 @@ export default {
     },
     methods: {
         handleSaveControl() {
-            const val = this.$refs.inputOption.getValue();
-            console.log('val from options', val);
+            const baseVal = this.$refs.controlDialog.getValue();
+            const extraVal = this.$refs.inputOption.getValue();
+            baseVal.extra = extraVal;
+            eventBus.fireEvent(CONTROL_UPDATE_REQUEST, { controlId: baseVal.id, data: baseVal })
 
-            // this.dialogEditControl.visible = false;
-            this.dialogEditControl.type =  this.dialogEditControl.type === 'text' ? 'number' : 'text';
-
-
+            // console.log('>>> save control: ', baseVal, ' extra: ', extraVal);
+            this.dialogEditControl.visible = false;
         },
         addSection(title = 'Random title') {
             if ( typeof title != 'string') {
@@ -153,6 +157,7 @@ export default {
 <style scoped>
 .build-wrapper {
     display: block;
+    margin-top: 20px;
 }
 </style>
 
