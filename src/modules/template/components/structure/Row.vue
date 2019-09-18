@@ -24,7 +24,7 @@
 
 
     <el-row class="row-body">
-        <draggable v-model="children" >
+        <draggable group="control" v-model="children" >
             <Control v-for="control in children" :key="control.id" v-bind="control" />
         </draggable>
         <div v-if="children.length == 0">[ EMPTY ROW ]</div>

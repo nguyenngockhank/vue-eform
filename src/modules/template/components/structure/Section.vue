@@ -13,7 +13,7 @@
     </template>
 
     <div class="section-body" v-if="children">
-        <draggable v-model="children" >
+        <draggable v-model="children" group="row" >
             <Row v-for="row in children" :key="row.id" v-bind="row"  />
        </draggable>
         <div v-if="children.length == 0">[ EMPTY SECTION ]</div>
