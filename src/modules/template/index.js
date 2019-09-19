@@ -6,6 +6,8 @@ import {
     InputNumber,
     Checkbox,
     Button, 
+    Select,
+    Option,
 
     // Container,
     Row,
@@ -40,6 +42,9 @@ const instance =  {
         Vue.use(Input);
         Vue.use(InputNumber);
         Vue.use(Checkbox);
+        
+        Vue.use(Select);
+        Vue.use(Option);
 
         // grid 
         // Vue.use(Container);
@@ -53,7 +58,6 @@ const instance =  {
         
         // dialog
         Vue.use(Dialog);
-
         Vue.use(FormItem);
         
 

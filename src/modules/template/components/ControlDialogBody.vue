@@ -62,15 +62,30 @@
             <div>Text</div>
             <el-input placeholder="Label Text"  v-model="label.text" ></el-input>
         </el-col>
-        <el-col span="3">
+
+        <el-col span="8">
+             <div>Position</div>
+            <el-select v-model="label.position" placeholder="Select label position">
+                <el-option
+                    v-for="item in labelPositionOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                </el-option>
+            </el-select>
+        </el-col>
+    </el-row>
+
+    <el-row gutter="20">
+        <el-col span="4">
              <div>&nbsp;</div>
             <el-checkbox border v-model="label.bold">Bold</el-checkbox>
         </el-col>
-        <el-col span="3">
+        <el-col span="4">
              <div>&nbsp;</div>
             <el-checkbox border v-model="label.italic">Italic</el-checkbox>
         </el-col>
-         <el-col span="3">
+         <el-col span="4">
               <div>&nbsp;</div>
             <el-checkbox border v-model="label.underline">Underline</el-checkbox>
         </el-col>
@@ -110,6 +125,15 @@ export default {
             extra: { },
         }
     }, 
+    computed: {
+        labelPositionOptions() {
+            return [
+                { value: 'left', label: 'Left' },
+                { value: 'top', label: 'Top' },
+                { value: 'placeholder', label: 'Placeholder' },
+            ];
+        }
+    },
     methods: {
         stateToControlAttr() {
             return plainObject({

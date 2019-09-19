@@ -17,6 +17,21 @@ export default {
                 result['font-style'] = 'italic';
             }
 
+            if (label.position === 'left') {
+                result['float'] = 'left';
+                result['width'] = label.width;
+            }
+
+            return result;
+        },
+        inputWrapperStyle() {
+            const result = { };
+            const label = this.label;
+
+            if (label.position === 'left') {
+                result['margin-left'] = label.width;
+            }
+
             return result;
         }
     }

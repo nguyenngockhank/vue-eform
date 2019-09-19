@@ -1,7 +1,9 @@
 <template>
 <div>
     <label :style="labelStyle">{{ label.text }}</label>
-    <el-input :type="inputType" disabled="" :placeholder="name" size="mini" ></el-input>
+     <div :style="inputWrapperStyle">
+        <el-input :type="inputType" disabled="" :placeholder="name" size="mini" ></el-input>
+    </div>
 </div>
 </template>
 <script>
@@ -15,7 +17,6 @@ export default {
             if(extra && extra.is_multiline) {
                 return 'textarea';
             }
-
             return 'text';
         },
      

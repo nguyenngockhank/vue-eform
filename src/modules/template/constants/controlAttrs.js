@@ -3,17 +3,18 @@ export const BASE_ATTR = {
     styles: {
         span: {
             responsive: true,
-            value: 6,
-            xs: 24, 
+            value: 12,
+            xs: 12, 
             sm: 12,
-            md: 8, // 3 cols
-            lg: 6, // 4 cols
-            xl: 4, // 6 cols
+            md: 12,
+            lg: 12, 
+            xl: 12, 
         },  
     },
     label: {
         text: 'LABEL',
-        position: 'left', // top, right?
+        position: 'top', // top, right?
+        width: '120px',
         bold: false,
         underline: false,
         italic: false,
