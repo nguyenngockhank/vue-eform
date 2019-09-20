@@ -14,4 +14,4 @@ class ControlFactory extends EntityFactory {
     }
 }
 
-export default new ControlFactory;
+export default ControlFactory;

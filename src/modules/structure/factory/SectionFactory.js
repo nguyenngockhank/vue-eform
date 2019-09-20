@@ -9,4 +9,4 @@ class SectionFactory extends EntityFactory {
 }
 
 
-export default new SectionFactory;
+export default  SectionFactory;

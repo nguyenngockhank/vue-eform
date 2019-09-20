@@ -1,9 +1,5 @@
 import EntityRepository from './EntityRepository';
 
-import sectionFactory from '../factory/SectionFactory';
-
-import rowRepo from './RowRepository';
-
 class SectionRepository extends EntityRepository {
 
     
@@ -13,6 +9,8 @@ class SectionRepository extends EntityRepository {
             return false;
         }
 
+        const rowRepo = this.page.rowRepo;
+
         const index = sectionData.children.length; // last index 
         const rowData = rowRepo.add({ sectionId: sectionData.id, index });
 
@@ -21,6 +19,8 @@ class SectionRepository extends EntityRepository {
     }
 
     removeRow(rowId) {
+        const rowRepo = this.page.rowRepo;
+
         const rowData = rowRepo.find(rowId); 
         const { sectionId } = rowData;
 
@@ -39,6 +39,7 @@ class SectionRepository extends EntityRepository {
 
 
     add(payload) {
+        const sectionFactory = this.page.sectionFactory;
         // create main entity
         var sectionData = sectionFactory.create(payload); 
         super.add(sectionData);
@@ -47,4 +48,4 @@ class SectionRepository extends EntityRepository {
     
 }
 
-export default new SectionRepository;
+export default SectionRepository;

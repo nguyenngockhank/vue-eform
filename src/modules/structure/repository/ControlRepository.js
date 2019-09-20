@@ -1,13 +1,10 @@
 import EntityRepository from './EntityRepository';
-
-import controlFactory from '../factory/ControlFactory';
-
 import { extendDeep } from 'utils/objectHelpers';
 
 class ControlRepository extends EntityRepository {
 
-
     add(payload = { rowId }) {
+        let controlFactory = this.page.controlFactory;
         var controlData = controlFactory.create(payload); 
         super.add(controlData);
         return controlData;
@@ -24,4 +21,4 @@ class ControlRepository extends EntityRepository {
     }
 }
 
-export default new ControlRepository;
+export default ControlRepository;

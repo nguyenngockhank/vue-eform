@@ -1,9 +1,5 @@
 import EntityRepository from './EntityRepository';
 
-import rowFactory from '../factory/RowFactory';
-
-import controlRepo from './ControlRepository';
-
 class RowRepository extends EntityRepository {
 
     addControl( rowId, attrs ) {
@@ -11,6 +7,7 @@ class RowRepository extends EntityRepository {
         if (!rowData) {
             return false;
         }
+        const controlRepo = this.page.controlRepo;
 
         const index = rowData.children.length; // last index 
         // more sub_type
@@ -21,6 +18,8 @@ class RowRepository extends EntityRepository {
     }
 
     removeControl(controlId) {
+        const controlRepo = this.page.controlRepo;
+
         const controlData = controlRepo.find(controlId); 
         const { rowId } = controlData;
 
@@ -38,10 +37,12 @@ class RowRepository extends EntityRepository {
 
 
     add(payload = { sectionId }) {
+        const rowFactory = this.page.rowFactory;
+
         var rowData = rowFactory.create(payload); 
         super.add(rowData);
         return rowData;
     }
 }
 
-export default new RowRepository;
+export default  RowRepository;

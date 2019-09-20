@@ -9,4 +9,4 @@ class RowFactory extends EntityFactory {
 
 }
 
-export default new RowFactory;
+export default  RowFactory;

@@ -1,7 +1,12 @@
 class EntityRepository {
 
-    constructor() {
+    constructor(page) {
         this.map = new Map(); 
+        this.setPage(page);
+    }
+
+    setPage(page) {
+        this.page = page;
     }
 
     set(entityId, entityData) {
