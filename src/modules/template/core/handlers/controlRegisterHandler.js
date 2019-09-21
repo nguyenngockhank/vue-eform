@@ -2,8 +2,8 @@
 import { TEXT_CONTROL_ATTR, NUMBER_CONTROL_ATTR } from '$template/constants/controlAttrs';
 
 /// registry 
-import controlAttrRegistry from '../registry/controlAttrRegistry';
-import controlStructureRegistry from '../registry/controlStructureRegistry';
+import controlAttrRegistry from '../registry/ControlAttrRegistry';
+import controlStructureRegistry from '../registry/ControlStructureRegistry';
 import controlOptionsComponentRegistry from '../registry/ControlOptionsComponentRegistry';
 import controlStructureComponentRegistry from '../registry/ControlStructureComponentRegistry';
 

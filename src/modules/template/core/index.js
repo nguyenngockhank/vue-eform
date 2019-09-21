@@ -1,12 +1,12 @@
-import controlAttrRegistry from './registry/controlAttrRegistry';
-import controlStructureRegistry from './registry/controlStructureRegistry';
+import controlAttrRegistry from './registry/ControlAttrRegistry';
+import controlStructureRegistry from './registry/ControlStructureRegistry';
 import controlOptionsComponentRegistry from './registry/ControlOptionsComponentRegistry';
 import controlStructureComponentRegistry from './registry/ControlStructureComponentRegistry';
 
 import { PageStructure, TemplateStorage } from '$structure/index';
 
-import eventHandler from './handlers/eventHandler';
-import controlRegisterHandler from './handlers/controlRegisterHandler';
+import eventHandler from './handlers/EventHandler';
+import controlRegisterHandler from './handlers/ControlRegisterHandler';
 
 import { cloneDeep }  from 'utils/objectHelpers';
 
