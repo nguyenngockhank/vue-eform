@@ -1,10 +1,6 @@
-import Page from '../page';
-
 const instance = {}; 
 
-
 const PREFIX_ITEM = 'eform.';
-
 
 function currentTime(){
     var d = new Date();
@@ -48,10 +44,10 @@ instance.getLastestItem = function() {
     return localStorage.getItem(key);
 }
 
-instance.saveToLocalStorage = function() {
+instance.saveToLocalStorage = function(pageStructure) {
 
     // grab data 
-    const structureData = Page.getPageState(); 
+    const structureData = pageStructure.getPageState(); 
     const value = JSON.stringify(structureData); 
 
     // generate template key  

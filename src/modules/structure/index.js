@@ -1,4 +1,4 @@
-import PageStructure  from './page';
+import PageStructure  from './PageStructure';
 import TemplateStorage  from './persistent/TemplateStorage';
 
 

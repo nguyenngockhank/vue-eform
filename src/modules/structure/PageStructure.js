@@ -5,7 +5,8 @@ import ControlRepository from './repository/ControlRepository';
 import SectionFactory from './factory/SectionFactory';
 import RowFactory from './factory/RowFactory';
 import ControlFactory from './factory/ControlFactory';
-class Page {
+
+class PageStructure {
 
     constructor() {
         this._dataStructure = {
@@ -172,4 +173,4 @@ class Page {
 }
 
 
-export default new Page; 
+export default PageStructure; 

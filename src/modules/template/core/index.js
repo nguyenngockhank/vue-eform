@@ -1,7 +1,7 @@
-import controlAttrRegistry from './registry/ControlAttrRegistry';
-import controlStructureRegistry from './registry/ControlStructureRegistry';
-import controlOptionsComponentRegistry from './registry/ControlOptionsComponentRegistry';
-import controlStructureComponentRegistry from './registry/ControlStructureComponentRegistry';
+import {
+    controlAttrRegistry, controlStructureRegistry,
+    controlOptionsComponentRegistry, controlStructureComponentRegistry
+} from './registry/index';
 
 import { PageStructure, TemplateStorage } from '$structure/index';
 
@@ -10,11 +10,13 @@ import controlRegisterHandler from './handlers/ControlRegisterHandler';
 
 import { cloneDeep }  from 'utils/objectHelpers';
 
+const pageStructure = new PageStructure;
+
 /// import structure 
 const instance = {};
 
 instance.init = function() {
-    eventHandler.init();
+    eventHandler.init(pageStructure);
     controlRegisterHandler.init();
 }
 
@@ -26,19 +28,19 @@ instance.registerControl = function( ...params) {
  * Methods to expose state for component
  */
 instance.getPageState = function() {
-    return PageStructure.getPageState();
+    return pageStructure.getPageState();
 }
 
 instance.getSectionState = function(sectionId) {
-    return PageStructure.getSectionState(sectionId);
+    return pageStructure.getSectionState(sectionId);
 }
 
 instance.getRowState = function(rowId) {
-    return PageStructure.getRowState(rowId);
+    return pageStructure.getRowState(rowId);
 }
 
 instance.getControlState = function(controlId) {
-    return PageStructure.getControlState(controlId);
+    return pageStructure.getControlState(controlId);
 }
 
 
@@ -66,11 +68,11 @@ instance.getControlStructureComponent = function(sub_type) {
  * Methods to expose API manipulate with template data
  */
 instance.saveTemplate = function() {
-    return TemplateStorage.saveToLocalStorage();
+    return TemplateStorage.saveToLocalStorage(pageStructure);
 }
 
 instance.loadTemplate = function(templateData) {
-    return PageStructure.loadState(templateData);
+    return pageStructure.loadState(templateData);
 }
 
 instance.loadLastestTemplate = function() {

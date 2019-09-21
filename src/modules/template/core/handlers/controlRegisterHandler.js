@@ -2,11 +2,10 @@
 import { TEXT_CONTROL_ATTR, NUMBER_CONTROL_ATTR } from '$template/constants/controlAttrs';
 
 /// registry 
-import controlAttrRegistry from '../registry/ControlAttrRegistry';
-import controlStructureRegistry from '../registry/ControlStructureRegistry';
-import controlOptionsComponentRegistry from '../registry/ControlOptionsComponentRegistry';
-import controlStructureComponentRegistry from '../registry/ControlStructureComponentRegistry';
-
+import {
+    controlAttrRegistry, controlStructureRegistry,
+    controlOptionsComponentRegistry, controlStructureComponentRegistry
+} from '../registry/index';
 
 /// control options
 import TextOptions from '$template/components/control_options/TextOptions';
