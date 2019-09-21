@@ -14,7 +14,7 @@ var styleLoaders = mode !== 'production' ? [ 'vue-style-loader', 'css-loader', '
 
 module.exports = {
     mode: mode,
-    entry: ['babel-polyfill', path.join(__dirname, 'src', 'index.js')],
+    entry: ['@babel/polyfill', path.join(__dirname, 'src', 'index.js')],
     output: {
         path: BUILD_DIR,
         filename: 'index.js'

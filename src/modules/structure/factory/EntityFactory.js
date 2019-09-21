@@ -1,4 +1,4 @@
-import generator from '$template/utils/idGenerator';
+import generator from 'utils/idGenerator';
 
 class EntityFactory {
 
