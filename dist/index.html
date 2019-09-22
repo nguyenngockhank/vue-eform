@@ -18,24 +18,46 @@
             max-width: 1200px;
             min-height: 800px;
         }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
   
     </style>
 </head>
 <body>
     
     <div id="app">
-        <eform-builder ref="template">
-            <template v-slot:toolbar>
-                <el-button @click.native="saveTemplate" type="success" icon="el-icon-s-promotion" >
-                    Save Template
-                </el-button>
+        <h1>Welcome to EForm Template Builder</h1>
+        <p class="mb-20">This is a line to prove this component working!</p>
 
-                <el-button @click.native="loadTemplate" type="default" icon="el-icon-refresh-right" >
-                    Load Template
-                </el-button>
+        <div v-show="showTemplate">
+            <eform-builder ref="template" >
+                <template v-slot:toolbar>
+                    <el-button @click.native="saveTemplate" type="success" icon="el-icon-s-promotion" >
+                        Save Template
+                    </el-button>
 
-            </template>
-        </eform-builder>
+                    <el-button @click.native="loadTemplate" type="default" icon="el-icon-refresh-right" >
+                        Load Template
+                    </el-button>
+
+                    <el-button @click.native="previewTemplate" type="default" icon="el-icon-picture" >
+                        Preview
+                    </el-button>
+                </template>
+            </eform-builder>
+        </div>
+
+        <div v-show="showGUI">
+            <div class="toolbar mb-20">
+                <el-button @click.native="viewTemplate" type="default" icon="el-icon-picture" >
+                    Template
+                </el-button>
+            </div>
+
+            <eform :template-data="templateData"  />
+        </div>
     </div>
 
 
@@ -50,7 +72,32 @@
 
         var vm = new Vue({
             el: "#app",
+            data() {
+                return {
+                    mode: 'template', // gui
+                    templateData: null,
+                }
+            },
+            computed: {
+                showTemplate() {
+                    return this.mode === 'template';
+                }, 
+                showGUI() {
+                    return this.mode === 'gui';
+                }
+            },
+            mounted() {
+                // auto load when lastest template available
+                this.loadTemplate();
+            },
             methods: {
+                previewTemplate() {
+                    this.mode = 'gui';
+                    this.templateData = this.$refs.template.getTemplateData('object');
+                },
+                viewTemplate() {
+                    this.mode = 'template';
+                },
                 saveTemplate() {
                     var val = this.$refs.template.getTemplateData('string');
                     localStorage.setItem('EFORM_TEMPLATE', val);
@@ -64,14 +111,7 @@
                     this.$refs.template.loadTemplateData(val);
                 }
             },
-            mounted() {
-                // auto load when lastest template available
-                this.loadTemplate();
-            }
-
         });
-
-
     </script>
 </body>
 </html>

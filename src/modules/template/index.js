@@ -64,14 +64,11 @@ const instance =  {
         Vue.component("draggable", draggableComponent);
         // Vue.directive(`${PREFIX_DIRECTIVE}draggable`, draggableDirective)
 
-
         /// run  
         CoreHandler.init();
 
         /// register global component 
         Vue.component('eform-builder', Main);
-
-        
     }
 };
 

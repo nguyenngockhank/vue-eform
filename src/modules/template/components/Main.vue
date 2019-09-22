@@ -1,32 +1,18 @@
 <template>
 <div>
-    <h1>Welcome to EForm Template Builder</h1>
-
-    <p>This is a line to prove this component working!</p>
-
     <div class="build-wrapper">
-        <!-- <el-row>
-            <el-col :span="16"> -->
-                <div class="toolbar">
-                    <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
-                    <slot name="toolbar"></slot>
-                </div>
+        <div class="toolbar">
+            <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
+            <slot name="toolbar"></slot>
+        </div>
 
-                <el-collapse v-model="activeSections" >
-                    <draggable v-model="structure.children" class="structure-wrapper">
-                        <Section  v-for="section in structure.children"   
-                            class="section-wrapper"  v-bind="section" :key="section.id + '_' + version" v-model="section.children" ></Section>
-                    </draggable>
-                </el-collapse>
-                <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
-            <!-- </el-col> -->
-
-            <!-- <el-col :span="8">
-                <h3>Data template</h3>
-                <pre>{{ $data }}</pre>
-            </el-col>  -->
-
-        <!-- </el-row> -->
+        <el-collapse v-model="activeSections" >
+            <draggable v-model="structure.children" class="structure-wrapper">
+                <Section  v-for="section in structure.children"   
+                    class="section-wrapper"  v-bind="section" :key="section.id + '_' + version" v-model="section.children" ></Section>
+            </draggable>
+        </el-collapse>
+        <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
     </div>    
 
 
@@ -87,15 +73,6 @@ export default {
         },
     },
     mounted() {
-        // eventBus.addListener(SECTION_ADDED, ({ sectionId }) => {
-        //     this.activeSections.push(sectionId);
-        //     eventBus.fireEvent(ROW_ADD_REQUEST, { sectionId });
-        //     eventBus.fireEvent(ROW_ADD_REQUEST, { sectionId });
-        // });
-
-        // this.addSection('First section');
-        // this.addSection('Second section');
-
         eventBus.addListener(UI_OPEN_EDIT_CONTROL_DIALOG, ({ data }) => {
 
             this.dialogEditControl.visible = true;
@@ -160,7 +137,6 @@ export default {
 <style scoped>
 .build-wrapper {
     display: block;
-    margin-top: 20px;
 }
 </style>
 
