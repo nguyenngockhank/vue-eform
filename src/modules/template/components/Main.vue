@@ -15,21 +15,13 @@
         <el-button @click.native="addSection" type="primary" icon="el-icon-plus" > Add Section</el-button>
     </div>    
 
-
-    <el-dialog title="Editting Control" :show-close="false" :visible.sync="dialogEditControl.visible" width="50%"  :before-close="() => false">
-
-        <ControlDialogBody ref="controlDialog" >
+    <b-modal size="lg" ref="controlModal" v-model="dialogEditControl.visible" @ok="handleSaveControl" title="Editting Control">
+        <ControlDialogBody ref="controlModalBody" >
             <template v-slot:extra="slotProps">
                 <component ref="inputOption" :is="componentInputOptions" v-bind="slotProps" :key="dialogEditControl.type" ></component> 
             </template>
         </ControlDialogBody>
-
-        <span slot="footer" class="dialog-footer">
-            <el-button @click="dialogEditControl.visible = false">Cancel</el-button>
-            <el-button type="primary" @click="handleSaveControl" >Save</el-button>
-        </span>
-    </el-dialog>
-    
+    </b-modal>
 </div>
 </template>
 
@@ -47,8 +39,10 @@ import {
 import Section from './structure/Section';
 import ControlDialogBody from './ControlDialogBody';
 import CoreHandler from '$template/core';
+import baseComponentMixin from '$template/utils/baseComponentMixin';
 
 export default {
+    mixins: [ baseComponentMixin ],
     components: {
         Section, ControlDialogBody
     },
@@ -74,12 +68,14 @@ export default {
     },
     mounted() {
         eventBus.addListener(UI_OPEN_EDIT_CONTROL_DIALOG, ({ data }) => {
-
+            // this.$refs.controlModal.show();
             this.dialogEditControl.visible = true;
             // wait for $refs available after dialog show up
             this.$nextTick(() => {
-                this.$refs.controlDialog.controlAttrToState( data );
-                this.dialogEditControl.type = data.sub_type;
+                this.$nextTick(() => {
+                    this.$refs.controlModalBody.controlAttrToState( data );
+                    this.dialogEditControl.type = data.sub_type;
+                });
             })
         });
     },
@@ -93,7 +89,7 @@ export default {
     },
     methods: {
         handleSaveControl() {
-            const baseVal = this.$refs.controlDialog.getValue();
+            const baseVal = this.$refs.controlModalBody.getValue();
             let extraVal = {};
             if (this.$refs.inputOption) {
                 extraVal = this.$refs.inputOption.getValue();
@@ -101,8 +97,7 @@ export default {
             baseVal.extra = extraVal;
             eventBus.fireEvent(CONTROL_UPDATE_REQUEST, { controlId: baseVal.id, data: baseVal })
 
-            // console.log('>>> save control: ', baseVal, ' extra: ', extraVal);
-            this.dialogEditControl.visible = false;
+            // this.dialogEditControl.visible = false;
         },
         addSection(title = 'Random title') {
             if ( typeof title != 'string') {
