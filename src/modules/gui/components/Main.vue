@@ -1,7 +1,7 @@
 <template>
     <div class="eform">
-        <Section v-for="sectionItem in structureData.children" 
-                :key="sectionItem.id" v-bind="sectionItem" />
+        <Section v-for="sectionData in structureData.children" 
+                :key="sectionData.id" v-bind="sectionData" />
     </div>
 </template>
 

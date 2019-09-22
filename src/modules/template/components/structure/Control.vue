@@ -12,7 +12,6 @@
             {{ label.text }}
             <el-input disabled="" :placeholder="name" size="mini" ></el-input>
         </div>
-        <!-- {{ styleSpan }} -->
     </div>
 </el-col>
 </template>

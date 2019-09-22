@@ -66,7 +66,6 @@
     <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 
     <script>
-        window.__webpack_public_path__ = 'http://localhost/vue-eform/dist/';
         Vue.config.devtools = true
         Vue.use(window.VueEform);
 
@@ -89,6 +88,9 @@
             mounted() {
                 // auto load when lastest template available
                 this.loadTemplate();
+
+                this.$nextTick( () => this.previewTemplate());
+                
             },
             methods: {
                 previewTemplate() {

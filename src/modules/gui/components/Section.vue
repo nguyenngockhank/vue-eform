@@ -1,21 +1,18 @@
 <template>
 <div class="eform-section">
-    Section {{ id }}
+    <Row v-for="rowData in children" 
+                :key="rowData.id" v-bind="rowData" />
 </div>
 </template>
 
 <script>
-
+import Row from './Row';
 
 export default {
+    components: { Row },
     props: [
         'children',
         'id',
     ],
-    data() {
-        return {
-            sectionData: {},
-        }
-    },
 }
 </script>
