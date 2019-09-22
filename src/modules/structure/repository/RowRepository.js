@@ -21,11 +21,12 @@ class RowRepository extends EntityRepository {
         const controlRepo = this.page.controlRepo;
 
         const controlData = controlRepo.find(controlId); 
-        const { rowId } = controlData;
-
+      
         if (!controlData) {
-            return; 
+            return false; 
         }
+
+        const { rowId } = controlData;
 
         // remove from repo 
         controlRepo.remove(controlId);

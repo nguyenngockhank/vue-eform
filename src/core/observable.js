@@ -38,8 +38,7 @@ function setValue(storage, observerIdSet, key, value) {
 
 function observe(fn) {
     const observerId = generateObserverId();
-
-    console.log(`- Observer Id ${observerId} was generated!`)
+    // console.log(`- Observer Id ${observerId} was generated!`)
 
     observerMap.set(observerId, {
         fn,

@@ -5,6 +5,10 @@ class EntityRepository {
         this.setPage(page);
     }
 
+    size() {
+        return this.map.length;
+    }
+
     setPage(page) {
         this.page = page;
     }

@@ -25,7 +25,7 @@ class SectionRepository extends EntityRepository {
         const { sectionId } = rowData;
 
         if (!rowData) {
-            return; 
+            return false; 
         }
 
         // remove from repo 

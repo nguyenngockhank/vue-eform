@@ -1,7 +1,7 @@
 {
     "presets": [
         [
-            "@babel/env", 
+            "@babel/env" 
             // {"modules": false}
         ]
     ],
@@ -11,6 +11,16 @@
             {
                 "libraryName": "element-ui",
                 "styleLibraryName": "theme-chalk"
+            }
+        ],
+        [
+            "module-resolver", 
+            {
+                "root": [ "./src" ],
+                "alias": {
+                    "$template": "./src/modules/template",
+                    "underscore": "./src/modules/gui"
+                }
             }
         ]
     ]

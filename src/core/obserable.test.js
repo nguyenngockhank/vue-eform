@@ -2,7 +2,6 @@ import { observable, observe } from  './observable';
 
 var assert = require('assert');
 
-console.log(' ----------- START ---------------');
 
 var invoice = observable({
     price: 100, 
@@ -25,7 +24,6 @@ const MAX_COUNT = 3;
 let updateTotalNetCount = 0;
 
 var unwatch = observe(() => {
-    console.log( 'total net update', invoice.totalNet );
     updateTotalNetCount++;
     if ( updateTotalNetCount == MAX_COUNT) {
         unwatch();
@@ -35,7 +33,7 @@ var unwatch = observe(() => {
 
 describe('Observable', function () {
 
-    describe('Mutating Attribute Test', function () {
+    describe('# Mutating Attribute Test', function () {
 
         it('should `totalNet` return 200 after initilizing', function () {
             assert.equal(invoice.totalNet, 200);
