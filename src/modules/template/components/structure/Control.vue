@@ -74,7 +74,7 @@ export default {
     
     margin-top: 5px;
     margin-bottom: 5px;
-    padding: 2px 10px 10px;
+    /* padding: 2px 10px 10px; */
 }
 .control-info {
     text-align: right;

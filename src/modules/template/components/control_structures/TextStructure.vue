@@ -1,9 +1,16 @@
 <template>
 <div>
-    <label :style="labelStyle">{{ label.text }}</label>
-     <div :style="inputWrapperStyle">
+    <!-- <label :style="labelStyle">{{ label.text }}</label>
+    <div :style="inputWrapperStyle">
         <el-input :type="inputType" disabled="" :placeholder="name" size="mini" ></el-input>
+    </div> -->
+    
+    <div  v-if="label.position === 'top'" class="form-group">
+        <label :style="labelStyle">{{ label.text }}</label>
+        <input class="form-control"  />
     </div>
+
+    
 </div>
 </template>
 <script>

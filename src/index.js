@@ -1,6 +1,11 @@
 import template from './modules/template/index';
 import gui from './modules/gui/index';
 
+// import 'bootstrap/scss/_forms.scss';
+
+import 'styles.scss';
+
+
 import { VAR_GLOBAL_NAME } from './constants';
 
 const instance =  {
