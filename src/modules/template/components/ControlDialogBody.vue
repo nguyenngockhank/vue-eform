@@ -74,7 +74,7 @@
 
         <FormCheck  v-model="label.bold" id="label_bold" label="Bold" :inline="true" />
         <FormCheck  v-model="label.italic" id="label_italic" label="Italic" :inline="true" />
-        <FormCheck  v-model="label.underline" id="label_bold" label="Underline" :inline="true" />
+        <FormCheck  v-model="label.underline" id="label_underline" label="Underline" :inline="true" />
         <!-- Color in future =)) -->
     </div>
     <!-- end label -->
