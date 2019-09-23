@@ -21,7 +21,8 @@ import {
     // Dialog
     Dialog,
 
-    FormItem,
+    Divider,
+
 } from 'element-ui';
 
 import draggableComponent from 'vuedraggable';
@@ -58,7 +59,7 @@ const instance =  {
         
         // dialog
         Vue.use(Dialog);
-        Vue.use(FormItem);
+        Vue.use(Divider);
         
 
         Vue.component("draggable", draggableComponent);

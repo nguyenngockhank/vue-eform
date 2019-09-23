@@ -1,95 +1,82 @@
 <template>
-<div class="dialog-input-options">
-    <h3>Essential Info</h3>
-    <el-row :gutter="20">
-        <el-col span="10">
-            Type
-            <el-input placeholder="type" disabled="" v-model="sub_type" ></el-input>
-        </el-col>
+<div class="container">
+    <el-divider content-position="left"><h3><i class="el-icon-star-on" /> Essential Info</h3></el-divider>
+    <div class="row">
+        <div class="col-lg-4">
+            Sub Type
+            <input type="text" disabled class="form-control form-control-sm" v-model="sub_type">
+        </div><!-- end type -->
 
-        <el-col span="10">
+        <div class="col-lg-4">
             Name
-            <el-input placeholder="Name"  v-model="name" ></el-input>
-        </el-col>
-    </el-row>
+            <input type="text" class="form-control form-control-sm" v-model="name">
+        </div><!-- end name -->
+    </div>
     <!-- end Essential-->
 
-    <h3>Layout</h3>
-    <el-row :gutter="20">
-        <el-col span="10">
-            <el-checkbox v-model="span.responsive">Responsive</el-checkbox>
-        </el-col>
-    </el-row>
+    <el-divider content-position="left"><h3><i class="el-icon-star-on" /> Layout</h3></el-divider>
+    <div class="row mb-10">
+        <div class="col-sm-12">
+            <div class="form-check" >
+                <input v-model="span.responsive" class="form-check-input" type="checkbox" id="layout_responsive">
+                <label class="form-check-label" for="layout_responsive">
+                    Responsive (12 columns per Row)
+                </label>
+            </div><!-- end span.reponsive -->
+        </div><!-- end .col-xs-12 -->
+    </div><!-- end .row -->
 
-    <el-row :gutter="10" v-if="!span.responsive">
-        <el-col span="5">
-            <el-input-number size="mini" v-model="span.value"></el-input-number>
-        </el-col>
-    </el-row>
-
-    <el-row :gutter="4" v-if="span.responsive">
-        <el-col span="5">
-            <div>xl</div>
-            <el-input-number size="mini" v-model="span.xl"></el-input-number>
-        </el-col>
-
-        <el-col span="5">
-            <div>lg</div>
-            <el-input-number size="mini" v-model="span.lg"></el-input-number>
-        </el-col>
-
-        <el-col span="5">
-            <div>md</div>
-            <el-input-number size="mini" v-model="span.md"></el-input-number>
-        </el-col>
-
-        <el-col span="5">
-            <div>sm</div>
-            <el-input-number size="mini" v-model="span.sm"></el-input-number>
-        </el-col>
-
-        <el-col span="5">
-            <div>xs</div>
-            <el-input-number size="mini" v-model="span.xs"></el-input-number>
-        </el-col>
-    </el-row>
-    <!-- end layout -->
+    <div class="row" v-show="!span.responsive">
+        <SizeGroupInput title="Fixed" v-model="span.fixed" />
+    </div><!-- end span.fixed -->
 
 
-    <h3>Label</h3>
-    <el-row gutter="20">
-        <el-col span="10">
-            <div>Text</div>
-            <el-input placeholder="Label Text"  v-model="label.text" ></el-input>
-        </el-col>
+    <div class="row" v-show="span.responsive">
+        <SizeGroupInput title="xl" v-model="span.xl" />
+        <SizeGroupInput title="lg" v-model="span.lg" />
+        <SizeGroupInput title="md" v-model="span.md" />
+        <SizeGroupInput title="sm" v-model="span.sm" />
+    </div><!-- end span.xl -->
+    <!-- end Layout-->
 
-        <el-col span="8">
-             <div>Position</div>
-            <el-select v-model="label.position" placeholder="Select label position">
-                <el-option
-                    v-for="item in labelPositionOptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                </el-option>
-            </el-select>
-        </el-col>
-    </el-row>
 
-    <el-row gutter="20">
-        <el-col span="4">
-             <div>&nbsp;</div>
-            <el-checkbox border v-model="label.bold">Bold</el-checkbox>
-        </el-col>
-        <el-col span="4">
-             <div>&nbsp;</div>
-            <el-checkbox border v-model="label.italic">Italic</el-checkbox>
-        </el-col>
-         <el-col span="4">
-              <div>&nbsp;</div>
-            <el-checkbox border v-model="label.underline">Underline</el-checkbox>
-        </el-col>
-    </el-row>
+    <el-divider content-position="left"><h3><i class="el-icon-star-on" /> Label</h3></el-divider>
+   
+    <div class="row mb-10">
+        <div class="col-sm-12">
+            <FormCheck v-model="label.hide" id="label_hide" label="Hide" />
+        </div><!-- end .col-xs-12 -->
+    </div><!-- end .row -->
+
+    <div v-show="!label.hide">
+        <el-divider>Basic</el-divider>
+
+        <div class="row" >
+            <div class="col-lg-4">
+                Text
+                <input type="text" class="form-control form-control-sm" v-model="label.text">
+            </div><!-- end type -->
+
+            <div class="col-lg-4">
+                Layout
+                <select v-model="label.position" class="form-control form-control-sm" >
+                    <option v-for="item in labelPositionOptions"  :key="item.value" :value="item.value" >{{ item.label }}</option>
+                </select>
+            </div><!-- end name -->
+
+            <div class="col-lg-4" v-show="label.position == 'left' ">
+                Width (per control)
+                <input type="number" max="11" min="1" class="form-control form-control-sm" v-model="label.width">
+            </div><!-- end name -->
+        </div>
+
+        <el-divider>Styles</el-divider>
+
+        <FormCheck  v-model="label.bold" id="label_bold" label="Bold" :inline="true" />
+        <FormCheck  v-model="label.italic" id="label_italic" label="Italic" :inline="true" />
+        <FormCheck  v-model="label.underline" id="label_bold" label="Underline" :inline="true" />
+        <!-- Color in future =)) -->
+    </div>
     <!-- end label -->
 
     <slot name="extra" :extra="extra" :id="id"></slot>
@@ -98,9 +85,14 @@
 </template>
 
 <script>
+import SizeGroupInput from './SizeGroupInput';
+import FormCheck from './FormCheck';
 import { plainObject } from 'utils/objectHelpers';
 
 export default {
+    components: {
+        SizeGroupInput, FormCheck
+    },
     data(){
         return {
             id: '',
@@ -165,7 +157,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

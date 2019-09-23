@@ -9,13 +9,9 @@
     <link rel="stylesheet" href="">
 
     <style>
-        * { margin: 0; padding: 0;  box-sizing: border-box; }
-        html, body  {  font-size: 16px;} 
+        html, body  {  font-size: 16px;}  
         body { background-color: #f1f1f1}
-        .form-group {
-            padding-right: 15px;
-            padding-left: 15px;
-        }
+   
         #app {
             padding: 0 1%;
             margin: auto;
@@ -94,7 +90,7 @@
                 // auto load when lastest template available
                 this.loadTemplate();
 
-                this.$nextTick( () => this.previewTemplate());
+                // this.$nextTick( () => this.previewTemplate());
                 
             },
             methods: {

@@ -141,13 +141,13 @@ export default {
 </style>
 
 <style >
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.dialog-input-options h3 {
+.mt-10 {
     margin-top: 10px;
+}
+.mb-10 {
     margin-bottom: 10px;
 }
+
 .structure-wrapper {
     /* border: 1px solid #ddd; */
     margin: 20px 0;
