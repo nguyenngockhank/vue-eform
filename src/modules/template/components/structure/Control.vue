@@ -23,31 +23,16 @@ import {  CONTROL_REMOVE_REQUEST, UI_OPEN_EDIT_CONTROL_DIALOG } from '$template/
 import { plainObject } from 'utils/objectHelpers';
 import CoreHandler from '$template/core';
 
+import gridMixin from 'mixins/gridMixin'
 
 export default {
+    mixins: [ gridMixin ],
     props: [ 'id', 'sub_type', ],
     data() {
         const controlState = CoreHandler.getControlState(this.$props.id)
         return controlState;
     },
     computed: {
-        styleSpan(){
-            const spanStyle = this.styles.span;
-              // var spanStyle = this.styles.span;
-            if (!spanStyle.responsive) {
-                return { span: spanStyle.fixed } ;
-            }
-
-            return {
-                xl: spanStyle.xl,
-                lg: spanStyle.lg,
-                md: spanStyle.md,
-                sm: spanStyle.sm,
-                xs: spanStyle.xs,
-            }
-
-            return this.calculateSpan(this.styles.span);
-        },
         componentDisplay() {
             return CoreHandler.getControlStructureComponent(this.sub_type);
         },

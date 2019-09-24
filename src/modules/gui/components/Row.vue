@@ -1,5 +1,5 @@
 <template>
-<el-row>
+<el-row :gutter="30">
     <Control v-for="controlData in children" 
                 :key="controlData.id" v-bind="controlData" />
 </el-row>

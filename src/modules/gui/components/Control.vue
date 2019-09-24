@@ -9,10 +9,15 @@
 <script>
 import { controlComponent } from '$gui/core/index';
 
+import gridMixin from 'mixins/gridMixin'
+
 export default {
+    mixins: [ gridMixin ],
+
     props: [
-        'children',
+        // 'children',
         'id',
+        'placeholder',
         'styles',
         'sub_type',
         'label',
@@ -20,25 +25,7 @@ export default {
     ],
 
     computed: {
-        styleSpan(){
-            const spanStyle = this.styles.span;
-              // var spanStyle = this.styles.span;
-            if (!spanStyle.responsive) {
-                return { span: spanStyle.value } ;
-            }
-
-            return {
-                xl: spanStyle.xl,
-                lg: spanStyle.lg,
-                md: spanStyle.md,
-                sm: spanStyle.sm,
-                xs: spanStyle.xs,
-            }
-            return this.calculateSpan(this.styles.span);
-        },
         componentDisplay() {
-            return controlComponent(this.sub_type);
-
             return controlComponent(this.sub_type);
         }
     },

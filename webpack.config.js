@@ -12,6 +12,14 @@ const mode = process.env.NODE_ENV; // production or development
 
 var styleLoaders = mode !== 'production' ? [ 'vue-style-loader', 'css-loader', 'sass-loader' ] : [ MiniCssExtractPlugin.loader,  'css-loader', 'sass-loader'] ;
 
+
+const InjectTemplates = ['index.html', 'gui.html'].map((filename) => new HtmlWebpackPlugin({
+    filename,
+    inject: false,
+    template: path.join(__dirname, 'public', filename),
+}))
+
+
 module.exports = {
     mode: mode,
     entry: ['@babel/polyfill', path.join(__dirname, 'src', 'index.js')],
@@ -59,10 +67,8 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'public', 'index.html'),
-            inject: false
-        }),
+        ...InjectTemplates,
+
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: "assets/css/style.css"
@@ -70,6 +76,7 @@ module.exports = {
     ],
     optimization: {}
 }
+
 
 
 module.exports.devtool = '#source-map'

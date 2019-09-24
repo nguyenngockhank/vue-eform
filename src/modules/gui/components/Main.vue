@@ -27,16 +27,20 @@ export default {
     },
 
     watch: {
-        templateData(newData) {
-            if (this.$options.pageStructure) {
-                this.$options.pageStructure.loadState(newData);
-                this.structureData =  this.$options.pageStructure.getPageState();
-            }
+        templateData: {
+            handler(newData) {
+                // first time wait $options.pageStructure ready
+                this.$nextTick(() => {
+                    this.setTemplateData(newData);
+                });
+            },
+           immediate: true
         }
     },
     methods: {
-        setTemplateData(templateData, render = true) {
-
+        setTemplateData(templateData) {
+            this.$options.pageStructure.loadState(templateData);
+            this.structureData =  this.$options.pageStructure.getPageState();
         }
     }
 }

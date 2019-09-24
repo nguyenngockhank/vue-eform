@@ -16,6 +16,7 @@
     </div><!-- end layout for left -->
 </div>
 </template>
+
 <script>
 import controlMixin from 'mixins/controlMixin';
 
