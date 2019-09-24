@@ -35,7 +35,7 @@ export default {
             const spanStyle = this.styles.span;
               // var spanStyle = this.styles.span;
             if (!spanStyle.responsive) {
-                return { span: spanStyle.value } ;
+                return { span: spanStyle.fixed } ;
             }
 
             return {

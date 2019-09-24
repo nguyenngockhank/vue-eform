@@ -4,7 +4,7 @@
         <div class="input-group-prepend">
             <div class="input-group-text">{{ title }}</div>
         </div>
-        <input type="number" class="form-control" max="12" min="1"
+        <input type="number" class="form-control" max="24" min="1" step="2"
                 :value="value" @input="$emit('input', $event.target.value)" />
     </div><!-- end span.fixed  -->
 </div><!-- end .col-xs-12 -->

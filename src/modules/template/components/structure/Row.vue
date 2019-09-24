@@ -23,7 +23,7 @@
     </div>
 
 
-    <el-row class="row-body">
+    <el-row >
         <draggable group="control" @add="onAddControl" v-model="children" >
             <Control v-for="control in children" :key="control.id" v-bind="control" />
         </draggable>

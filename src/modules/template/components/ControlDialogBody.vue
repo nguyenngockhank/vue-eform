@@ -11,34 +11,14 @@
             Name
             <input type="text" class="form-control form-control-sm" v-model="name">
         </div><!-- end name -->
+
+        <div class="col-lg-4">
+            Placeholder
+            <input type="text" class="form-control form-control-sm" v-model="placeholder">
+        </div><!-- end name -->
+        
     </div>
     <!-- end Essential-->
-
-    <el-divider content-position="left"><h3><i class="el-icon-star-on" /> Layout</h3></el-divider>
-    <div class="row mb-10">
-        <div class="col-sm-12">
-            <div class="form-check" >
-                <input v-model="span.responsive" class="form-check-input" type="checkbox" id="layout_responsive">
-                <label class="form-check-label" for="layout_responsive">
-                    Responsive (12 columns per Row)
-                </label>
-            </div><!-- end span.reponsive -->
-        </div><!-- end .col-xs-12 -->
-    </div><!-- end .row -->
-
-    <div class="row" v-show="!span.responsive">
-        <SizeGroupInput title="Fixed" v-model="span.fixed" />
-    </div><!-- end span.fixed -->
-
-
-    <div class="row" v-show="span.responsive">
-        <SizeGroupInput title="xl" v-model="span.xl" />
-        <SizeGroupInput title="lg" v-model="span.lg" />
-        <SizeGroupInput title="md" v-model="span.md" />
-        <SizeGroupInput title="sm" v-model="span.sm" />
-    </div><!-- end span.xl -->
-    <!-- end Layout-->
-
 
     <el-divider content-position="left"><h3><i class="el-icon-star-on" /> Label</h3></el-divider>
    
@@ -79,6 +59,35 @@
     </div>
     <!-- end label -->
 
+
+
+
+    <el-divider content-position="left"><h3><i class="el-icon-star-on" /> Layout</h3></el-divider>
+    <div class="row mb-10">
+        <div class="col-sm-12">
+            <div class="form-check" >
+                <input v-model="span.responsive" class="form-check-input" type="checkbox" id="layout_responsive">
+                <label class="form-check-label" for="layout_responsive">
+                    Responsive (12 columns per Row)
+                </label>
+            </div><!-- end span.reponsive -->
+        </div><!-- end .col-xs-12 -->
+    </div><!-- end .row -->
+
+    <div class="row" v-show="!span.responsive">
+        <SizeGroupInput title="Fixed" v-model="span.fixed" />
+    </div><!-- end span.fixed -->
+
+
+    <div class="row" v-show="span.responsive">
+        <SizeGroupInput title="xl" v-model="span.xl" />
+        <SizeGroupInput title="lg" v-model="span.lg" />
+        <SizeGroupInput title="md" v-model="span.md" />
+        <SizeGroupInput title="sm" v-model="span.sm" />
+    </div><!-- end span.xl -->
+    <!-- end Layout-->
+
+
     <slot name="extra" :extra="extra" :id="id"></slot>
 
 </div>
@@ -97,6 +106,7 @@ export default {
         return {
             id: '',
             name: '',
+            placeholder: '',
             sub_type: '',
             span: {
                 responsive: true,
@@ -122,7 +132,6 @@ export default {
             return [
                 { value: 'left', label: 'Left' },
                 { value: 'top', label: 'Top' },
-                { value: 'placeholder', label: 'Placeholder' },
             ];
         }
     },
@@ -132,18 +141,20 @@ export default {
                 id: this.id,
                 name: this.name, 
                 label: this.label,
+                placeholder: this.placeholder,
                 styles: {
                     span: this.span
                 }, 
             });
         },
         controlAttrToState( controlInfo ) {
-            const { id, rowId, name, sub_type, label, styles, extra } = controlInfo;
+            const { id, rowId, name, sub_type, placeholder, label, styles, extra } = controlInfo;
 
             const { span } = styles; 
 
             this.span = span;
             this.label = label;
+            this.placeholder = placeholder;
             this.name = controlInfo.name || controlInfo.id;
             this.extra = extra; 
 

@@ -1,5 +1,6 @@
 export const TEXT_CONTROL_ATTR = {
     is_multiline: false,
+    input_type: 'text', 
     label: { text: 'TEXT LABEL' }
 }
 

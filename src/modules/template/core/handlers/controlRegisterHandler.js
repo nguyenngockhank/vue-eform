@@ -51,16 +51,16 @@ instance.init = function() {
         structureComponent: TextStructure,
     })
 
-    instance.registerControl( 'number', {
-        structure: {
-            label: 'Number Control',
-            icon: 'el-icon-lollipop',
-        },
-        attrs: NUMBER_CONTROL_ATTR,
-        optionComponent: NumberOptions,
-        structureComponent: NumberStructure,
-        // sidebar: '',
-    })
+    // instance.registerControl( 'number', {
+    //     structure: {
+    //         label: 'Number Control',
+    //         icon: 'el-icon-lollipop',
+    //     },
+    //     attrs: NUMBER_CONTROL_ATTR,
+    //     optionComponent: NumberOptions,
+    //     structureComponent: NumberStructure,
+    //     // sidebar: '',
+    // })
 
 }
 

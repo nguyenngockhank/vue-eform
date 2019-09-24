@@ -1,32 +1,31 @@
 <template>
 <div>
-    <!-- <label :style="labelStyle">{{ label.text }}</label>
-    <div :style="inputWrapperStyle">
-        <el-input :type="inputType" disabled="" :placeholder="name" size="mini" ></el-input>
-    </div> -->
-    
-    <div  v-if="label.position === 'top'" class="form-group">
+    <div v-if="label.position === 'top'"  key="top-layout" class="form-group">
         <label :style="labelStyle">{{ label.text }}</label>
-        <input class="form-control"  />
-    </div>
+        <input :placeholder="placeholder" :type="inputType" class="form-control"  />
+    </div><!-- end layout for top -->
 
-    
+    <div v-if="label.position === 'left'" key="left-layout" class="form-group row">
+        <label :style="labelStyle" class="col-form-label" :class="labelLeftClasses">
+            {{ label.text }}
+        </label>
+        
+        <div :class="labelLeftControlWrapperClasses">
+            <input :placeholder="placeholder"  :type="inputType" class="form-control"  />
+        </div>
+    </div><!-- end layout for left -->
 </div>
 </template>
 <script>
-import controlStructureMixin from '$template/utils/controlStructureMixin';
+import controlMixin from 'mixins/controlMixin';
 
 export default {
-    mixins: [ controlStructureMixin ],
+    mixins: [ controlMixin ],
     computed: {
         inputType() {
-            const extra = this.extra;
-            if(extra && extra.is_multiline) {
-                return 'textarea';
-            }
-            return 'text';
+            let { input_type = 'text'  } = this.extra || {};
+            return input_type;
         },
-     
     }
 }
 </script>

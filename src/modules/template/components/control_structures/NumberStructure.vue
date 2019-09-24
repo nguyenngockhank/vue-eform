@@ -7,9 +7,9 @@
 </div>
 </template>
 <script>
-import controlStructureMixin from '$template/utils/controlStructureMixin';
+import controlMixin from 'mixins/controlMixin';
 
 export default {
-    mixins: [ controlStructureMixin ],
+    mixins: [ controlMixin ],
 }
 </script>

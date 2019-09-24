@@ -1,5 +1,6 @@
 export const BASE_ATTR = {
     name: '...',
+    placeholder: '',
     styles: {
         span: {
             responsive: false,
@@ -14,10 +15,9 @@ export const BASE_ATTR = {
     },
     label: {
         hide: false,
-        width: 4, //  1 / 3 
+        width: 4, // ( 1 / 3 of control )
         text: 'LABEL',
         position: 'top', // top, right?
-        width: '120px',
 
         // style
         bold: false,
