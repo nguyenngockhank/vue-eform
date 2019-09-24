@@ -1,6 +1,6 @@
 import EntityRegistry from 'core/entityRegistry';
 
-import { BASE_ATTR } from '$template/constants/controlAttrs';
+import { BASE_ATTR } from '$structure/constants/baseControlAttr';
 
 import { extendDeep, cloneDeep, pick, omit } from 'utils/objectHelpers';
 import { difference } from 'utils/arrayHelpers';

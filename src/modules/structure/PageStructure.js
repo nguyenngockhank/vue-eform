@@ -6,6 +6,8 @@ import SectionFactory from './factory/SectionFactory';
 import RowFactory from './factory/RowFactory';
 import ControlFactory from './factory/ControlFactory';
 
+import structureStateLoader from './persistent/structureStateLoader';
+
 class PageStructure {
 
     constructor() {
@@ -92,65 +94,16 @@ class PageStructure {
      * - clear repo
      * - build structure (tree) of data
      * - set index for Id Generator of factory 
+     * - correct attributes of Control Data
      */
     loadState (state) {
-        if ('string' === typeof state) {
-            try {
-                state = JSON.parse(state);
-            } catch (ex) {
-                console.warn('[EFORM WARNING]: Invalid Data to Load!');
-                return false;
-            }
+        const newState =  structureStateLoader(this, state);
+        if (newState === false) {
+            return false;
         }
-        /// load state 
 
-        // reset repos
-        this.sectionRepo.clear();
-        this.rowRepo.clear();
-        this.controlRepo.clear();
-
-        // traverse sections
-        let secIndex =0, rowIndex = 0, controlIndex = 0; 
-
-        state.children.forEach( (sectionData) => {
-            this.sectionRepo.set(sectionData.id, sectionData);
-
-            const sIndex = this.sectionFactory.extractIndexFromId(sectionData.id);
-
-            if (sIndex > secIndex) {
-                secIndex = sIndex;
-            }
-
-            // traverse rows of section
-            sectionData.children.forEach( (rowData) => {
-                this.rowRepo.set(rowData.id, rowData);
-
-                const rIndex = this.rowFactory.extractIndexFromId(rowData.id);
-                if (rIndex > rowIndex) {
-                    rowIndex = rIndex;
-                }
-
-                // traverse controls of row
-                rowData.children.forEach( (controlData) => {
-                    this.controlRepo.set(controlData.id, controlData);
-
-                    const cIndex = this.controlFactory.extractIndexFromId(controlData.id);
-                    if (cIndex > controlIndex) {
-                        controlIndex = cIndex;
-                    }
-                });
-            })
-        });
-
-        /// reset factory - gererator id index
-        this.sectionFactory.setGeneratorIndex(secIndex);
-        this.rowFactory.setGeneratorIndex(rowIndex);
-        this.controlFactory.setGeneratorIndex(controlIndex);
-
-        /// set to local var 
-        this._dataStructure = state;
-
-        return state;
+        this._dataStructure = newState;
+        return this._dataStructure;
     }
 
     /// getter for state
