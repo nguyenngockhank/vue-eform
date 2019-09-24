@@ -1,12 +1,13 @@
 <template>
     <div class="eform">
         <Section v-for="sectionData in structureData.children" 
-                :key="sectionData.id" v-bind="sectionData" />
+                :key="sectionData.id" v-bind="sectionData" :eformStore="$options.store"  />
     </div>
 </template>
 
 <script>
 import { PageStructure } from "$structure/index";
+import { plainObject } from 'utils/objectHelpers';
 
 import Section  from "./Section";
 
@@ -14,6 +15,7 @@ export default {
     components: { Section },
     props: [
         'templateData',
+        'value',
     ],
     data() {
         return {
@@ -22,6 +24,8 @@ export default {
     },
 
     pageStructure: null,
+    store: null, 
+
     created() {
         this.$options.pageStructure = new PageStructure;
     },
@@ -38,9 +42,21 @@ export default {
         }
     },
     methods: {
+        emitStore() {
+            const store = this.$options.store || {};
+            this.$emit('input', plainObject(store.__storage__ || {}));
+        },
+
         setTemplateData(templateData) {
-            this.$options.pageStructure.loadState(templateData);
-            this.structureData =  this.$options.pageStructure.getPageState();
+            const { $options } = this;
+
+            $options.pageStructure.loadState(templateData);
+            $options.store =  $options.pageStructure.createValueStore(() => {
+                this.emitStore();
+            }, this.value);
+
+            this.structureData =  $options.pageStructure.getPageState();
+            this.emitStore();
         }
     }
 }

@@ -7,6 +7,8 @@ import RowFactory from './factory/RowFactory';
 import ControlFactory from './factory/ControlFactory';
 
 import structureStateLoader from './persistent/structureStateLoader';
+import structureValueStore from './persistent/structureValueStore';
+import { observe } from 'core/observable';
 
 class PageStructure {
 
@@ -122,6 +124,33 @@ class PageStructure {
     getControlState(controlId) {
         return this.controlRepo.find(controlId);
     }
+
+
+    /*
+     * Store of Control Value 
+     */
+    createValueStore( onStoreChange, defaultValue ) {
+        this.valueStore = structureValueStore(this.controlRepo, defaultValue);
+        if (this.unwatchStoreFns) {
+            this.unwatchStoreFns.forEach(fn => fn());
+        }
+        
+        // reset 
+        this.unwatchStoreFns = [];
+
+        if ( onStoreChange ) {
+            this.controlRepo.map.forEach(( { name }  = controlData )  => {
+                let unwatch = observe(() => {
+                    // console.log( 'Control ', name , ' change to',  this.valueStore[name])
+                    onStoreChange(name, this.valueStore[name]);
+                });
+                this.unwatchStoreFns.push(unwatch);
+            })
+        }
+
+        return this.valueStore;
+    }
+
 
 }
 

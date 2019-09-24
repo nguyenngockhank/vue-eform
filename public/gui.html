@@ -28,9 +28,30 @@
 </head>
 <body>
     <div id="app">
-        <h1>Render Eform</h1>
-        <eform :template-data="templateData"  />
+        <div>
+            <h1>Render Eform 1</h1>
+            <eform v-model="formValue" :template-data="templateData"  />
+        </div>
+        <div>
+            <h2>Form Values</h2>
+            <pre>{{ formValue }}</pre>
+        </div>
+
+        <hr />
+
+        <div>
+            <h1>Render Eform 2</h1>
+            <eform v-model="formValue2" :template-data="templateData"  />
+        </div>
+        
+  
+        <div>
+            <h2>Form Values</h2>
+            <pre>{{ formValue2 }}</pre>
+        </div>
     </div>
+
+      
 
 
     <script src="../public/vue.js"></script>
@@ -49,6 +70,12 @@
             data() {
                 return {
                     templateData: templateData,
+                    formValue: {
+                        last_name: "nguyen",
+                    },
+                    formValue2: {
+                        first_name: "khank",
+                    },
                 }
             },
         });

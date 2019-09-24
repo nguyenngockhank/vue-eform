@@ -1,7 +1,7 @@
 <template>
 <el-col v-bind="styleSpan">
     <div class="control-wrapper">
-        <component :is="componentDisplay" v-bind="$props" />
+        <component :is="componentDisplay"  v-bind="$props" />
     </div>
 </el-col>
 </template>
@@ -15,8 +15,9 @@ export default {
     mixins: [ gridMixin ],
 
     props: [
-        // 'children',
+        'eformStore',
         'id',
+        'name',
         'placeholder',
         'styles',
         'sub_type',

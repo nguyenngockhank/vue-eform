@@ -15,7 +15,7 @@ class EntityRepository {
 
     set(entityId, entityData) {
         this.map.set(entityId, entityData);
-        console.log( `Added new ${entityData.id} entity to ` , this.constructor.name,  this.map.size );
+        // console.log( `Added new ${entityData.id} entity to ` , this.constructor.name,  this.map.size );
     }
 
     add( entityData ) {
