@@ -2,17 +2,11 @@ import {
     Collapse,
     CollapseItem, 
 
-    Input,
-    InputNumber,
-    Checkbox,
     Button, 
     Select,
     Option,
-
-    // Container,
     Row,
     Col,
-
     // dropdown
     Dropdown,
     DropdownMenu,
@@ -27,46 +21,92 @@ import {
 
 import draggableComponent from 'vuedraggable';
 
+
+function register3rdComponents() {
+    // register 3rd parties
+    Vue.use(Collapse);
+    Vue.use(CollapseItem);
+
+    Vue.use(Button);
+    
+    Vue.use(Select);
+    Vue.use(Option);
+
+    // grid 
+    // Vue.use(Container);
+    Vue.use(Row);
+    Vue.use(Col);
+
+    // dropdown
+    Vue.use(Dropdown);
+    Vue.use(DropdownMenu);
+    Vue.use(DropdownItem);
+    
+    // dialog
+    Vue.use(Dialog);
+    Vue.use(Divider);
+    
+
+    Vue.component("draggable", draggableComponent);
+}
+
+
+
 import CoreHandler from './core';
-
-
 import Main from './components/Main.vue';
+
+
+/// control options
+import TextOptions from '$template/components/control_options/TextOptions';
+
+/// structured control
+import TextStructure from '$template/components/control_structures/TextStructure';
+import SelectStructure from '$template/components/control_structures/SelectStructure';
+
+// This handler to register all built-in Control 
+import { TEXT_CONTROL_ATTR, SELECT_CONTROL_ATTR } from '$template/constants/controlAttrs';
+
+/*
+ *  This function will register built-in controls 
+ */
+function registerControls() {
+
+    const TEXT_OPTIONS = {
+        structure: {
+            label: 'Input Control',
+            icon: 'el-icon-edit', 
+        }, 
+        attrs: TEXT_CONTROL_ATTR, 
+        structureComponent: TextStructure, 
+        optionComponent: TextOptions,  
+    };
+
+    const SELECT_OPTIONS = {
+        structure: {
+            label: 'Select',
+            icon: 'el-icon-menu', 
+        }, 
+        attrs: SELECT_CONTROL_ATTR, 
+        structureComponent: SelectStructure,
+    }
+
+    const CONTROL_OPTIONS = {
+        'text': TEXT_OPTIONS,
+        'select': SELECT_OPTIONS,
+    }
+
+    CoreHandler.registerControls(CONTROL_OPTIONS);
+}
+
 
 const instance =  {
     install: function (Vue, options) {
 
-        // register 3rd parties
-        Vue.use(Collapse);
-        Vue.use(CollapseItem);
+        register3rdComponents();
 
-        Vue.use(Button);
-        Vue.use(Input);
-        Vue.use(InputNumber);
-        Vue.use(Checkbox);
-        
-        Vue.use(Select);
-        Vue.use(Option);
-
-        // grid 
-        // Vue.use(Container);
-        Vue.use(Row);
-        Vue.use(Col);
-
-        // dropdown
-        Vue.use(Dropdown);
-        Vue.use(DropdownMenu);
-        Vue.use(DropdownItem);
-        
-        // dialog
-        Vue.use(Dialog);
-        Vue.use(Divider);
-        
-
-        Vue.component("draggable", draggableComponent);
-        // Vue.directive(`${PREFIX_DIRECTIVE}draggable`, draggableDirective)
-
-        /// run  
         CoreHandler.init();
+        registerControls();
+
 
         /// register global component 
         Vue.component('eform-builder', Main);

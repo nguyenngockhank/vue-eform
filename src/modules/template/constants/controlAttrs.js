@@ -10,3 +10,9 @@ export const NUMBER_CONTROL_ATTR = {
     label: { text: 'NUMBER LABEL' }
 }
 
+
+export const SELECT_CONTROL_ATTR = {
+    label: { text: 'SELECT CONTROL' },
+    options: [], 
+}
+

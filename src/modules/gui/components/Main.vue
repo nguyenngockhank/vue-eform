@@ -47,10 +47,16 @@ export default {
             this.$emit('input', plainObject(store.__storage__ || {}));
         },
 
-        setTemplateData(templateData) {
+        setTemplateData(templateData = {}) {
             const { $options } = this;
 
-            $options.pageStructure.loadState(templateData);
+            const isOk = $options.pageStructure.loadState(templateData);
+
+            if (!isOk) {
+                console.warn('[EFORM GUI]: setTemplateData fail - cannot loadState of PageStructure');
+                return;
+            }
+
             $options.store =  $options.pageStructure.createValueStore(() => {
                 this.emitStore();
             }, this.value);

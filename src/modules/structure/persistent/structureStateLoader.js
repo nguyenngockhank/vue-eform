@@ -1,5 +1,5 @@
 import { BASE_ATTR } from '../constants/baseControlAttr';
-import { extendDeep, cloneDeep, extend } from 'utils/objectHelpers';
+import { extendDeep, cloneDeep, extend, isEmpty } from 'utils/objectHelpers';
 
 /*
  * Load & build from stored data 
@@ -26,7 +26,7 @@ function traverseState(state, fnProcessSection, fnProcessRow, fnProcessControl) 
     });
 }
 
-export default function loadState( pageStructure, state ) {
+export default function ( pageStructure, state ) {
 
     if ('string' === typeof state) {
         try {
@@ -37,6 +37,12 @@ export default function loadState( pageStructure, state ) {
         }
     }
     /// load state 
+
+    if (isEmpty(state)) {
+        console.warn('[EFORM WARNING]: Invalid Data to Load!');
+        return false;
+    }
+
 
     // reset repos
     pageStructure.sectionRepo.clear();

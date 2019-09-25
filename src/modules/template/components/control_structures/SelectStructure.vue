@@ -1,6 +1,8 @@
 <template>
 <LabelWrapedStructure v-bind="$props">
-    <input :placeholder="placeholder"  :type="inputType" class="form-control"  />
+    <select :placeholder="placeholder" class="form-control" key="top">
+        <option value="">top</option>
+    </select>
 </LabelWrapedStructure>
 </template>
 
@@ -12,9 +14,10 @@ export default {
     components: { LabelWrapedStructure }, 
     mixins: [ controlMixin ],
     computed: {
-        inputType() {
-            let { input_type = 'text'  } = this.extra || {};
-            return input_type;
+        optionList() {
+            return [
+                { 'value': 1, text: 'abc'}
+            ];
         },
     }
 }

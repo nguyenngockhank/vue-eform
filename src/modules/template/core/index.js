@@ -8,7 +8,7 @@ import { PageStructure, TemplateStorage } from '$structure/index';
 import eventHandler from './handlers/EventHandler';
 import controlRegisterHandler from './handlers/ControlRegisterHandler';
 
-import { cloneDeep }  from 'utils/objectHelpers';
+import { cloneDeep, forEach }  from 'utils/objectHelpers';
 
 const pageStructure = new PageStructure;
 
@@ -17,11 +17,41 @@ const instance = {};
 
 instance.init = function() {
     eventHandler.init(pageStructure);
-    controlRegisterHandler.init();
+    // controlRegisterHandler.init();
 }
 
-instance.registerControl = function( ...params) {
+/*
+ *  Register a component includes ( Dropdown selector + Display in Row + Customize Options )
+ *
+ *  @return void  
+ * 
+ *  @param subType string  
+ *  @param options  
+ *   {
+ *      structure, 
+ *      attrs, 
+ *      optionComponent,  (Vue instance)
+ *      structureComponent, (Vue instance)
+ *       ...
+ *   }
+ */
+instance.registerControl = function(subType, options) {
     /// will use this later
+    controlRegisterHandler.registerControl(subType, options)
+}
+
+/*
+ *  @param optionsList:  
+ *   {
+ *       subType1 : options (Object),
+ *       subType2 : options (Object),
+ *       ...
+ *   }
+ */
+instance.registerControls = function( optionsList ) {
+    forEach(optionsList, (options, subType) => {
+        instance.registerControl(subType, options)
+    });
 }
 
 /**

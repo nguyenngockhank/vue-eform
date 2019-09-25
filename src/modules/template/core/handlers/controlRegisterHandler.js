@@ -1,26 +1,16 @@
-// This handler to register all built-in Control 
-import { TEXT_CONTROL_ATTR, NUMBER_CONTROL_ATTR } from '$template/constants/controlAttrs';
-
 /// registry 
 import {
     controlAttrRegistry, controlStructureRegistry,
     controlOptionsComponentRegistry, controlStructureComponentRegistry
 } from '../registry/index';
 
-/// control options
-import TextOptions from '$template/components/control_options/TextOptions';
-import NumberOptions from '$template/components/control_options/NumberOptions';
-
-/// structured control
-import TextStructure from '$template/components/control_structures/TextStructure';
-import NumberStructure from '$template/components/control_structures/NumberStructure';
 
 
 const instance = {};
 
 instance.registerControl = function( sub_type,  { structure, attrs, optionComponent, structureComponent }) {
     if (!attrs || !structure) {
-        console.warn(`[EForm Warning]: Register control failed! Options invalid!`)
+        console.warn(`[EForm Warning]: Register control "${sub_type}" failed! Options invalid!`)
         return false; 
     }
 
@@ -36,7 +26,7 @@ instance.registerControl = function( sub_type,  { structure, attrs, optionCompon
     }
 }
 
-/**
+/*
  * Methods to register all of built-in controls
  */
 instance.init = function() {
