@@ -1,3 +1,4 @@
+import { Logger } from '$template/utils/index';
 import * as EV from '$template/constants/events';
 import eventBus from 'core/eventBus';
 
@@ -50,7 +51,7 @@ instance.init = function(pageStructure) {
         // fire event
     });
 
-
+    Logger.i('Core event listeners is initilized!')
 }
 
 

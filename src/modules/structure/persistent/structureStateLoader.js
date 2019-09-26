@@ -1,5 +1,6 @@
 import { BASE_ATTR } from '../constants/baseControlAttr';
 import { extendDeep, cloneDeep, extend, isEmpty } from 'utils/objectHelpers';
+import { Logger } from '$structure/utils/index';
 
 /*
  * Load & build from stored data 
@@ -32,14 +33,14 @@ export default function ( pageStructure, state ) {
         try {
             state = JSON.parse(state);
         } catch (ex) {
-            console.warn('[EFORM WARNING]: Invalid Data to Load!');
+            Logger.warn('Invalid Data to Load!');
             return false;
         }
     }
     /// load state 
 
     if (isEmpty(state)) {
-        console.warn('[EFORM WARNING]: Invalid Data to Load!');
+        Logger.warn('Invalid Data to Load!');
         return false;
     }
 

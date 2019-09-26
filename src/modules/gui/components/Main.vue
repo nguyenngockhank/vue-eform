@@ -9,6 +9,8 @@
 import { PageStructure } from "$structure/index";
 import { plainObject } from 'utils/objectHelpers';
 
+import { Logger } from '$gui/utils/index';
+
 import Section  from "./Section";
 
 export default {
@@ -53,7 +55,7 @@ export default {
             const isOk = $options.pageStructure.loadState(templateData);
 
             if (!isOk) {
-                console.warn('[EFORM GUI]: setTemplateData fail - cannot loadState of PageStructure');
+                Logger.warn('setTemplateData fail - cannot loadState of PageStructure');
                 return;
             }
 
