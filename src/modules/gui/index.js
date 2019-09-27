@@ -9,10 +9,13 @@ import Main from './components/Main.vue';
 /// use for register controls 
 import { registerControl } from './core/index';
 
-import TextControl from './components/controls/TextControl';
+import InputControl from './components/controls/InputControl';
+import SelectControl from './components/controls/SelectControl';
+
 
 function registerControls() {
-    registerControl('text', TextControl);
+    registerControl('text', InputControl);
+    registerControl('select', SelectControl);
 }
 /// -- end 
 

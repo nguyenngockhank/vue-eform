@@ -58,6 +58,7 @@ import Main from './components/Main.vue';
 
 /// control options
 import TextOptions from '$template/components/control_options/TextOptions';
+import SelectOptions from '$template/components/control_options/SelectOptions';
 
 /// structured control
 import TextStructure from '$template/components/control_structures/TextStructure';
@@ -88,6 +89,7 @@ function registerControls() {
         }, 
         attrs: SELECT_CONTROL_ATTR, 
         structureComponent: SelectStructure,
+        optionComponent: SelectOptions,
     }
 
     const CONTROL_OPTIONS = {

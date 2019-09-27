@@ -47,6 +47,7 @@ import {
 import Section from './structure/Section';
 import ControlDialogBody from './ControlDialogBody';
 import CoreHandler from '$template/core';
+import { Logger } from '$template/utils';
 
 export default {
     components: {
@@ -74,6 +75,7 @@ export default {
     },
     mounted() {
         eventBus.addListener(UI_OPEN_EDIT_CONTROL_DIALOG, ({ data }) => {
+            Logger.i('Edit Control', data);
 
             this.dialogEditControl.visible = true;
             // wait for $refs available after dialog show up
