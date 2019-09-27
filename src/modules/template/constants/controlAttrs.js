@@ -1,5 +1,4 @@
 export const TEXT_CONTROL_ATTR = {
-    is_multiline: false,
     input_type: 'text', 
     label: { text: 'TEXT LABEL' }
 }
@@ -16,3 +15,7 @@ export const SELECT_CONTROL_ATTR = {
     values: [], 
 }
 
+export const TEXTAREA_CONTROL_ATTR = {
+    label: { text: 'TEXTAREA' },
+    rows: 4,
+}
