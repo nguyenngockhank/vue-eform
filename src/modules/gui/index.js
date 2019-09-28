@@ -11,11 +11,13 @@ import { registerControl } from './core/index';
 
 import InputControl from './components/controls/InputControl';
 import SelectControl from './components/controls/SelectControl';
+import Textarea from './components/controls/Textarea';
 
 
 function registerControls() {
     registerControl('text', InputControl);
     registerControl('select', SelectControl);
+    registerControl('textarea', Textarea);
 }
 /// -- end 
 
