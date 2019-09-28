@@ -45,7 +45,7 @@ import {
 
 
 import Section from './structure/Section';
-import ControlDialogBody from './ControlDialogBody';
+import ControlDialogBody from './edit_control_modal/ControlDialogBody';
 import CoreHandler from '$template/core';
 import { Logger } from '$template/utils';
 
@@ -140,16 +140,6 @@ export default {
 .build-wrapper {
     display: block;
 }
-</style>
-
-<style >
-.mt-10 {
-    margin-top: 10px;
-}
-.mb-10 {
-    margin-bottom: 10px;
-}
-
 .structure-wrapper {
     /* border: 1px solid #ddd; */
     margin: 20px 0;
@@ -160,6 +150,16 @@ export default {
     background-color: #f1f1f1;
     margin-top: 10px;
 }
+</style>
+
+<style >
+.mt-10 {
+    margin-top: 10px;
+}
+.mb-10 {
+    margin-bottom: 10px;
+}
+
 .el-dialog__body {
     padding-top: 0;
     padding-bottom: 0;
