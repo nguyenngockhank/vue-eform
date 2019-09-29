@@ -46,7 +46,7 @@
 
             <div class="col-lg-4" v-show="label.position == 'left' ">
                 Width (per control)
-                <input type="number" max="11" min="1" class="form-control form-control-sm" v-model="label.width">
+                <input type="number" max="11" min="1" class="form-control form-control-sm" v-model.number="label.width">
             </div><!-- end name -->
         </div>
 
@@ -75,15 +75,15 @@
     </div><!-- end .row -->
 
     <div class="row" v-show="!span.responsive">
-        <SizeGroupInput title="Fixed" v-model="span.fixed" />
+        <SizeGroupInput title="Fixed" v-model.number="span.fixed" />
     </div><!-- end span.fixed -->
 
 
     <div class="row" v-show="span.responsive">
-        <SizeGroupInput title="xl" v-model="span.xl" />
-        <SizeGroupInput title="lg" v-model="span.lg" />
-        <SizeGroupInput title="md" v-model="span.md" />
-        <SizeGroupInput title="sm" v-model="span.sm" />
+        <SizeGroupInput title="xl" v-model.number="span.xl" />
+        <SizeGroupInput title="lg" v-model.number="span.lg" />
+        <SizeGroupInput title="md" v-model.number="span.md" />
+        <SizeGroupInput title="sm" v-model.number="span.sm" />
     </div><!-- end span.xl -->
     <!-- end Layout-->
 

@@ -1,5 +1,5 @@
 import EntityFactory from './EntityFactory';
-import { TYPE_SECTION, PREFIX_SECTION_ID } from 'constants/entities';
+import { TYPE_SECTION, PREFIX_SECTION_ID } from '$structure/constants/entities';
 class SectionFactory extends EntityFactory {
     
     constructor() {

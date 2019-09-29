@@ -1,5 +1,5 @@
 import EntityFactory from './EntityFactory';
-import { TYPE_ROW, PREFIX_ROW_ID } from 'constants/entities';
+import { TYPE_ROW, PREFIX_ROW_ID } from '$structure/constants/entities';
 
 class RowFactory extends EntityFactory {
     

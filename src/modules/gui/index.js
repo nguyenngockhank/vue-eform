@@ -9,15 +9,22 @@ import Main from './components/Main.vue';
 /// use for register controls 
 import { registerControl } from './core/index';
 
+
+import { 
+    INPUT_CONTROL, 
+    SELECT_CONTROL, 
+    TEXTAREA_CONTROL
+} from 'constants/index';
+
 import InputControl from './components/controls/InputControl';
 import SelectControl from './components/controls/SelectControl';
 import Textarea from './components/controls/Textarea';
 
 
 function registerControls() {
-    registerControl('text', InputControl);
-    registerControl('select', SelectControl);
-    registerControl('textarea', Textarea);
+    registerControl(INPUT_CONTROL, InputControl);
+    registerControl(SELECT_CONTROL, SelectControl);
+    registerControl(TEXTAREA_CONTROL, Textarea);
 }
 /// -- end 
 

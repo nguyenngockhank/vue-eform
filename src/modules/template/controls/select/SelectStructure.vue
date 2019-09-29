@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import LabelWrapedStructure from './LabelWrapedStructure';
+import LabelWrapedStructure from '$template/components/common/LabelWrapedStructure';
 import controlMixin from 'mixins/controlMixin';
 
 export default {

@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-4">
-            <input type="number" v-model="options.rows" class="form-control">
+            <input type="number" v-model.number="options.rows" class="form-control">
         </div>
     </div>
 
