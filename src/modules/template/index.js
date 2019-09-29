@@ -58,13 +58,15 @@ import Main from './components/Main.vue';
 import { 
     INPUT_CONTROL, 
     SELECT_CONTROL, 
-    TEXTAREA_CONTROL
+    TEXTAREA_CONTROL,
+    RADIO_GROUP_CONTROL,
 } from 'constants/index';
 
 import {
     TEXT_OPTIONS,
     SELECT_OPTIONS,
     TEXTAREA_OPTIONS,
+    RADIO_GROUP_OPTIONS,
 } from './controls'
 
 /*
@@ -76,6 +78,7 @@ function registerControls() {
         [INPUT_CONTROL]: TEXT_OPTIONS,
         [TEXTAREA_CONTROL]: TEXTAREA_OPTIONS,
         [SELECT_CONTROL]: SELECT_OPTIONS,
+        [RADIO_GROUP_CONTROL]: RADIO_GROUP_OPTIONS,
     }
 
     CoreHandler.registerControls(CONTROL_OPTIONS);
