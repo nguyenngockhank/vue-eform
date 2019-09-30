@@ -19,6 +19,11 @@ class ControlRepository extends EntityRepository {
         extendDeep(controlData, attrs);
         return controlData;
     }
+
+    validationSchema() {
+        const schema = {};
+        return schema;
+    }
 }
 
 export default ControlRepository;
