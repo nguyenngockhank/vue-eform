@@ -16,22 +16,10 @@
 import LabelWrapedStructure from './LabelWrapedStructure';
 import controlMixin from 'mixins/controlMixin';
 import guiControlMixin from '$gui/mixins/guiControlMixin';
+import choiceMixin from '$gui/mixins/choiceMixin';
 
 export default {
-    mixins: [ controlMixin, guiControlMixin ],
+    mixins: [ controlMixin, guiControlMixin, choiceMixin ],
     components: { LabelWrapedStructure }, 
-    computed: {
-        formCheckClasses() {
-            const { layout } = this.extra;
-            return {
-                'form-check-inline': layout === 'inline'
-            };
-        }
-    },
-    methods: {
-        domId(item) {
-            return this.name + '__' + item.value;
-        },
-    }
 }
 </script>
