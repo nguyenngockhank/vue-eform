@@ -19,6 +19,7 @@ export default {
     props: [
         'templateData',
         'value',
+        'errors',
     ],
     data() {
         return {
@@ -53,7 +54,8 @@ export default {
             this.$emit('input', plainObject(store.__storage__ || {}));
         },
         emitErrorStore() {
-
+            const store = this.$options.errorStore || {};
+            this.$emit('update:errors', plainObject(store.__storage__ || {}));
         },
         setTemplateData(templateData = {}) {
             const { $options } = this;
@@ -66,12 +68,13 @@ export default {
             }
 
             $options.store = $options.eform.createValueStore(this.value, () => this.emitValueStore());
-            $options.errorStore = $options.eform.createErrorStore();
+            $options.errorStore = $options.eform.createErrorStore( () => this.emitErrorStore());
 
 
             this.structureData =  $options.pageStructure.getPageState();
-            // emit first time
+            // emit store first time
             this.emitValueStore();
+            this.emitErrorStore();
         }
     }
 }

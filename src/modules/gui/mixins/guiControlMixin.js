@@ -27,8 +27,16 @@ export default {
         onInput(e) {
             // update store
             this.eformStore[this.name] = this.value;
+
+            if (this.isInvalid) {
+                this.$nextTick(() => this.validate());
+            }
         }, 
         onBlur(e) {
+            this.validate(); 
+            // do more thing here maybe
+        }, 
+        validate() {
             let isInvalid = false;
             if (this.errorStore && this.errorStore[this.name]) {
                 isInvalid = true;

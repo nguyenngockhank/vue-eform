@@ -3,17 +3,23 @@
     <tr>
         <th>Value</th>
         <th>Label</th>
-        <th><button class="el-button el-button--default el-button--mini" @click="addValueRow">Add</button></th>
+        <th>
+            <button class="el-button el-button--default el-button--mini" @click="addValueRow">Add</button>
+        </th>
     </tr>
+    <tr v-if="!value || !value.length">
+        <td span="3">No records!</td>
+    </tr>
+
     <tr v-for="(item, index) in value" :key="index">
         <td>
             <input v-model="item.value" 
                 @input="inputValue(item, $event)" 
-                placeholder="value" class="form-control form-control-sm" />
+                class="form-control form-control-sm" />
         </td>
         <td>
             <input v-model="item.label" 
-                placeholder="label" class="form-control form-control-sm"   />
+               class="form-control form-control-sm"   />
         </td>
         <td>
             <button @click="removeValueRow(item)" class="el-button el-button--default el-button--mini">Remove</button>
@@ -25,18 +31,19 @@
 <script>
 export default {
     props: ['value'],
-    created() {
-        console.log(this.value)
-    },
     methods: {
         inputValue(item, $event) {
             if (item.value.indexOf(item.label) === 0) {
                 item.label = item.value;
             }
         },
-        addValueRow(){
+        addValueRow(prepend = false){
             const values = this.value;
-            this.$emit('input', [{ value: '', label: '' }].concat(values));
+            if ( prepend ) {
+                this.$emit('input', [{ value: '', label: '' }].concat(values));
+            } else {
+                this.$emit('input', values.concat([{ value: '', label: '' }]));
+            }
         },
         removeValueRow(item) {
             const values = this.value;

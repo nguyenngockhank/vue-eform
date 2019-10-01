@@ -22,14 +22,8 @@
 
     <el-divider content-position="left"><h3><i class="el-icon-star-on" /> Label</h3></el-divider>
    
-    <div class="row mb-10">
-        <div class="col-sm-12">
-            <FormCheck v-model="label.hide" id="label_hide" label="Hide" />
-        </div><!-- end .col-xs-12 -->
-    </div><!-- end .row -->
 
-    <div v-show="!label.hide">
-        <el-divider>Basic</el-divider>
+    <div v-show="true">
 
         <div class="row" >
             <div class="col-lg-4">
@@ -79,6 +73,20 @@
     </div><!-- end span.fixed -->
 
 
+    <el-divider content-position="left"><h3><i class="el-icon-star-on" /> Validation</h3></el-divider>
+
+    <div class="row mb-10">
+        <div class="col-sm-12">
+            <div class="form-check" >
+                <input v-model="validate.required" class="form-check-input" type="checkbox" id="val_control_required">
+                <label class="form-check-label" for="val_control_required">
+                    Required
+                </label>
+            </div><!-- end span.reponsive -->
+        </div><!-- end .col-xs-12 -->
+    </div><!-- end .row -->
+
+
     <div class="row" v-show="span.responsive">
         <SizeGroupInput title="xl" v-model.number="span.xl" />
         <SizeGroupInput title="lg" v-model.number="span.lg" />
@@ -124,6 +132,7 @@ export default {
                 underline: false,
                 italic: false,
             },
+            validate: { },
             extra: { },
         }
     }, 
@@ -142,13 +151,14 @@ export default {
                 name: this.name, 
                 label: this.label,
                 placeholder: this.placeholder,
+                validate: this.validate,
                 styles: {
                     span: this.span
                 }, 
             });
         },
         controlAttrToState( controlInfo ) {
-            const { id, rowId, name, sub_type, placeholder, label, styles, extra } = controlInfo;
+            const { id, rowId, name, sub_type, placeholder, label, styles, validate, extra } = controlInfo;
 
             const { span } = styles; 
 
@@ -157,6 +167,7 @@ export default {
             this.placeholder = placeholder;
             this.name = controlInfo.name || controlInfo.id;
             this.extra = extra; 
+            this.validate = validate; 
 
             // no use now, just for passing to slot 
             this.id = id;

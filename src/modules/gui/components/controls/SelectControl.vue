@@ -1,8 +1,12 @@
 <template>
 <LabelWrapedStructure v-bind="$props">
-    <select  v-model="value" @change="onInput"  :placeholder="placeholder" class="form-control" key="top">
+    <select class="form-control" :class="inputClasses"  :placeholder="placeholder" 
+        v-model="value" @change="onInput" @blur="onBlur"  
+    >
         <option disabled>Select one</option>
-        <option v-for="item in extra.values" :key="item.value"  :value="item.value">{{ item.label }}</option>
+        <option v-for="item in extra.values" :key="item.value" :value="item.value">
+            {{ item.label }}
+        </option>
     </select>
 </LabelWrapedStructure>
 </template>

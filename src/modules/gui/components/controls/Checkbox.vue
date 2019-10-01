@@ -2,8 +2,13 @@
 <LabelWrapedStructure v-bind="$props">
 <div>
     <div v-for="item in extra.values" :key="domId(item)" 
-        class="form-check" :class="formCheckClasses" >
-        <input v-model="value" :id="domId(item)" @change="onInput" :name="name" :value="item.value" type="checkbox" class="form-check-input">
+        class="form-check" :class="formCheckClasses" 
+    >
+        <input class="form-check-input" type="checkbox" 
+            :id="domId(item)" :class="inputClasses" 
+            :name="name" :value="item.value"
+            v-model="value" @change="onInput" @blur="onBlur"  
+        />
         <label class="form-check-label" :for="domId(item)"  >
             {{ item.label }}
         </label>

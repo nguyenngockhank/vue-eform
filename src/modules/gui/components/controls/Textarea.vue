@@ -1,6 +1,7 @@
 <template>
 <LabelWrapedStructure v-bind="$props">
-    <textarea :placeholder="placeholder" v-model="value" @input="onInput" :rows="extra.rows"  class="form-control" ></textarea>
+    <textarea class="form-control" :class="inputClasses" :placeholder="placeholder" 
+        v-model="value" @input="onInput" @blur="onBlur" :rows="extra.rows"  ></textarea>
 </LabelWrapedStructure>
 </template>
 

@@ -64,13 +64,39 @@ class EForm {
         return this.errorStore;
     }
 
-    createErrorStore() {
+    _resetErrorWatchers(){
+        /// remove all old watchers 
+        if (this.unwatchErrorStoreFns) {
+            this.unwatchErrorStoreFns.forEach(fn => fn());
+        }
+        // reset
+        this.unwatchErrorStoreFns = [];
+    }
+
+    createErrorStore(onStoreChange) {
         const controlRepo = this.structure.get('controlRepo');
         this.validationSchema = buildValidationSchema(controlRepo);
         Logger.i('[VALIDATION SCHEMA]', this.validationSchema);
 
         this.errorStore = createErrorStore(controlRepo);
-        /// add watchers 
+        this._resetErrorWatchers();
+
+        /// init
+        controlRepo.map.forEach(( { name }  = controlData )  => {
+            // first validate
+            this.validateControl(name);
+
+            // add watchers
+            let unwatch = observe(() => {
+                if (onStoreChange) {
+                    onStoreChange(name, this.valueStore[name]);
+                }
+            });
+
+            this.unwatchValueStoreFns.push(unwatch);
+        });
+
+
 
         return this.errorStore;
     }
