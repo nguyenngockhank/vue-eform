@@ -61,6 +61,7 @@ import {
     TEXTAREA_CONTROL,
     RADIO_GROUP_CONTROL,
     CHECKBOX_GROUP_CONTROL,
+    CHECKBOX_CONTROL,
 } from 'constants/index';
 
 import {
@@ -69,6 +70,7 @@ import {
     TEXTAREA_OPTIONS,
     RADIO_GROUP_OPTIONS,
     CHECKBOX_GROUP_OPTIONS,
+    CHECKBOX_OPTIONS,
 } from './controls'
 
 /*
@@ -82,6 +84,7 @@ function registerControls() {
         [SELECT_CONTROL]: SELECT_OPTIONS,
         [RADIO_GROUP_CONTROL]: RADIO_GROUP_OPTIONS,
         [CHECKBOX_GROUP_CONTROL]: CHECKBOX_GROUP_OPTIONS,
+        [CHECKBOX_CONTROL]: CHECKBOX_OPTIONS,
     }
 
     CoreHandler.registerControls(CONTROL_OPTIONS);

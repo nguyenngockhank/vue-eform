@@ -5,7 +5,7 @@ import CheckboxGroupOptions from './CheckboxGroupOptions';
 export default  {
     structure: {
         label: 'Checkbox Group',
-        icon: 'el-icon-check', 
+        icon: 'el-icon-circle-check', 
     }, 
     attrs: CONTROL_ATTR, 
     structureComponent: CheckboxGroupStructure,
