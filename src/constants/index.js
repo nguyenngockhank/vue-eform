@@ -5,3 +5,4 @@ export const INPUT_CONTROL = 'text';
 export const SELECT_CONTROL = 'select';
 export const TEXTAREA_CONTROL = 'textarea';
 export const RADIO_GROUP_CONTROL = 'radio_group';
+export const CHECKBOX_GROUP_CONTROL = 'checkbox_group';
