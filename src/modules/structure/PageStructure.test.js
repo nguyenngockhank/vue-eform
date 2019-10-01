@@ -1,6 +1,6 @@
 import PageStructure from './PageStructure';
 
-import { PREFIX_SECTION_ID, PREFIX_ROW_ID, PREFIX_CONTROL_ID} from 'constants/entities';
+import { PREFIX_SECTION_ID, PREFIX_ROW_ID, PREFIX_CONTROL_ID} from './constants/entities';
 
 
 var assert = require('assert');

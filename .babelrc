@@ -19,7 +19,8 @@
                 "root": [ "./src" ],
                 "alias": {
                     "$template": "./src/modules/template",
-                    "underscore": "./src/modules/gui"
+                    "$structure": "./src/modules/structure",
+                    "$gui": "./src/modules/gui"
                 }
             }
         ]
