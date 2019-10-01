@@ -1,8 +1,16 @@
 export default {
-    props: [ 'eformStore' ],
+    props: [ 'eformStore', 'errorStore' ],
     data() {
         return {
             value: '',
+            isInvalid: false,
+        }
+    },
+    computed: {
+        inputClasses() {
+            return {
+                'is-invalid': !!this.isInvalid,
+            }
         }
     },
     watch: {
@@ -19,6 +27,13 @@ export default {
         onInput(e) {
             // update store
             this.eformStore[this.name] = this.value;
+        }, 
+        onBlur(e) {
+            let isInvalid = false;
+            if (this.errorStore && this.errorStore[this.name]) {
+                isInvalid = true;
+            }
+            this.isInvalid = isInvalid;
         }
     }
 }

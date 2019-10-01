@@ -1,7 +1,7 @@
 <template>
 <div class="eform-section">
     <Row v-for="rowData in children" 
-                :key="rowData.id" :eform-store="eformStore" v-bind="rowData" />
+                :key="rowData.id" :eformStore="eformStore" :errorStore="errorStore" v-bind="rowData" />
 </div>
 </template>
 
@@ -12,6 +12,7 @@ export default {
     components: { Row },
     props: [
         'eformStore',
+        'errorStore',
         'children',
         'id',
     ],

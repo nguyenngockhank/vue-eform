@@ -1,8 +1,11 @@
 import { observable } from  'core/observable';
 
-export default function createValueStore( controlRepo, defaultValue = {} ) {
+/*
+ * To create a store for form value
+ */
+export default function createValueStore( controlRepo, formValue = {} ) {
     const targetObj = {};
-    defaultValue = defaultValue || {};
+    formValue = formValue || {};
 
     controlRepo.map.forEach(( { name }  = controlData ) => {
 
@@ -10,12 +13,12 @@ export default function createValueStore( controlRepo, defaultValue = {} ) {
             console.warn('[EFORM WARN]: Duplicate name of control detected!');
         }
 
-        const defaultVal = defaultValue[name] || '';
-        targetObj[name] = defaultVal;
+        // TODO: get default value from 
+        const initVal = formValue[name] || '';
+        targetObj[name] = initVal;
     });
 
     const result =  observable( targetObj );
-    // console.log('>> result of store', result); 
 
     return result;
 }
