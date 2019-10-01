@@ -3,20 +3,8 @@
 <div>
     <div v-for="item in extra.values" :key="domId(item)" 
         class="form-check" :class="formCheckClasses" >
-        <!-- <input :id="domId(item)" :name="name" 
-                :value="item.value" type="radio" 
-                class="form-check-input">
+        <input v-model="value" :id="domId(item)" @change="onInput" :name="name" :value="item.value" type="checkbox" class="form-check-input">
         <label class="form-check-label" :for="domId(item)"  >
-            {{ item.label }}
-        </label> -->
-
-        <input 
-            type="checkbox" 
-            :id="domId(item)" 
-            :name="name"
-            :value="item.value"
-        >
-        <label class="form-check-label" :for="domId(item)">
             {{ item.label }}
         </label>
     </div>
@@ -25,12 +13,18 @@
 </template>
 
 <script>
-import LabelWrapedStructure from '$template/components/common/LabelWrapedStructure';
+import LabelWrapedStructure from './LabelWrapedStructure';
 import controlMixin from 'mixins/controlMixin';
+import guiControlMixin from '$gui/mixins/guiControlMixin';
 
 export default {
+    mixins: [ controlMixin, guiControlMixin ],
     components: { LabelWrapedStructure }, 
-    mixins: [ controlMixin ],
+    data() {
+        return {
+            value: [],
+        }
+    },
     computed: {
         formCheckClasses() {
             const { layout } = this.extra;
@@ -41,9 +35,8 @@ export default {
     },
     methods: {
         domId(item) {
-            return this.name + '_' + item.value;
+            return this.name + '__' + item.value;
         },
-        
     }
 }
 </script>

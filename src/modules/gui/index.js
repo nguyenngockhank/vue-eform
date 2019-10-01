@@ -15,12 +15,14 @@ import {
     SELECT_CONTROL, 
     TEXTAREA_CONTROL,
     RADIO_GROUP_CONTROL,
+    CHECKBOX_GROUP_CONTROL,
 } from 'constants/index';
 
 import InputControl from './components/controls/InputControl';
 import SelectControl from './components/controls/SelectControl';
 import Textarea from './components/controls/Textarea';
 import RadioGroup from './components/controls/RadioGroup';
+import CheckboxGroup from './components/controls/CheckboxGroup';
 
 
 function registerControls() {
@@ -28,6 +30,7 @@ function registerControls() {
     registerControl(SELECT_CONTROL, SelectControl);
     registerControl(TEXTAREA_CONTROL, Textarea);
     registerControl(RADIO_GROUP_CONTROL, RadioGroup);
+    registerControl(CHECKBOX_GROUP_CONTROL, CheckboxGroup);
 }
 /// -- end 
 
