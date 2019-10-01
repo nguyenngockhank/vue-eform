@@ -1,7 +1,7 @@
 <template>
     <div class="eform">
         <Section v-for="sectionData in structureData.children" 
-                :key="sectionData.id" v-bind="sectionData" :eformStore="$options.store"  />
+                :key="sectionData.id" v-bind="sectionData" :eformStore="$options.store" :errorStore="$options.errorStore"  />
     </div>
 </template>
 
@@ -9,7 +9,8 @@
 import { PageStructure } from "$structure/index";
 import { plainObject } from 'utils/objectHelpers';
 
-import { Logger } from '$gui/utils/index';
+import { EForm } from '../core';
+import { Logger } from '../utils/index';
 
 import Section  from "./Section";
 
@@ -26,10 +27,13 @@ export default {
     },
 
     pageStructure: null,
+    eform: null,
     store: null, 
+    errorStore: null,
 
     created() {
         this.$options.pageStructure = new PageStructure;
+        this.$options.eform = new EForm(this.$options.pageStructure);
     },
 
     watch: {
@@ -44,11 +48,13 @@ export default {
         }
     },
     methods: {
-        emitStore() {
+        emitValueStore() {
             const store = this.$options.store || {};
             this.$emit('input', plainObject(store.__storage__ || {}));
         },
+        emitErrorStore() {
 
+        },
         setTemplateData(templateData = {}) {
             const { $options } = this;
 
@@ -59,12 +65,13 @@ export default {
                 return;
             }
 
-            $options.store =  $options.pageStructure.createValueStore(() => {
-                this.emitStore();
-            }, this.value);
+            $options.store = $options.eform.createValueStore(this.value, () => this.emitValueStore());
+            $options.errorStore = $options.eform.createErrorStore();
+
 
             this.structureData =  $options.pageStructure.getPageState();
-            this.emitStore();
+            // emit first time
+            this.emitValueStore();
         }
     }
 }

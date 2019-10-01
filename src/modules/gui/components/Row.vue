@@ -1,7 +1,7 @@
 <template>
 <el-row :gutter="30">
     <Control v-for="controlData in children" 
-                :key="controlData.id" :eform-store="eformStore" v-bind="controlData" />
+                :key="controlData.id" :eformStore="eformStore" :errorStore="errorStore" v-bind="controlData" />
 </el-row>
 </template>
 
@@ -12,6 +12,7 @@ export default {
     components: { Control },
     props: [
         'eformStore',
+        'errorStore',
         'children',
         'id',
     ],

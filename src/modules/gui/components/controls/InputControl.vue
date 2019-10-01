@@ -1,6 +1,8 @@
 <template>
 <LabelWrapedStructure v-bind="$props">
-    <input v-model="value"  @input="onInput" :placeholder="placeholder" :type="inputType" class="form-control"  />
+    <input class="form-control" :class="inputClasses" v-model="value"  
+        @input="onInput" @blur="onBlur" 
+        :placeholder="placeholder" :type="inputType"  />
 </LabelWrapedStructure>
 </template>
 

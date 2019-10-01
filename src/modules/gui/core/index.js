@@ -1,4 +1,5 @@
 import controlComponentRegistry from './registry/ControlComponentRegistry';
+import EForm from './eform/EForm';
 import { Logger } from '$gui/utils/index'; 
 
 /*
@@ -19,3 +20,6 @@ export function registerControl(sub_type, component) {
 export function controlComponent(sub_type) {
     return controlComponentRegistry.get(sub_type);
 }
+
+
+export { EForm };
