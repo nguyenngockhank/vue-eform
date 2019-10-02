@@ -1,6 +1,6 @@
 import CONTROL_ATTR from './attrs';
 import CheckboxStructure from './CheckboxStructure';
-import CheckboxOptions from './CheckboxOptions';
+// import CheckboxOptions from './CheckboxOptions';
 
 export default  {
     structure: {
@@ -9,5 +9,5 @@ export default  {
     }, 
     attrs: CONTROL_ATTR, 
     structureComponent: CheckboxStructure,
-    optionComponent: CheckboxOptions,
+    // optionComponent: CheckboxOptions,
 }
