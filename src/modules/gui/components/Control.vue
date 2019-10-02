@@ -15,8 +15,7 @@ export default {
     mixins: [ gridMixin ],
 
     props: [
-        'eformStore',
-        'errorStore',
+        'eform',
         'id',
         'name',
         'placeholder',

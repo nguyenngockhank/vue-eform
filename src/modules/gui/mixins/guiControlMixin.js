@@ -1,5 +1,7 @@
 export default {
-    props: [ 'eformStore', 'errorStore' ],
+    props: [ 'eformStore', 'errorStore', 'eform' ],
+    // eformStore: null,
+    // errorStore: null,
     data() {
         return {
             value: '',
@@ -14,9 +16,10 @@ export default {
         }
     },
     watch: {
-        'eformStore': {
-            handler(store) {
-                if (store) {
+        'eform': {
+            handler(eform) {
+                if (eform) {
+                    const store = eform.getValueStore();
                     this.value  = store[this.name];
                 }
             }, 
@@ -25,8 +28,9 @@ export default {
     },
     methods: {
         onInput(e) {
+            const store = this.eform.getValueStore()
             // update store
-            this.eformStore[this.name] = this.value;
+            store[this.name] = this.value;
 
             if (this.isInvalid) {
                 this.$nextTick(() => this.validate());
@@ -37,8 +41,10 @@ export default {
             // do more thing here maybe
         }, 
         validate() {
+            const errorStore = this.eform.getErrorStore()
+
             let isInvalid = false;
-            if (this.errorStore && this.errorStore[this.name]) {
+            if (errorStore && errorStore[this.name]) {
                 isInvalid = true;
             }
             this.isInvalid = isInvalid;

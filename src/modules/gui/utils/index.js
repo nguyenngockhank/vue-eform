@@ -9,4 +9,10 @@ validate.options = { format: "detailed" };
 const Logger = new BaseLogger('EFORM GUI');
 
 
-export { Logger, validate };
+// create generator for EForm instance
+import generator from 'utils/idGenerator';
+
+const eFormIdGenerator = generator('__EFORM_INS__');
+
+
+export { Logger, validate, eFormIdGenerator };

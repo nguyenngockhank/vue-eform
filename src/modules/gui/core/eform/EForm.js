@@ -2,12 +2,15 @@ import createValueStore from './createValueStore'
 import createErrorStore from './createErrorStore'
 import buildValidationSchema from './buildValidationSchema'
 import { observe } from 'core/observable';
-import { Logger, validate } from '$gui/utils';
+import { Logger, validate, eFormIdGenerator } from '$gui/utils';
 
 class EForm {
 
     /// formStructure a.k.a pageStructure
     constructor(formStructure) {
+        // create 
+        this.id = eFormIdGenerator();
+
         this.setStructure(formStructure);
     }
 

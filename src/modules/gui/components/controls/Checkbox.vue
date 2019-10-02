@@ -16,7 +16,7 @@ export default {
     mixins: [ controlMixin, guiControlMixin ],
     methods: {
         domId(item) {
-            return this.name + '__';
+            return this.eform.id + '__' + this.name;
         },
     }
 }

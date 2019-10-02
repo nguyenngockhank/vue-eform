@@ -9,7 +9,7 @@ export default {
     },
     methods: {
         domId(item) {
-            return this.name + '__' + item.value;
+            return this.eform.id + '__' + this.name + '__' + item.value;
         },
     }
 }
