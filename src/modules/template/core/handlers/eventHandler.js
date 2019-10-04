@@ -49,6 +49,7 @@ instance.init = function(pageStructure) {
     eventBus.addListener(EV.CONTROL_UPDATE_REQUEST, function( { controlId, data }) {
         pageStructure.updateControl(controlId, data);
         // fire event
+        eventBus.fireEvent(EV.CONTROL_UPDATED, { controlId });
     });
 
     Logger.i('Core event listeners is initilized!')

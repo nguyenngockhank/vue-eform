@@ -13,7 +13,7 @@ const mode = process.env.NODE_ENV; // production or development
 var styleLoaders = mode !== 'production' ? [ 'vue-style-loader', 'css-loader', 'sass-loader' ] : [ MiniCssExtractPlugin.loader,  'css-loader', 'sass-loader'] ;
 
 
-const InjectTemplates = ['index.html', 'gui.html'].map((filename) => new HtmlWebpackPlugin({
+const InjectTemplates = ['index.html', 'gui.html', 'template_gui.html'].map((filename) => new HtmlWebpackPlugin({
     filename,
     inject: false,
     template: path.join(__dirname, 'public', filename),
