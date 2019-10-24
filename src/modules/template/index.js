@@ -19,6 +19,9 @@ import {
 
 } from 'element-ui';
 
+import { forEach, isEmpty } from 'utils/objectHelpers';
+
+import { Logger } from './utils/index';
 import draggableComponent from 'vuedraggable';
 
 
@@ -91,14 +94,40 @@ function registerControls() {
 }
 
 
+function registerCustomControls(controls) {
+    const objects = {};
+
+    forEach(controls, ( controlOptions, controlName) => {
+        const { template: templateOption = {} } = controlOptions;
+        if (isEmpty(templateOption)) {
+            return;
+        }
+        objects[controlName] = templateOption;
+    });
+
+    if (!isEmpty(objects)) {
+        Logger.i('Register custom controls: ', objects);
+        CoreHandler.registerControls(objects);
+    }
+}
+
+
 const instance =  {
     install: function (Vue, options) {
+        options = options || {};
+        
+        console.log(".... options ????",Vue, options)
+        const { controls = {} } = options;
 
+       
         register3rdComponents();
 
         CoreHandler.init();
-        registerControls();
 
+        registerControls();
+        if (!isEmpty(controls)) {
+            registerCustomControls(controls);
+        }
 
         /// register global component 
         Vue.component('eform-builder', Main);

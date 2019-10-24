@@ -8,9 +8,11 @@
 
     <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
 
-    <style>
-  
-    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.css" rel="stylesheet" />
+
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 </head>
 <body>
 
@@ -19,7 +21,13 @@
             <div class="col-md-6">
                 <h2>Template</h2>
 
-                <eform-builder ref="template" v-model="templateData" ></eform-builder>
+                <eform-builder ref="template" v-model="templateData" >
+                    <template v-slot:toolbar>
+                        <el-button @click.native="saveTemplate" type="success" icon="el-icon-s-promotion" >
+                            Save Template
+                        </el-button>
+                    </template>
+                </eform-builder>
 
                 <!-- <div class="">
                     <h2>Form values</h2>
@@ -40,13 +48,90 @@
         </div>
     </div>
 
+
+
+<script type="text/x-template" id="select2-template">
+    <select>
+        <slot></slot>
+    </select>
+</script>
+
+<script type="text/x-template" id="select2-structure">
+<label-wraped-structure v-bind="$props">
+    <select2  class="form-control" />
+</label-wraped-structure>
+</script>
+
+
 <script src="../public/vue.js"></script>
 <!-- add built file -->
 <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 
 <script>
+console.log("????")
+
+var select2Component =  {
+  props: ['options', 'value'],
+  template: '#select2-template',
+  mounted: function () {
+    var vm = this
+    $(this.$el)
+      // init select2
+      .select2({ data: this.options })
+      .val(this.value)
+      .trigger('change')
+      // emit event on change.
+      .on('change', function () {
+        vm.$emit('input', this.value)
+      })
+  },
+  watch: {
+    value: function (value) {
+      // update value
+      $(this.$el)
+      	.val(value)
+      	.trigger('change')
+    },
+    options: function (options) {
+      // update options
+      $(this.$el).empty().select2({ data: options })
+    }
+  },
+  destroyed: function () {
+    $(this.$el).off().select2('destroy')
+  }
+};
+
+
+var select2Structure = {
+    components: { 
+        LabelWrapedStructure: VueEformUtils.templates.LabelWrapedStructure,
+        select2:  select2Component
+    }, 
+    mixins: [ VueEformUtils.mixins.controlMixin ],
+    template: '#select2-structure'
+};
+
+
 Vue.config.devtools = true
-Vue.use(window.VueEform);
+Vue.use(VueEform, {
+    controls: {
+        select2: {
+            template: {
+                structure: {
+                    label: 'Select2',
+                    icon: 'el-icon-menu', 
+                }, 
+                attrs: { 
+                    label: { text: 'SELECT2 CONTROL' },
+                    values: [], 
+                },
+                structureComponent: select2Structure,
+                // optionComponent: SelectOptions,
+            }
+        }
+    }
+});
 
 var vm = new Vue({
     el: "#app",
@@ -57,15 +142,25 @@ var vm = new Vue({
             formErrors: {}
         }
     },
+    mounted() {
+        this.loadTemplate();
+    },
     methods: {
         previewTemplate() {
             this.templateData = this.$refs.template.getTemplateData('object');
         },
         saveTemplate() {
             var val = this.$refs.template.getTemplateData('string');
-            localStorage.setItem('EFORM_TEMPLATE', val);
-            console.log('save di ne', val)
+            localStorage.setItem('EFORM_TEMPLATE_NE', val);
         },
+        loadTemplate() {
+            var val = localStorage.getItem('EFORM_TEMPLATE_NE');
+            if (!val) {
+                return;
+            }
+            this.$refs.template.loadTemplateData(val);
+            this.previewTemplate();
+        }
     },
 });
 </script>
